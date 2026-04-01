@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emmanuel Tekle — Cybersecurity & Cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+:root,[data-theme="dark"]{
+  --bg:#0d0f10;--surface:#131618;--surface-2:#181b1d;--surface-3:#1e2124;
+  --border:rgba(255,255,255,0.07);--border-2:rgba(255,255,255,0.12);
+  --text:#e8e6e3;--text-muted:#8a8885;--text-faint:#4a4946;
+  --primary:#3db8c5;--primary-dim:rgba(61,184,197,0.12);--primary-glow:rgba(61,184,197,0.25);
+  --green:#5aad41;--green-dim:rgba(90,173,65,0.12);
+  --orange:#e8953a;--orange-dim:rgba(232,149,58,0.12);
+  --red:#d15a7a;--red-dim:rgba(209,90,122,0.12);
+  --gold:#c9a227;--gold-dim:rgba(201,162,39,0.12);
+  --blue:#5591c7;--blue-dim:rgba(85,145,199,0.12);
+  --radius-sm:0.375rem;--radius-md:0.5rem;--radius-lg:0.75rem;--radius-xl:1rem;--radius-full:9999px;
+  --shadow-glow:0 0 40px rgba(61,184,197,0.08);
+  --font-body:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
+  --transition:180ms cubic-bezier(0.16,1,0.3,1);
+}
+[data-theme="light"]{
+  --bg:#f4f3ef;--surface:#faf9f6;--surface-2:#f0eeea;--surface-3:#e8e5e0;
+  --border:rgba(0,0,0,0.08);--border-2:rgba(0,0,0,0.14);
+  --text:#1a1917;--text-muted:#6b6966;--text-faint:#b0adaa;
+  --primary:#01696f;--primary-dim:rgba(1,105,111,0.1);--primary-glow:rgba(1,105,111,0.2);
+  --green:#437a22;--green-dim:rgba(67,122,34,0.1);
+  --orange:#964219;--orange-dim:rgba(150,66,25,0.1);
+  --red:#a12c7b;--red-dim:rgba(161,44,123,0.1);
+  --gold:#d19900;--gold-dim:rgba(209,153,0,0.1);
+  --blue:#006494;--blue-dim:rgba(0,100,148,0.1);
+  --shadow-glow:0 0 40px rgba(1,105,111,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:80px}
+body{min-height:100dvh;font-family:var(--font-body);font-size:1rem;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--radius-sm)}
+.fade-in{opacity:1}
+@supports(animation-timeline:scroll()){
+  .fade-in{opacity:0;animation:reveal-fade linear both;animation-timeline:view();animation-range:entry 0% entry 80%}
+}
+@keyframes reveal-fade{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.fade-in{opacity:1!important;animation:none!important}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,15,16,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem);height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+[data-theme="light"] nav{background:rgba(244,243,239,0.9)}
+.nav-logo{font-family:var(--font-mono);font-weight:700;font-size:0.9rem;color:var(--primary);letter-spacing:-0.01em;display:flex;align-items:center;gap:0.5rem}
+.nav-logo span{color:var(--text-muted);font-weight:400}
+.nav-links{display:flex;align-items:center;gap:0.25rem}
+.nav-links a{font-size:0.875rem;color:var(--text-muted);padding:0.4rem 0.75rem;border-radius:var(--radius-md);transition:color var(--transition),background var(--transition)}
+.nav-links a:hover{color:var(--text);background:var(--surface-3)}
+.nav-links a.active{color:var(--primary)}
+.nav-right{display:flex;align-items:center;gap:0.5rem}
+.theme-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-muted);transition:color var(--transition),background var(--transition)}
+.theme-btn:hover{color:var(--text);background:var(--surface-3)}
+.nav-cta{font-size:0.875rem;font-weight:600;color:var(--primary);border:1px solid var(--primary);padding:0.35rem 0.9rem;border-radius:var(--radius-full);transition:all var(--transition)}
+.nav-cta:hover{background:var(--primary-dim)}
+@media(max-width:700px){.nav-links{display:none}}
+
+/* HERO */
+#hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:80px clamp(1rem,5vw,5rem) 5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.5}
+.hero-glow{position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;max-width:700px;max-height:700px;background:radial-gradient(circle,var(--primary-glow) 0%,transparent 65%);border-radius:50%}
+.hero-inner{position:relative;z-index:1;max-width:760px}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--primary);background:var(--primary-dim);border:1px solid rgba(61,184,197,0.2);border-radius:var(--radius-full);padding:0.3rem 0.85rem;margin-bottom:1.5rem}
+[data-theme="light"] .hero-tag{border-color:rgba(1,105,111,0.2)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero-name{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:700;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem}
+.hero-name .first{color:var(--text)}.hero-name .last{color:var(--primary)}
+.hero-role{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text-muted);margin-bottom:2rem;max-width:58ch;line-height:1.5}
+.hero-role strong{color:var(--text);font-weight:600}
+.hero-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem}
+.chip{font-family:var(--font-mono);font-size:0.72rem;padding:0.3rem 0.7rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface);transition:all var(--transition)}
+.chip:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-dim)}
+.chip.c-green{border-color:rgba(90,173,65,0.3);color:var(--green);background:var(--green-dim)}
+.chip.c-blue{border-color:rgba(85,145,199,0.3);color:var(--blue);background:var(--blue-dim)}
+.chip.c-orange{border-color:rgba(232,149,58,0.3);color:var(--orange);background:var(--orange-dim)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;font-size:0.9rem;color:#0d0f10;background:var(--primary);padding:0.65rem 1.4rem;border-radius:var(--radius-full);transition:all var(--transition);box-shadow:0 4px 24px var(--primary-glow)}
+.btn-primary:hover{filter:brightness(1.1)}
+[data-theme="light"] .btn-primary{color:#fff}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;font-weight:500;font-size:0.9rem;color:var(--text-muted);border:1px solid var(--border-2);padding:0.65rem 1.4rem;border-radius:var(--radius-full);transition:all var(--transition)}
+.btn-secondary:hover{color:var(--text);border-color:var(--text-muted);background:var(--surface)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:var(--text-faint);font-size:0.7rem;font-family:var(--font-mono);animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* SECTIONS */
+section{padding:clamp(4rem,8vw,7rem) clamp(1rem,5vw,5rem)}
+.section-inner{max-width:1000px;margin:0 auto}
+.section-label{font-family:var(--font-mono);font-size:0.72rem;color:var(--primary);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
+.section-title{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1.15}
+.section-sub{color:var(--text-muted);font-size:1rem;max-width:56ch;margin-bottom:3rem;line-height:1.6}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-2),transparent)}
+
+/* ABOUT */
+#about{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr}}
+.about-avatar{width:160px;height:160px;border-radius:var(--radius-xl);background:linear-gradient(135deg,var(--primary-dim),var(--blue-dim));border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;position:relative}
+.about-initials{font-family:var(--font-mono);font-weight:700;font-size:2.8rem;color:var(--primary)}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.25rem}
+.stat-box{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:0.85rem 1rem}
+.stat-num{font-size:1.5rem;font-weight:700;font-family:var(--font-mono);color:var(--primary);line-height:1}
+.stat-label{font-size:0.72rem;color:var(--text-muted);margin-top:0.2rem}
+.about-text p{color:var(--text-muted);font-size:0.95rem;line-height:1.75;margin-bottom:1rem;max-width:72ch}
+.about-skills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.25rem}
+
+/* PROJECTS */
+
+
+/* SKILLS */
+#skills{background:var(--surface)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:1rem}
+.skill-cat{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem 1.5rem}
+.skill-cat-title{display:flex;align-items:center;gap:0.6rem;font-weight:700;font-size:0.9rem;margin-bottom:1rem}
+.skill-cat-title i{width:18px;height:18px}
+.skill-list{display:flex;flex-direction:column;gap:0.6rem}
+.skill-item{display:flex;align-items:center;justify-content:space-between;gap:0.75rem}
+.skill-name{font-size:0.85rem;color:var(--text-muted)}
+.skill-bar{height:4px;flex:1;background:var(--surface-3);border-radius:var(--radius-full);overflow:hidden;max-width:100px}
+.skill-fill{height:100%;border-radius:var(--radius-full);background:var(--primary)}
+
+/* CERTS */
+#certs{background:var(--bg)}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:1rem}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:all var(--transition)}
+.cert-card:hover{border-color:var(--border-2);background:var(--surface-2)}
+.cert-icon{width:48px;height:48px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-mono);font-weight:700;font-size:0.65rem;text-align:center;line-height:1.2}
+.cert-info{flex:1;min-width:0}
+.cert-name{font-weight:600;font-size:0.9rem;line-height:1.3}
+.cert-issuer{font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem}
+.cert-status{font-size:0.65rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:0.4rem}
+.cs-done{color:var(--green)}.cs-progress{color:var(--orange)}.cs-planned{color:var(--text-faint)}
+
+/* EXPERIENCE */
+#experience{background:var(--surface)}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:760px){.exp-grid{grid-template-columns:1fr}}
+.exp-col-title{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border)}
+.exp-col-title i{width:16px;height:16px;color:var(--primary)}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:1.25rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--primary),var(--border),transparent)}
+.tl-item{padding:0 0 2rem 1.75rem;position:relative}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-1.65rem;top:0.35rem;width:9px;height:9px;border-radius:50%;background:var(--primary);border:2px solid var(--bg);box-shadow:0 0 6px var(--primary-glow)}
+[data-theme="light"] .tl-dot{border-color:var(--surface)}
+.tl-period{font-family:var(--font-mono);font-size:0.68rem;color:var(--primary);margin-bottom:0.25rem;display:flex;align-items:center;gap:0.4rem}
+.tl-title{font-weight:700;font-size:0.95rem;margin-bottom:0.1rem;line-height:1.3}
+.tl-company{font-size:0.82rem;color:var(--text-muted);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem}
+.tl-company i{width:13px;height:13px;flex-shrink:0}
+.tl-desc{color:var(--text-muted);font-size:0.83rem;line-height:1.65;max-width:60ch}
+.tl-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.6rem}
+.tl-dot.edu{background:var(--blue);box-shadow:0 0 6px rgba(85,145,199,0.4)}
+.tl-dot.green{background:var(--green);box-shadow:0 0 6px rgba(90,173,65,0.3)}
+.tl-dot.faint{background:var(--text-faint);box-shadow:none}
+.edu-timeline::before{background:linear-gradient(180deg,var(--blue),var(--border),transparent)}
+
+/* CONTACT */
+#contact{background:var(--bg)}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:700px){.contact-inner{grid-template-columns:1fr}}
+.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem}
+.form-group{margin-bottom:1.25rem}
+.form-label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-muted);margin-bottom:0.5rem;letter-spacing:0.03em}
+.form-input{width:100%;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--radius-md);padding:0.7rem 0.9rem;font-size:0.9rem;color:var(--text);font-family:var(--font-body);transition:all var(--transition);resize:vertical}
+.form-input::placeholder{color:var(--text-faint)}
+.form-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-dim)}
+textarea.form-input{min-height:120px}
+.form-submit{width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;font-weight:700;font-size:0.9rem;color:#0d0f10;background:var(--primary);padding:0.8rem;border-radius:var(--radius-md);border:none;cursor:pointer;transition:all var(--transition)}
+[data-theme="light"] .form-submit{color:#fff}
+.form-submit:hover{filter:brightness(1.08);box-shadow:0 4px 24px var(--primary-glow)}
+.contact-links{display:flex;flex-direction:column;gap:0.75rem}
+.contact-link-card{display:flex;align-items:center;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;transition:all var(--transition);color:inherit}
+.contact-link-card:hover{border-color:var(--primary);background:var(--primary-dim);color:var(--primary)}
+.contact-link-card i{width:20px;height:20px;flex-shrink:0}
+.contact-link-info{flex:1}
+.contact-link-name{font-weight:600;font-size:0.9rem}
+.contact-link-val{font-size:0.78rem;color:var(--text-muted);font-family:var(--font-mono)}
+.contact-link-card:hover .contact-link-val{color:var(--primary)}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem clamp(1rem,5vw,5rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-left{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-faint)}
+.footer-left strong{color:var(--primary)}
+.footer-social{display:flex;gap:0.5rem}
+.footer-social a{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-faint);transition:all var(--transition)}
+.footer-social a:hover{color:var(--primary);background:var(--primary-dim)}
+.footer-social a i{width:18px;height:18px}
+.notify{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--surface-3);border:1px solid var(--green);border-radius:var(--radius-lg);padding:0.9rem 1.25rem;font-size:0.85rem;color:var(--green);display:none;align-items:center;gap:0.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.3);animation:slide-in 0.3s cubic-bezier(0.16,1,0.3,1)}
+.notify.show{display:flex}
+@keyframes slide-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:480px){.hero-name{font-size:2.5rem}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-label="ET logo">
+      <rect x="3" y="3" width="18" height="18" rx="3"/>
+      <path d="M8 8h3m0 0v8m0-4h4M15 8h1"/>
+    </svg>
+    Emmanuel<span>.tekle()</span>
+  </a>
+  <div class="nav-links">
+    <a href="#about">Over mij</a>
+    <a href="#projects">Projecten</a>
+    <a href="#skills">Skills</a>
+    <a href="#certs">Certificaten</a>
+    <a href="#experience">Ervaring</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" data-theme-toggle aria-label="Toggle theme">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="#contact" class="nav-cta">Hire me</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <span class="status-dot"></span>
+      Beschikbaar voor stages & IT rollen — Enschede / Remote
+    </div>
+    <h1 class="hero-name">
+      <span class="first">Emmanuel</span><br>
+      <span class="last">Tekle</span>
+    </h1>
+    <p class="hero-role">
+      Saxion HBO ICT Student · <strong>Cybersecurity & Cloud Infrastructure</strong><br>
+      DevSecOps pipelines, Terraform IaC, Ansible automatisering en home lab security labs — Enschede, NL.
+    </p>
+    <div class="hero-chips">
+      <span class="chip c-green">Terraform</span>
+      <span class="chip c-green">Ansible</span>
+      <span class="chip c-blue">Azure</span>
+      <span class="chip c-blue">AWS</span>
+      <span class="chip">GitHub Actions</span>
+      <span class="chip">Docker</span>
+      <span class="chip c-orange">Kali Linux</span>
+      <span class="chip">Proxmox</span>
+      <span class="chip">OPNsense</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">
+        <i data-lucide="folder-open" style="width:17px;height:17px"></i>
+        Bekijk projecten
+      </a>
+      <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+        <i data-lucide="linkedin" style="width:17px;height:17px"></i>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <i data-lucide="chevron-down" style="width:16px;height:16px"></i>
+    scroll
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">// over mij</div>
+    <div class="about-grid">
+      <div class="fade-in">
+        <div class="about-avatar"><span class="about-initials">ET</span></div>
+        <h2 class="section-title" style="margin-bottom:0.4rem">Hey, ik ben Emmanuel</h2>
+        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1.25rem">Enschede, Overijssel · Saxion HBO ICT · 2e jaar</p>
+        <div class="about-stats">
+          <div class="stat-box"><div class="stat-num">2+</div><div class="stat-label">jaar IT-werkervaring</div></div>
+          <div class="stat-box"><div class="stat-num">2028</div><div class="stat-label">afstudeerjaar</div></div>
+        </div>
+      </div>
+      <div class="about-text fade-in">
+        <p>Ik ben een HBO ICT student aan <strong style="color:var(--text)">Saxion University of Applied Sciences</strong> (2024–2028) met een sterke focus op cybersecurity en cloud infrastructure. Parallel aan mijn studie werk ik bij <strong style="color:var(--text)">Livio</strong> als 1e lijn Helpdesk Medewerker, Frontdesk-receptionist en op de afdeling logistiek.</p>
+        <p>Mijn passie ligt in het leren en begrijpen van systemen en infrastructuur — van <strong style="color:var(--text)">IaC met Terraform & Ansible</strong> tot <strong style="color:var(--text)">DevSecOps pipelines</strong> en een volledig gesegmenteerd Proxmox home lab. Ik geloof dat security iets is wat je vanaf het begin inbouwt, niet achteraf toevoegt.</p>
+        <p>Buiten de tech vind ik mijn balans in kickboksen, bergwandelen en boulderen.</p>
+        <div class="about-skills">
+          <span class="chip" style="background:var(--primary-dim);color:var(--primary);border-color:rgba(61,184,197,0.25)">DevSecOps</span>
+          <span class="chip">IaC / Terraform</span>
+          <span class="chip">Ansible</span>
+          <span class="chip c-blue">Cloud Security</span>
+          <span class="chip">Linux Admin</span>
+          <span class="chip c-orange">Pentesting</span>
+          <span class="chip">Servicedesk</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">// technische skills</div>
+    <h2 class="section-title">Tech Stack</h2>
+    <p class="section-sub"></p>
+    <div class="skills-grid fade-in">
+      <div class="skill-cat">
+        <div class="skill-cat-title" style="color:var(--primary)"><i data-lucide="shield"></i> Security</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-name">Penetration Testing</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">SIEM / Log Analysis</span><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Reverse Engineering</span><div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Network Security</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Informatiebeveiliging</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title" style="color:var(--blue)"><i data-lucide="cloud"></i> Cloud & IaC</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-name">Terraform / HCL</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--blue)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Ansible</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--blue)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Azure</span><div class="skill-bar"><div class="skill-fill" style="width:65%;background:var(--blue)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">AWS</span><div class="skill-bar"><div class="skill-fill" style="width:55%;background:var(--blue)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Docker</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--blue)"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title" style="color:var(--green)"><i data-lucide="terminal"></i> Linux & Netwerk</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-name">Linux (Debian/Kali)</span><div class="skill-bar"><div class="skill-fill" style="width:85%;background:var(--green)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Bash Scripting</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--green)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">OPNsense / pfSense</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--green)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">VLAN / Subnetting</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--green)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Proxmox</span><div class="skill-bar"><div class="skill-fill" style="width:80%;background:var(--green)"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title" style="color:var(--orange)"><i data-lucide="headphones"></i> IT Support</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-name">Servicedesk (1e lijn)</span><div class="skill-bar"><div class="skill-fill" style="width:90%;background:var(--orange)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Probleemoplossing</span><div class="skill-bar"><div class="skill-fill" style="width:85%;background:var(--orange)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Microsoft Office</span><div class="skill-bar"><div class="skill-fill" style="width:80%;background:var(--orange)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Webdesign</span><div class="skill-bar"><div class="skill-fill" style="width:65%;background:var(--orange)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Communicatie</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--orange)"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTS -->
+
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">// ervaring & opleiding</div>
+    <h2 class="section-title">Achtergrond</h2>
+    <p class="section-sub" style="margin-bottom:2.5rem">Mijn werkervaring en opleiding op een rij.</p>
+    <div class="exp-grid">
+
+      <!-- WERK -->
+      <div class="fade-in">
+        <div class="exp-col-title"><i data-lucide="briefcase"></i> Werkervaring</div>
+        <div class="timeline">
+
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Apr 2025 – heden · 1 jr 1 mnd</div>
+            <div class="tl-title">1e Lijn Helpdesk Medewerker</div>
+            <div class="tl-company"><i data-lucide="building-2"></i> Livio · Part-time · Enschede, On-site</div>
+            <p class="tl-desc">Eerste lijn IT support, troubleshooting netwerk- en hardwareproblemen, gebruikersbeheer, escalatie naar technisch team. Servicedesk & ICT afdeling.</p>
+            <div class="tl-tags"><span class="tag">Servicedesk</span><span class="tag">ICT Support</span><span class="tag">Troubleshooting</span></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Mei 2024 – heden · 2 jr</div>
+            <div class="tl-title">Frontdesk-receptionist</div>
+            <div class="tl-company"><i data-lucide="building-2"></i> Livio · Part-time · Enschede</div>
+            <p class="tl-desc">Gastvrije ontvangst, telefoonbeheer en administratieve ondersteuning. Servicedesk taken gecombineerd met frontoffice werkzaamheden.</p>
+            <div class="tl-tags"><span class="tag">Servicedesk</span><span class="tag">Communicatie</span><span class="tag">Administratie</span></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Mei 2024 – heden · 2 jr</div>
+            <div class="tl-title">Servicemedewerker</div>
+            <div class="tl-company"><i data-lucide="building-2"></i> Livio · Greater Enschede Area</div>
+            <p class="tl-desc">Logistieke werkzaamheden, Microsoft Office, webdesign ondersteuning en overige ICT-gerelateerde taken binnen de organisatie.</p>
+            <div class="tl-tags"><span class="tag">Microsoft Office</span><span class="tag">Webdesign</span><span class="tag">Logistiek</span></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot green"></div>
+            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Nov 2024 – Apr 2025 · 6 mnd</div>
+            <div class="tl-title">ICT-medewerker</div>
+            <div class="tl-company"><i data-lucide="building-2"></i> Studentaanhuis · Part-time · Enschede</div>
+            <p class="tl-desc">On-site ICT support voor particulieren. Internet probleemoplossing, hardware installatie en troubleshooting.</p>
+            <div class="tl-tags"><span class="tag">Internet Support</span><span class="tag">Probleemoplossing</span><span class="tag">Hardware</span></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot faint"></div>
+            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Mrt 2023 – Mei 2024 · 1 jr 3 mnd</div>
+            <div class="tl-title">Tankstation Medewerker</div>
+            <div class="tl-company"><i data-lucide="building-2"></i> TotalEnergies · Part-time · Enschede</div>
+            <p class="tl-desc">Klantenservice, kassa en dagelijkse operaties op een druk tankstation.</p>
+            <div class="tl-tags"><span class="tag">Klantenservice</span><span class="tag">Retail</span></div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot faint"></div>
+            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> 2021 – 2023 · 2 jr</div>
+            <div class="tl-title">Vakkenvuller</div>
+            <div class="tl-company"><i data-lucide="building-2"></i> Albert Heijn · Part-time · Enschede</div>
+            <p class="tl-desc">Schapbeheer, klantenservice en logistieke ondersteuning.</p>
+            <div class="tl-tags"><span class="tag">Retail</span><span class="tag">Logistiek</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- OPLEIDING -->
+      <div class="fade-in">
+        <div class="exp-col-title" style="color:var(--blue)"><i data-lucide="graduation-cap" style="color:var(--blue)"></i> Opleiding</div>
+        <div class="timeline edu-timeline">
+
+          <div class="tl-item">
+            <div class="tl-dot edu"></div>
+            <div class="tl-period" style="color:var(--blue)"><i data-lucide="calendar" style="width:11px;height:11px"></i> Aug 2024 – Aug 2028</div>
+            <div class="tl-title">Bachelor ICT</div>
+            <div class="tl-company" style="color:var(--text-muted)"><i data-lucide="building-2"></i> Saxion University of Applied Sciences</div>
+            <p class="tl-desc">HBO Bachelor opleiding ICT met focus op cybersecurity en cloud infrastructure. Hands-on projecten met Terraform, Ansible, Azure en AWS. Actief in security labs en CTF-competities naast de studie.</p>
+            <div class="tl-tags">
+              <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Informatiebeveiliging</span>
+              <span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">Docker</span><span class="tag">Linux</span>
+            </div>
+          </div>
+
+          <div class="tl-item" style="padding-top:2rem">
+            <div class="tl-dot edu" style="top:2.35rem"></div>
+            <div style="background:var(--blue-dim);border:1px solid rgba(85,145,199,0.2);border-radius:var(--radius-lg);padding:1rem 1.25rem">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--blue);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem"><i data-lucide="target" style="width:14px;height:14px"></i> Studiedoelen</div>
+              <ul style="font-size:0.82rem;color:var(--text-muted);line-height:2;padding-left:1rem;list-style:disc">
+                <li>Master Cybersecurity na HBO</li>
+                <li>CCNA certificaat in 2026</li>
+                <li>Terraform Associate in 2026</li>
+                <li>eJPT penetration tester cert</li>
+                <li>Cloud Security Engineer rol</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">// contact</div>
+    <h2 class="section-title">Neem contact op</h2>
+    <p class="section-sub">Interesse in een stage, samenwerking of gesprek over security en cloud? Stuur me een bericht.</p>
+    <div class="contact-inner">
+      <div class="contact-form fade-in">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:1.5rem">Stuur een bericht</h3>
+        <div data-fs-success style="background:var(--green-dim);border:1px solid rgba(90,173,65,0.3);border-radius:var(--radius-md);padding:0.9rem 1rem;margin-bottom:1.25rem;display:none;color:var(--green);font-size:0.9rem">
+          ✓ Bericht verzonden! Ik reageer binnen 24 uur.
+        </div>
+        <div data-fs-error style="background:var(--red-dim);border:1px solid rgba(209,90,122,0.3);border-radius:var(--radius-md);padding:0.9rem 1rem;margin-bottom:1.25rem;display:none;color:var(--red);font-size:0.9rem"></div>
+        <form id="contact-form">
+          <div class="form-group">
+            <label class="form-label" for="name">Naam</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Je naam" data-fs-field required>
+            <span data-fs-error="name" style="color:var(--red);font-size:0.78rem;margin-top:0.3rem;display:block"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">E-mail</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="jouw@email.nl" data-fs-field required>
+            <span data-fs-error="email" style="color:var(--red);font-size:0.78rem;margin-top:0.3rem;display:block"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject">Onderwerp</label>
+            <input class="form-input" type="text" id="subject" name="subject" placeholder="Stage aanvraag / Samenwerking / ..." data-fs-field>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Bericht</label>
+            <textarea class="form-input" id="message" name="message" placeholder="Vertel me meer..." data-fs-field required></textarea>
+            <span data-fs-error="message" style="color:var(--red);font-size:0.78rem;margin-top:0.3rem;display:block"></span>
+          </div>
+          <button type="submit" class="form-submit" data-fs-submit-btn>
+            <i data-lucide="send" style="width:16px;height:16px"></i>
+            Verstuur bericht
+          </button>
+        </form>
+      </div>
+      <div class="contact-links fade-in">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem">Of bereik mij via</h3>
+        <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" class="contact-link-card">
+          <i data-lucide="linkedin"></i>
+          <div class="contact-link-info">
+            <div class="contact-link-name">LinkedIn</div>
+            <div class="contact-link-val">Emmanuel Tekle</div>
+          </div>
+          <i data-lucide="external-link" style="width:16px;height:16px;color:var(--text-faint)"></i>
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-link-card">
+          <i data-lucide="github"></i>
+          <div class="contact-link-info">
+            <div class="contact-link-name">GitHub</div>
+            <div class="contact-link-val">github.com/emmanueltekle</div>
+          </div>
+          <i data-lucide="external-link" style="width:16px;height:16px;color:var(--text-faint)"></i>
+        </a>
+        <a href="mailto:emmanuel@example.nl" class="contact-link-card">
+          <i data-lucide="mail"></i>
+          <div class="contact-link-info">
+            <div class="contact-link-name">E-mail</div>
+            <div class="contact-link-val">emmanueltekle@gmail.com</div>
+          </div>
+          <i data-lucide="arrow-right" style="width:16px;height:16px;color:var(--text-faint)"></i>
+        </a>
+        <div class="contact-link-card" style="border-style:dashed;cursor:default">
+          <i data-lucide="map-pin"></i>
+          <div class="contact-link-info">
+            <div class="contact-link-name">Locatie</div>
+            <div class="contact-link-val">Enschede, Overijssel, NL</div>
+          </div>
+        </div>
+        <div style="background:var(--primary-dim);border:1px solid rgba(61,184,197,0.2);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-top:0.25rem">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--primary);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.5rem"><i data-lucide="calendar" style="width:15px;height:15px"></i> Beschikbaarheid</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6">Open voor werk/stage. Momenteel werkzaam bij <strong style="color:var(--text)">Livio</strong> part-time. Reactietijd gemiddeld 24 uur.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    <strong>Emmanuel Tekle</strong> · Saxion HBO ICT · Enschede, NL · 2026
+  </div>
+  <div class="footer-social">
+    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
+    <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+    <a href="mailto:emmanuel@example.nl" aria-label="Email"><i data-lucide="mail"></i></a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d='dark';
+  const sun='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const moon='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  t&&t.addEventListener('click',()=>{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);t.innerHTML=d==='dark'?moon:sun;});
+})();
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+e.target.id)l.classList.add('active')})})},{threshold:0.3,rootMargin:'-80px 0px 0px 0px'});
+sections.forEach(s=>obs.observe(s));
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#contact-form', formId: 'xaqlbeoa' });
+lucide.createIcons();
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+</body>
+</html>
