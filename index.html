@@ -117,8 +117,30 @@ section{padding:clamp(4rem,8vw,7rem) clamp(1rem,5vw,5rem)}
 .about-text p{color:var(--text-muted);font-size:0.95rem;line-height:1.75;margin-bottom:1rem;max-width:72ch}
 .about-skills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.25rem}
 
-/* PROJECTS */
+/* TAG (timeline) */
+.tag{font-family:var(--font-mono);font-size:0.68rem;padding:0.2rem 0.55rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
 
+/* PROJECTS */
+#projects{background:var(--bg)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:1.25rem}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.75rem;transition:all var(--transition);display:flex;flex-direction:column;gap:1rem}
+.project-card:hover{border-color:var(--border-2);box-shadow:var(--shadow-glow);transform:translateY(-2px)}
+.project-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.project-icon{width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.project-links{display:flex;gap:0.4rem}
+.project-link{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-faint);border:1px solid var(--border);transition:all var(--transition)}
+.project-link:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-dim)}
+.project-link i{width:15px;height:15px}
+.project-name{font-weight:700;font-size:1rem;line-height:1.3;margin-top:0.75rem}
+.project-badge{display:inline-flex;align-items:center;gap:0.35rem;font-family:var(--font-mono);font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:var(--radius-full);margin-bottom:0.1rem}
+.project-badge.done{background:var(--green-dim);color:var(--green);border:1px solid rgba(90,173,65,0.3)}
+.project-badge.wip{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(232,149,58,0.3)}
+.project-desc{font-size:0.85rem;color:var(--text-muted);line-height:1.75;flex:1}
+.project-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:auto;padding-top:0.25rem}
+.project-tag{font-family:var(--font-mono);font-size:0.68rem;padding:0.2rem 0.55rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
+.project-highlights{display:flex;flex-direction:column;gap:0.4rem;margin-top:-0.25rem}
+.project-highlight{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8rem;color:var(--text-muted)}
+.project-highlight i{width:13px;height:13px;color:var(--green);flex-shrink:0;margin-top:0.15rem}
 
 /* SKILLS */
 #skills{background:var(--surface)}
@@ -260,6 +282,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
       <span class="chip c-orange">Kali Linux</span>
       <span class="chip">Proxmox</span>
       <span class="chip">OPNsense</span>
+      <span class="chip c-orange">Prometheus</span>
+      <span class="chip c-orange">Grafana</span>
     </div>
     <div class="hero-actions">
       <a href="#projects" class="btn-primary">
@@ -315,7 +339,63 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <div class="divider"></div>
 
 <!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">// projecten</div>
+    <h2 class="section-title">Wat ik heb gebouwd</h2>
+    <p class="section-sub">Hands-on projecten waarbij ik theorie omzet in werkende infrastructuur — van monitoring tot security labs.</p>
+    <div class="projects-grid fade-in">
 
+      <!-- MONITORING HOMELAB -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon" style="background:var(--orange-dim);color:var(--orange)">
+            <i data-lucide="activity" style="width:22px;height:22px"></i>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub repo">
+              <i data-lucide="github"></i>
+            </a>
+          </div>
+        </div>
+        <span class="project-badge done"><i data-lucide="check-circle" style="width:11px;height:11px"></i> Voltooid</span>
+        <div class="project-name">Monitoring Homelab</div>
+        <p class="project-desc">
+          Volledig zelfgebouwde monitoring stack op een 3-node Proxmox VE cluster. Prometheus scrapet elke 15 seconden metrics van alle nodes en services. Alertmanager routeert incidenten naar PagerDuty — bij een kritiek alert krijg ik een SMS en bij geen reactie een telefoontje. Alle configuratie handmatig geschreven zodat ik precies begrijp wat elke config-regel doet.
+        </p>
+        <div class="project-highlights">
+          <div class="project-highlight"><i data-lucide="check"></i>7 alert rules: NodeDown, DiskSpace, CPU, RAM, EndpointDown, SlowResponse</div>
+          <div class="project-highlight"><i data-lucide="check"></i>blackbox_exporter voor HTTP/TCP checks op alle services</div>
+          <div class="project-highlight"><i data-lucide="check"></i>PagerDuty escalatiebeleid: SMS → telefoontje bij geen reactie</div>
+          <div class="project-highlight"><i data-lucide="check"></i>3 nodes: Dell OptiPlex + HP ProDesk, HA ingesteld</div>
+        </div>
+        <div class="project-stack">
+          <span class="project-tag">Proxmox VE</span>
+          <span class="project-tag">Prometheus</span>
+          <span class="project-tag">Grafana</span>
+          <span class="project-tag">Alertmanager</span>
+          <span class="project-tag">PagerDuty</span>
+          <span class="project-tag">blackbox_exporter</span>
+          <span class="project-tag">node_exporter</span>
+          <span class="project-tag">Tailscale</span>
+          <span class="project-tag">Linux</span>
+          <span class="project-tag">systemd</span>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER: meer projecten -->
+      <div class="project-card" style="border-style:dashed;opacity:0.5;cursor:default;justify-content:center;align-items:center;min-height:220px">
+        <div style="text-align:center">
+          <i data-lucide="plus-circle" style="width:28px;height:28px;color:var(--text-faint);margin-bottom:0.75rem"></i>
+          <div style="font-size:0.85rem;color:var(--text-faint);font-family:var(--font-mono)">Meer projecten binnenkort</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <!-- SKILLS -->
 <section id="skills">
@@ -354,6 +434,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
         </div>
       </div>
       <div class="skill-cat">
+        <div class="skill-cat-title" style="color:var(--orange)"><i data-lucide="activity"></i> Monitoring</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-name">Prometheus</span><div class="skill-bar"><div class="skill-fill" style="width:80%;background:var(--orange)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Grafana</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--orange)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Alertmanager</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--orange)"></div></div></div>
+          <div class="skill-item"><span class="skill-name">PagerDuty</span><div class="skill-bar"><div class="skill-fill" style="width:65%;background:var(--orange)"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-cat">
         <div class="skill-cat-title" style="color:var(--orange)"><i data-lucide="headphones"></i> IT Support</div>
         <div class="skill-list">
           <div class="skill-item"><span class="skill-name">Servicedesk (1e lijn)</span><div class="skill-bar"><div class="skill-fill" style="width:90%;background:var(--orange)"></div></div></div>
@@ -369,7 +458,29 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <div class="divider"></div>
 
 <!-- CERTS -->
+<section id="certs">
+  <div class="section-inner">
+    <div class="section-label">// certificaten</div>
+    <h2 class="section-title">Certificaten</h2>
+    <p class="section-sub">Behaalde certificaten en studiedoelen voor 2026.</p>
+    <div class="certs-grid fade-in">
 
+      <div class="cert-card">
+        <div class="cert-icon" style="background:var(--blue-dim);color:var(--blue)">
+          <i data-lucide="cloud" style="width:22px;height:22px"></i>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Azure AZ-104</div>
+          <div class="cert-issuer">Microsoft · Azure Administrator</div>
+          <div class="cert-status cs-progress">In voorbereiding · 2026</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <!-- EXPERIENCE -->
 <section id="experience">
@@ -529,15 +640,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
           </div>
           <i data-lucide="external-link" style="width:16px;height:16px;color:var(--text-faint)"></i>
         </a>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-link-card">
+        <a href="https://github.com/E-mma9" target="_blank" rel="noopener noreferrer" class="contact-link-card">
           <i data-lucide="github"></i>
           <div class="contact-link-info">
             <div class="contact-link-name">GitHub</div>
-            <div class="contact-link-val">github.com/emmanueltekle</div>
+            <div class="contact-link-val">github.com/E-mma9</div>
           </div>
           <i data-lucide="external-link" style="width:16px;height:16px;color:var(--text-faint)"></i>
         </a>
-        <a href="mailto:emmanuel@example.nl" class="contact-link-card">
+        <a href="mailto:emmanueltekle@gmail.com" class="contact-link-card">
           <i data-lucide="mail"></i>
           <div class="contact-link-info">
             <div class="contact-link-name">E-mail</div>
@@ -566,9 +677,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
     <strong>Emmanuel Tekle</strong> · Saxion HBO ICT · Enschede, NL · 2026
   </div>
   <div class="footer-social">
-    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
+    <a href="https://github.com/E-mma9" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
     <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-    <a href="mailto:emmanuel@example.nl" aria-label="Email"><i data-lucide="mail"></i></a>
+    <a href="mailto:emmanueltekle@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+    <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" aria-label="Monitoring Homelab" title="Monitoring-Homelab project"><i data-lucide="activity" style="width:18px;height:18px"></i></a>
   </div>
 </footer>
 
