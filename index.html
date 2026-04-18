@@ -1,304 +1,348 @@
 <!DOCTYPE html>
-<html lang="nl" data-theme="dark">
+<html lang="nl" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emmanuel Tekle — Cybersecurity & Cloud</title>
+<title>Emmanuel Tekle — Cybersecurity & Cloud Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
-:root,[data-theme="dark"]{
-  --bg:#0d0f10;--surface:#131618;--surface-2:#181b1d;--surface-3:#1e2124;
-  --border:rgba(255,255,255,0.07);--border-2:rgba(255,255,255,0.12);
-  --text:#e8e6e3;--text-muted:#8a8885;--text-faint:#4a4946;
-  --primary:#3db8c5;--primary-dim:rgba(61,184,197,0.12);--primary-glow:rgba(61,184,197,0.25);
-  --green:#5aad41;--green-dim:rgba(90,173,65,0.12);
-  --orange:#e8953a;--orange-dim:rgba(232,149,58,0.12);
-  --red:#d15a7a;--red-dim:rgba(209,90,122,0.12);
-  --gold:#c9a227;--gold-dim:rgba(201,162,39,0.12);
-  --blue:#5591c7;--blue-dim:rgba(85,145,199,0.12);
-  --radius-sm:0.375rem;--radius-md:0.5rem;--radius-lg:0.75rem;--radius-xl:1rem;--radius-full:9999px;
-  --shadow-glow:0 0 40px rgba(61,184,197,0.08);
-  --font-body:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace;
-  --transition:180ms cubic-bezier(0.16,1,0.3,1);
-}
-[data-theme="light"]{
-  --bg:#f4f3ef;--surface:#faf9f6;--surface-2:#f0eeea;--surface-3:#e8e5e0;
+:root{
+  --bg:#F9F8F5;--surface:#FFFFFF;--surface-2:#F4F3EF;--surface-3:#ECEAE5;
   --border:rgba(0,0,0,0.08);--border-2:rgba(0,0,0,0.14);
-  --text:#1a1917;--text-muted:#6b6966;--text-faint:#b0adaa;
-  --primary:#01696f;--primary-dim:rgba(1,105,111,0.1);--primary-glow:rgba(1,105,111,0.2);
-  --green:#437a22;--green-dim:rgba(67,122,34,0.1);
-  --orange:#964219;--orange-dim:rgba(150,66,25,0.1);
-  --red:#a12c7b;--red-dim:rgba(161,44,123,0.1);
-  --gold:#d19900;--gold-dim:rgba(209,153,0,0.1);
-  --blue:#006494;--blue-dim:rgba(0,100,148,0.1);
-  --shadow-glow:0 0 40px rgba(1,105,111,0.06);
+  --text:#1C1917;--text-muted:#6B6966;--text-faint:#A8A29E;
+  --primary:#5B5BD6;--primary-dim:rgba(91,91,214,0.08);--primary-glow:rgba(91,91,214,0.2);
+  --teal:#0D9488;--teal-dim:rgba(13,148,136,0.1);
+  --green:#16A34A;--green-dim:rgba(22,163,74,0.08);
+  --orange:#EA580C;--orange-dim:rgba(234,88,12,0.08);
+  --blue:#2563EB;--blue-dim:rgba(37,99,235,0.08);
+  --red:#DC2626;--red-dim:rgba(220,38,38,0.08);
+  --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-2xl:1.5rem;--radius-full:9999px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 16px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.1),0 4px 8px rgba(0,0,0,.04);
+  --font:'Inter',sans-serif;--transition:200ms cubic-bezier(.16,1,.3,1);
+}
+[data-theme="dark"]{
+  --bg:#0F172A;--surface:#1E293B;--surface-2:#263548;--surface-3:#334155;
+  --border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.14);
+  --text:#F1F5F9;--text-muted:#94A3B8;--text-faint:#475569;
+  --primary:#818CF8;--primary-dim:rgba(129,140,248,.1);--primary-glow:rgba(129,140,248,.25);
+  --teal:#2DD4BF;--teal-dim:rgba(45,212,191,.1);
+  --green:#4ADE80;--green-dim:rgba(74,222,128,.1);
+  --orange:#FB923C;--orange-dim:rgba(251,146,60,.1);
+  --blue:#60A5FA;--blue-dim:rgba(96,165,250,.1);
+  --red:#F87171;--red-dim:rgba(248,113,113,.1);
+  --shadow-sm:0 1px 3px rgba(0,0,0,.4);--shadow-md:0 4px 16px rgba(0,0,0,.35);--shadow-lg:0 8px 32px rgba(0,0,0,.4);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:80px}
-body{min-height:100dvh;font-family:var(--font-body);font-size:1rem;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:72px}
+body{min-height:100dvh;font-family:var(--font);font-size:1rem;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;transition:background var(--transition),color var(--transition)}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
 :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--radius-sm)}
+
 .fade-in{opacity:1}
 @supports(animation-timeline:scroll()){
   .fade-in{opacity:0;animation:reveal-fade linear both;animation-timeline:view();animation-range:entry 0% entry 80%}
 }
 @keyframes reveal-fade{to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.fade-in{opacity:1!important;animation:none!important}}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes float-a{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes float-b{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes float-c{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,15,16,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem);height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-[data-theme="light"] nav{background:rgba(244,243,239,0.9)}
-.nav-logo{font-family:var(--font-mono);font-weight:700;font-size:0.9rem;color:var(--primary);letter-spacing:-0.01em;display:flex;align-items:center;gap:0.5rem}
-.nav-logo span{color:var(--text-muted);font-weight:400}
-.nav-links{display:flex;align-items:center;gap:0.25rem}
-.nav-links a{font-size:0.875rem;color:var(--text-muted);padding:0.4rem 0.75rem;border-radius:var(--radius-md);transition:color var(--transition),background var(--transition)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(249,248,245,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,5vw,3.5rem);height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background var(--transition)}
+[data-theme="dark"] nav{background:rgba(15,23,42,.94)}
+.nav-logo{font-weight:800;font-size:1rem;color:var(--text);display:flex;align-items:center;gap:.625rem;letter-spacing:-.02em}
+.nav-logo-badge{width:34px;height:34px;border-radius:var(--radius-md);background:var(--primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:800;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:.125rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--text-muted);padding:.4rem .875rem;border-radius:var(--radius-full);transition:color var(--transition),background var(--transition)}
 .nav-links a:hover{color:var(--text);background:var(--surface-3)}
-.nav-links a.active{color:var(--primary)}
-.nav-right{display:flex;align-items:center;gap:0.5rem}
-.theme-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-muted);transition:color var(--transition),background var(--transition)}
-.theme-btn:hover{color:var(--text);background:var(--surface-3)}
-.nav-cta{font-size:0.875rem;font-weight:600;color:var(--primary);border:1px solid var(--primary);padding:0.35rem 0.9rem;border-radius:var(--radius-full);transition:all var(--transition)}
-.nav-cta:hover{background:var(--primary-dim)}
-@media(max-width:700px){.nav-links{display:none}}
+.nav-links a.active{color:var(--primary);background:var(--primary-dim)}
+.nav-right{display:flex;align-items:center;gap:.5rem}
+.theme-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);color:var(--text-muted);border:1px solid var(--border);transition:all var(--transition)}
+.theme-btn:hover{color:var(--text);background:var(--surface-3);border-color:var(--border-2)}
+.nav-cta{font-size:.875rem;font-weight:600;color:#fff;background:var(--primary);padding:.45rem 1.1rem;border-radius:var(--radius-full);transition:all var(--transition);box-shadow:0 2px 8px var(--primary-glow)}
+.nav-cta:hover{filter:brightness(1.08);box-shadow:0 4px 16px var(--primary-glow)}
+@media(max-width:768px){.nav-links{display:none}}
 
 /* HERO */
-#hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:80px clamp(1rem,5vw,5rem) 5rem;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.5}
-.hero-glow{position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;max-width:700px;max-height:700px;background:radial-gradient(circle,var(--primary-glow) 0%,transparent 65%);border-radius:50%}
-.hero-inner{position:relative;z-index:1;max-width:760px}
-.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--primary);background:var(--primary-dim);border:1px solid rgba(61,184,197,0.2);border-radius:var(--radius-full);padding:0.3rem 0.85rem;margin-bottom:1.5rem}
-[data-theme="light"] .hero-tag{border-color:rgba(1,105,111,0.2)}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse-dot 2s ease-in-out infinite}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
-.hero-name{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:700;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem}
-.hero-name .first{color:var(--text)}.hero-name .last{color:var(--primary)}
-.hero-role{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text-muted);margin-bottom:2rem;max-width:58ch;line-height:1.5}
+.hero-blob{position:fixed;top:-30%;right:-20%;width:70vw;height:70vw;max-width:800px;max-height:800px;background:radial-gradient(ellipse,rgba(91,91,214,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0}
+.hero-blob-2{position:fixed;bottom:-20%;left:-10%;width:50vw;height:50vw;max-width:600px;background:radial-gradient(ellipse,rgba(13,148,136,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0}
+[data-theme="dark"] .hero-blob{background:radial-gradient(ellipse,rgba(129,140,248,.09) 0%,transparent 70%)}
+#hero{min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:100px clamp(1.25rem,6vw,5rem) 4rem;max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.hero-left{display:flex;flex-direction:column;align-items:flex-start}
+.hero-available{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;color:var(--green);background:var(--green-dim);border:1px solid rgba(22,163,74,.2);border-radius:var(--radius-full);padding:.35rem 1rem;margin-bottom:1.75rem}
+[data-theme="dark"] .hero-available{border-color:rgba(74,222,128,.2)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0}
+.hero-greeting{font-size:1.1rem;font-weight:500;color:var(--text-muted);margin-bottom:.5rem}
+.hero-name{font-size:clamp(2.6rem,6vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.04em;margin-bottom:1.25rem;background:linear-gradient(135deg,var(--text) 0%,var(--primary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+[data-theme="dark"] .hero-name{background:linear-gradient(135deg,#F1F5F9 0%,#818CF8 100%);-webkit-background-clip:text;background-clip:text}
+.hero-role{font-size:1.05rem;color:var(--text-muted);margin-bottom:2rem;max-width:52ch;line-height:1.7}
 .hero-role strong{color:var(--text);font-weight:600}
-.hero-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem}
-.chip{font-family:var(--font-mono);font-size:0.72rem;padding:0.3rem 0.7rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface);transition:all var(--transition)}
-.chip:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-dim)}
-.chip.c-green{border-color:rgba(90,173,65,0.3);color:var(--green);background:var(--green-dim)}
-.chip.c-blue{border-color:rgba(85,145,199,0.3);color:var(--blue);background:var(--blue-dim)}
-.chip.c-orange{border-color:rgba(232,149,58,0.3);color:var(--orange);background:var(--orange-dim)}
-.hero-actions{display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center}
-.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;font-size:0.9rem;color:#0d0f10;background:var(--primary);padding:0.65rem 1.4rem;border-radius:var(--radius-full);transition:all var(--transition);box-shadow:0 4px 24px var(--primary-glow)}
-.btn-primary:hover{filter:brightness(1.1)}
-[data-theme="light"] .btn-primary{color:#fff}
-.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;font-weight:500;font-size:0.9rem;color:var(--text-muted);border:1px solid var(--border-2);padding:0.65rem 1.4rem;border-radius:var(--radius-full);transition:all var(--transition)}
-.btn-secondary:hover{color:var(--text);border-color:var(--text-muted);background:var(--surface)}
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:var(--text-faint);font-size:0.7rem;font-family:var(--font-mono);animation:bounce 2s ease-in-out infinite}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.25rem}
+.htag{font-size:.78rem;font-weight:500;padding:.3rem .8rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface);transition:all var(--transition)}
+.htag.ind{border-color:rgba(91,91,214,.25);color:var(--primary);background:var(--primary-dim)}
+.htag.tea{border-color:rgba(13,148,136,.25);color:var(--teal);background:var(--teal-dim)}
+.htag.grn{border-color:rgba(22,163,74,.25);color:var(--green);background:var(--green-dim)}
+[data-theme="dark"] .htag.ind{border-color:rgba(129,140,248,.25)}
+[data-theme="dark"] .htag.tea{border-color:rgba(45,212,191,.25)}
+[data-theme="dark"] .htag.grn{border-color:rgba(74,222,128,.25)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.925rem;color:#fff;background:var(--primary);padding:.75rem 1.5rem;border-radius:var(--radius-full);transition:all var(--transition);box-shadow:0 4px 20px var(--primary-glow)}
+.btn-primary:hover{filter:brightness(1.07);transform:translateY(-1px);box-shadow:0 6px 24px var(--primary-glow)}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;font-size:.925rem;color:var(--text-muted);border:1.5px solid var(--border-2);padding:.75rem 1.5rem;border-radius:var(--radius-full);transition:all var(--transition);background:var(--surface)}
+.btn-secondary:hover{color:var(--text);border-color:var(--text-muted);background:var(--surface-2);transform:translateY(-1px)}
+.btn-primary i,.btn-secondary i{width:17px;height:17px}
+.hero-right{display:flex;justify-content:center;align-items:center}
+.hero-visual{position:relative;width:340px;height:340px}
+.avatar-ring{width:220px;height:220px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--teal));padding:3px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 8px 48px var(--primary-glow)}
+.avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center}
+.avatar-initials{font-size:3.5rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--primary),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.float-badge{position:absolute;display:flex;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:.5rem .875rem;font-size:.78rem;font-weight:600;box-shadow:var(--shadow-md);white-space:nowrap}
+.float-badge i{width:15px;height:15px;flex-shrink:0}
+.fb-1{top:5%;right:0;color:var(--primary);animation:float-a 4s ease-in-out infinite}
+.fb-2{bottom:15%;left:0;color:var(--teal);animation:float-b 3.5s ease-in-out infinite .5s}
+.fb-3{top:60%;right:-5%;color:var(--green);animation:float-c 4.5s ease-in-out infinite 1s}
+@media(max-width:900px){#hero{grid-template-columns:1fr;min-height:auto;padding-top:120px;padding-bottom:4rem;max-width:640px}.hero-right{display:none}}
+@media(max-width:480px){.hero-name{font-size:2.4rem}}
 
 /* SECTIONS */
-section{padding:clamp(4rem,8vw,7rem) clamp(1rem,5vw,5rem)}
+section:not(#hero){padding:clamp(4.5rem,9vw,7rem) clamp(1.25rem,5vw,5rem)}
 .section-inner{max-width:1000px;margin:0 auto}
-.section-label{font-family:var(--font-mono);font-size:0.72rem;color:var(--primary);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
-.section-title{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1.15}
-.section-sub{color:var(--text-muted);font-size:1rem;max-width:56ch;margin-bottom:3rem;line-height:1.6}
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-2),transparent)}
+.section-eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.625rem}
+.section-title{font-size:clamp(1.65rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.875rem;line-height:1.15}
+.section-sub{color:var(--text-muted);font-size:1rem;max-width:56ch;margin-bottom:3rem;line-height:1.7}
+.divider{height:1px;background:var(--border)}
 
 /* ABOUT */
-#about{background:var(--surface)}
-.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}
-@media(max-width:700px){.about-grid{grid-template-columns:1fr}}
-.about-avatar{width:160px;height:160px;border-radius:var(--radius-xl);background:linear-gradient(135deg,var(--primary-dim),var(--blue-dim));border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;position:relative}
-.about-initials{font-family:var(--font-mono);font-weight:700;font-size:2.8rem;color:var(--primary)}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.25rem}
-.stat-box{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:0.85rem 1rem}
-.stat-num{font-size:1.5rem;font-weight:700;font-family:var(--font-mono);color:var(--primary);line-height:1}
-.stat-label{font-size:0.72rem;color:var(--text-muted);margin-top:0.2rem}
-.about-text p{color:var(--text-muted);font-size:0.95rem;line-height:1.75;margin-bottom:1rem;max-width:72ch}
-.about-skills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.25rem}
-
-/* TAG (timeline) */
-.tag{font-family:var(--font-mono);font-size:0.68rem;padding:0.2rem 0.55rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
+#about{background:var(--surface);position:relative;z-index:1}
+.about-layout{display:grid;grid-template-columns:280px 1fr;gap:4rem;align-items:start}
+@media(max-width:768px){.about-layout{grid-template-columns:1fr}}
+.about-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:2rem;text-align:center}
+.about-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--teal));margin:0 auto 1.25rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--primary-glow)}
+.about-initials{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.about-card-name{font-weight:800;font-size:1.1rem;letter-spacing:-.02em;margin-bottom:.25rem}
+.about-card-sub{font-size:.82rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.875rem;text-align:center}
+.stat-num{font-size:1.5rem;font-weight:800;color:var(--primary);line-height:1;letter-spacing:-.03em}
+.stat-label{font-size:.7rem;color:var(--text-muted);margin-top:.2rem;line-height:1.3}
+.about-content p{color:var(--text-muted);font-size:.95rem;line-height:1.8;margin-bottom:1.125rem}
+.about-content p:last-of-type{margin-bottom:1.75rem}
+.about-content strong{color:var(--text);font-weight:600}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.atag{font-size:.8rem;font-weight:500;padding:.35rem .85rem;border-radius:var(--radius-full);background:var(--primary-dim);color:var(--primary);border:1px solid rgba(91,91,214,.2)}
+[data-theme="dark"] .atag{border-color:rgba(129,140,248,.2)}
+.atag.neutral{background:var(--surface-2);color:var(--text-muted);border-color:var(--border-2)}
 
 /* PROJECTS */
-#projects{background:var(--bg)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:1.25rem}
-.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.75rem;transition:all var(--transition);display:flex;flex-direction:column;gap:1rem}
-.project-card:hover{border-color:var(--border-2);box-shadow:var(--shadow-glow);transform:translateY(-2px)}
+#projects{background:var(--bg);position:relative;z-index:1}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:1.5rem}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:2rem;transition:all var(--transition);display:flex;flex-direction:column;gap:1.125rem;box-shadow:var(--shadow-sm)}
+.project-card:hover{border-color:rgba(91,91,214,.25);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+[data-theme="dark"] .project-card:hover{border-color:rgba(129,140,248,.25)}
 .project-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
-.project-icon{width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.project-links{display:flex;gap:0.4rem}
-.project-link{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-faint);border:1px solid var(--border);transition:all var(--transition)}
+.project-icon{width:48px;height:48px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.project-links{display:flex;gap:.4rem}
+.project-link{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-faint);border:1px solid var(--border);transition:all var(--transition)}
 .project-link:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-dim)}
-.project-link i{width:15px;height:15px}
-.project-name{font-weight:700;font-size:1rem;line-height:1.3;margin-top:0.75rem}
-.project-badge{display:inline-flex;align-items:center;gap:0.35rem;font-family:var(--font-mono);font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:var(--radius-full);margin-bottom:0.1rem}
-.project-badge.done{background:var(--green-dim);color:var(--green);border:1px solid rgba(90,173,65,0.3)}
-.project-badge.wip{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(232,149,58,0.3)}
-.project-desc{font-size:0.85rem;color:var(--text-muted);line-height:1.75;flex:1}
-.project-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:auto;padding-top:0.25rem}
-.project-tag{font-family:var(--font-mono);font-size:0.68rem;padding:0.2rem 0.55rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
-.project-highlights{display:flex;flex-direction:column;gap:0.4rem;margin-top:-0.25rem}
-.project-highlight{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8rem;color:var(--text-muted)}
-.project-highlight i{width:13px;height:13px;color:var(--green);flex-shrink:0;margin-top:0.15rem}
+.project-link i{width:16px;height:16px}
+.ps-done{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:var(--radius-full);background:var(--green-dim);color:var(--green);border:1px solid rgba(22,163,74,.2)}
+[data-theme="dark"] .ps-done{border-color:rgba(74,222,128,.2)}
+.ps-done i{width:11px;height:11px}
+.project-name{font-weight:800;font-size:1.1rem;line-height:1.3;letter-spacing:-.02em}
+.project-desc{font-size:.875rem;color:var(--text-muted);line-height:1.8;flex:1}
+.project-points{display:flex;flex-direction:column;gap:.5rem}
+.pp{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:var(--text-muted);line-height:1.5}
+.pp-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:.45rem}
+.project-stack{display:flex;flex-wrap:wrap;gap:.4rem;padding-top:.75rem;border-top:1px solid var(--border)}
+.ptag{font-size:.72rem;font-weight:500;padding:.25rem .6rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
+.project-placeholder{background:transparent;border:1.5px dashed var(--border-2);border-radius:var(--radius-2xl);padding:2rem;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:200px;gap:.75rem;opacity:.5}
+.project-placeholder span{font-size:.85rem;color:var(--text-faint);font-weight:500}
 
 /* SKILLS */
-#skills{background:var(--surface)}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:1rem}
-.skill-cat{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem 1.5rem}
-.skill-cat-title{display:flex;align-items:center;gap:0.6rem;font-weight:700;font-size:0.9rem;margin-bottom:1rem}
-.skill-cat-title i{width:18px;height:18px}
-.skill-list{display:flex;flex-direction:column;gap:0.6rem}
-.skill-item{display:flex;align-items:center;justify-content:space-between;gap:0.75rem}
-.skill-name{font-size:0.85rem;color:var(--text-muted)}
-.skill-bar{height:4px;flex:1;background:var(--surface-3);border-radius:var(--radius-full);overflow:hidden;max-width:100px}
-.skill-fill{height:100%;border-radius:var(--radius-full);background:var(--primary)}
+#skills{background:var(--surface);position:relative;z-index:1}
+.skills-layout{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr));gap:1rem}
+.skill-group{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem}
+.skill-group-head{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:.9rem;margin-bottom:1.25rem}
+.skill-group-head i{width:18px;height:18px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.stag{font-size:.8rem;font-weight:500;padding:.3rem .75rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface);transition:all var(--transition)}
+.stag.hi{color:var(--text);border-color:var(--border-2);font-weight:600}
 
 /* CERTS */
-#certs{background:var(--bg)}
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:1rem}
-.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:all var(--transition)}
-.cert-card:hover{border-color:var(--border-2);background:var(--surface-2)}
-.cert-icon{width:48px;height:48px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-mono);font-weight:700;font-size:0.65rem;text-align:center;line-height:1.2}
-.cert-info{flex:1;min-width:0}
-.cert-name{font-weight:600;font-size:0.9rem;line-height:1.3}
-.cert-issuer{font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem}
-.cert-status{font-size:0.65rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:0.4rem}
-.cs-done{color:var(--green)}.cs-progress{color:var(--orange)}.cs-planned{color:var(--text-faint)}
+#certs{background:var(--bg);position:relative;z-index:1}
+.cert-card{display:inline-flex;align-items:center;gap:1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem 1.75rem;box-shadow:var(--shadow-sm);transition:all var(--transition)}
+.cert-card:hover{border-color:rgba(37,99,235,.3);box-shadow:var(--shadow-md)}
+.cert-icon{width:52px;height:52px;border-radius:var(--radius-lg);background:var(--blue-dim);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cert-icon i{width:24px;height:24px}
+.cert-name{font-weight:700;font-size:.95rem;line-height:1.3}
+.cert-issuer{font-size:.8rem;color:var(--text-muted);margin-top:.15rem}
+.cert-badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:var(--radius-full);background:var(--orange-dim);color:var(--orange);border:1px solid rgba(234,88,12,.2);margin-top:.4rem}
+[data-theme="dark"] .cert-badge{border-color:rgba(251,146,60,.2)}
+.cert-badge i{width:11px;height:11px}
 
 /* EXPERIENCE */
-#experience{background:var(--surface)}
-.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-@media(max-width:760px){.exp-grid{grid-template-columns:1fr}}
-.exp-col-title{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border)}
-.exp-col-title i{width:16px;height:16px;color:var(--primary)}
-.timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:1.25rem}
-.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--primary),var(--border),transparent)}
-.tl-item{padding:0 0 2rem 1.75rem;position:relative}
+#experience{background:var(--surface);position:relative;z-index:1}
+.exp-cols{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+@media(max-width:768px){.exp-cols{grid-template-columns:1fr}}
+.exp-col-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;padding-bottom:.875rem;border-bottom:1px solid var(--border)}
+.exp-col-label i{width:15px;height:15px;color:var(--primary)}
+.tl{display:flex;flex-direction:column;gap:0;position:relative;padding-left:1.5rem}
+.tl::before{content:'';position:absolute;left:0;top:6px;bottom:0;width:1px;background:linear-gradient(180deg,var(--primary),var(--border-2) 80%,transparent)}
+.tl-edu::before{background:linear-gradient(180deg,var(--blue),var(--border-2) 80%,transparent)}
+.tl-item{padding:0 0 2.25rem 1.75rem;position:relative}
 .tl-item:last-child{padding-bottom:0}
-.tl-dot{position:absolute;left:-1.65rem;top:0.35rem;width:9px;height:9px;border-radius:50%;background:var(--primary);border:2px solid var(--bg);box-shadow:0 0 6px var(--primary-glow)}
-[data-theme="light"] .tl-dot{border-color:var(--surface)}
-.tl-period{font-family:var(--font-mono);font-size:0.68rem;color:var(--primary);margin-bottom:0.25rem;display:flex;align-items:center;gap:0.4rem}
-.tl-title{font-weight:700;font-size:0.95rem;margin-bottom:0.1rem;line-height:1.3}
-.tl-company{font-size:0.82rem;color:var(--text-muted);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem}
-.tl-company i{width:13px;height:13px;flex-shrink:0}
-.tl-desc{color:var(--text-muted);font-size:0.83rem;line-height:1.65;max-width:60ch}
-.tl-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.6rem}
-.tl-dot.edu{background:var(--blue);box-shadow:0 0 6px rgba(85,145,199,0.4)}
-.tl-dot.green{background:var(--green);box-shadow:0 0 6px rgba(90,173,65,0.3)}
+.tl-dot{position:absolute;left:-1.9rem;top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--primary);border:2px solid var(--surface);box-shadow:0 0 0 2px var(--primary-glow)}
+.tl-dot.edu{background:var(--blue);box-shadow:0 0 0 2px rgba(37,99,235,.2)}
+[data-theme="dark"] .tl-dot.edu{box-shadow:0 0 0 2px rgba(96,165,250,.2)}
+.tl-dot.sub{background:var(--teal);box-shadow:0 0 0 2px rgba(13,148,136,.2)}
 .tl-dot.faint{background:var(--text-faint);box-shadow:none}
-.edu-timeline::before{background:linear-gradient(180deg,var(--blue),var(--border),transparent)}
+.tl-period{font-size:.72rem;font-weight:600;color:var(--primary);margin-bottom:.3rem}
+.tl-period.edu{color:var(--blue)}
+.tl-title{font-weight:700;font-size:.95rem;margin-bottom:.15rem;line-height:1.35}
+.tl-org{font-size:.82rem;color:var(--text-muted);margin-bottom:.625rem}
+.tl-desc{font-size:.83rem;color:var(--text-muted);line-height:1.7;max-width:58ch}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.625rem}
+.tag{font-size:.72rem;font-weight:500;padding:.2rem .6rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
+.goal-box{background:linear-gradient(135deg,var(--primary-dim),var(--teal-dim));border:1px solid rgba(91,91,214,.15);border-radius:var(--radius-xl);padding:1.25rem 1.5rem;margin-top:2rem}
+[data-theme="dark"] .goal-box{border-color:rgba(129,140,248,.15)}
+.goal-box-title{font-size:.8rem;font-weight:700;color:var(--primary);margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+.goal-box-title i{width:14px;height:14px}
+.goal-list{display:flex;flex-direction:column;gap:.5rem}
+.goal-item{display:flex;align-items:center;gap:.6rem;font-size:.83rem;color:var(--text-muted)}
+.goal-item i{width:13px;height:13px;color:var(--teal);flex-shrink:0}
 
 /* CONTACT */
-#contact{background:var(--bg)}
-.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-@media(max-width:700px){.contact-inner{grid-template-columns:1fr}}
-.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem}
+#contact{background:var(--bg);position:relative;z-index:1}
+.contact-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:768px){.contact-layout{grid-template-columns:1fr}}
+.contact-form-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:2.25rem;box-shadow:var(--shadow-sm)}
+.contact-form-title{font-weight:800;font-size:1.1rem;letter-spacing:-.02em;margin-bottom:1.75rem}
 .form-group{margin-bottom:1.25rem}
-.form-label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-muted);margin-bottom:0.5rem;letter-spacing:0.03em}
-.form-input{width:100%;background:var(--surface-3);border:1px solid var(--border);border-radius:var(--radius-md);padding:0.7rem 0.9rem;font-size:0.9rem;color:var(--text);font-family:var(--font-body);transition:all var(--transition);resize:vertical}
+.form-label{display:block;font-size:.8rem;font-weight:600;color:var(--text-muted);margin-bottom:.5rem}
+.form-input{width:100%;background:var(--surface-2);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:.75rem 1rem;font-size:.9rem;color:var(--text);font-family:var(--font);transition:all var(--transition);resize:vertical}
 .form-input::placeholder{color:var(--text-faint)}
-.form-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-dim)}
+.form-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-dim);background:var(--surface)}
 textarea.form-input{min-height:120px}
-.form-submit{width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;font-weight:700;font-size:0.9rem;color:#0d0f10;background:var(--primary);padding:0.8rem;border-radius:var(--radius-md);border:none;cursor:pointer;transition:all var(--transition)}
-[data-theme="light"] .form-submit{color:#fff}
-.form-submit:hover{filter:brightness(1.08);box-shadow:0 4px 24px var(--primary-glow)}
-.contact-links{display:flex;flex-direction:column;gap:0.75rem}
-.contact-link-card{display:flex;align-items:center;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;transition:all var(--transition);color:inherit}
-.contact-link-card:hover{border-color:var(--primary);background:var(--primary-dim);color:var(--primary)}
-.contact-link-card i{width:20px;height:20px;flex-shrink:0}
-.contact-link-info{flex:1}
-.contact-link-name{font-weight:600;font-size:0.9rem}
-.contact-link-val{font-size:0.78rem;color:var(--text-muted);font-family:var(--font-mono)}
-.contact-link-card:hover .contact-link-val{color:var(--primary)}
+.form-submit{width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;font-size:.925rem;color:#fff;background:var(--primary);padding:.875rem;border-radius:var(--radius-lg);border:none;cursor:pointer;transition:all var(--transition);box-shadow:0 2px 8px var(--primary-glow)}
+.form-submit i{width:17px;height:17px}
+.form-submit:hover{filter:brightness(1.07);transform:translateY(-1px);box-shadow:0 4px 16px var(--primary-glow)}
+.contact-side{display:flex;flex-direction:column;gap:1rem}
+.contact-side-title{font-weight:700;font-size:.95rem;margin-bottom:.25rem}
+.clink{display:flex;align-items:center;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.125rem 1.375rem;transition:all var(--transition);color:inherit;box-shadow:var(--shadow-sm)}
+.clink:hover{border-color:rgba(91,91,214,.3);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.clink-icon{width:42px;height:42px;border-radius:var(--radius-md);background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-muted);transition:all var(--transition)}
+.clink-icon i{width:20px;height:20px}
+.clink:hover .clink-icon{background:var(--primary-dim);color:var(--primary)}
+.clink:hover .clink-label{color:var(--primary)}
+.clink-label{font-weight:600;font-size:.9rem}
+.clink-val{font-size:.78rem;color:var(--text-muted);margin-top:.1rem}
+.avail-box{background:linear-gradient(135deg,var(--primary-dim),var(--teal-dim));border:1px solid rgba(91,91,214,.15);border-radius:var(--radius-xl);padding:1.25rem 1.375rem}
+[data-theme="dark"] .avail-box{border-color:rgba(129,140,248,.15)}
+.avail-title{font-size:.8rem;font-weight:700;color:var(--primary);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.avail-title i{width:14px;height:14px}
+.avail-text{font-size:.83rem;color:var(--text-muted);line-height:1.6}
+.avail-text strong{color:var(--text)}
+.fs-success{background:var(--green-dim);border:1px solid rgba(22,163,74,.2);border-radius:var(--radius-md);padding:.875rem 1rem;margin-bottom:1.25rem;display:none;color:var(--green);font-size:.875rem}
+.fs-error-box{background:var(--red-dim);border:1px solid rgba(220,38,38,.2);border-radius:var(--radius-md);padding:.875rem 1rem;margin-bottom:1.25rem;display:none;color:var(--red);font-size:.875rem}
+.fs-field-err{color:var(--red);font-size:.75rem;margin-top:.3rem;display:block}
 
 /* FOOTER */
-footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem clamp(1rem,5vw,5rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.footer-left{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-faint)}
-.footer-left strong{color:var(--primary)}
-.footer-social{display:flex;gap:0.5rem}
-.footer-social a{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-faint);transition:all var(--transition)}
-.footer-social a:hover{color:var(--primary);background:var(--primary-dim)}
-.footer-social a i{width:18px;height:18px}
-.notify{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--surface-3);border:1px solid var(--green);border-radius:var(--radius-lg);padding:0.9rem 1.25rem;font-size:0.85rem;color:var(--green);display:none;align-items:center;gap:0.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.3);animation:slide-in 0.3s cubic-bezier(0.16,1,0.3,1)}
-.notify.show{display:flex}
-@keyframes slide-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:480px){.hero-name{font-size:2.5rem}}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem clamp(1.25rem,5vw,5rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.footer-copy{font-size:.8rem;color:var(--text-faint)}
+.footer-copy strong{color:var(--text-muted);font-weight:600}
+.footer-links{display:flex;align-items:center;gap:.375rem}
+.footer-links a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);color:var(--text-faint);border:1px solid var(--border);transition:all var(--transition)}
+.footer-links a:hover{color:var(--primary);background:var(--primary-dim);border-color:rgba(91,91,214,.2)}
+.footer-links a i{width:17px;height:17px}
 </style>
 </head>
 <body>
 
+<div class="hero-blob"></div>
+<div class="hero-blob-2"></div>
+
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-label="ET logo">
-      <rect x="3" y="3" width="18" height="18" rx="3"/>
-      <path d="M8 8h3m0 0v8m0-4h4M15 8h1"/>
-    </svg>
-    Emmanuel<span>.tekle()</span>
+    <div class="nav-logo-badge">ET</div>
+    <span>Emmanuel Tekle</span>
   </a>
   <div class="nav-links">
     <a href="#about">Over mij</a>
     <a href="#projects">Projecten</a>
     <a href="#skills">Skills</a>
-    <a href="#certs">Certificaten</a>
     <a href="#experience">Ervaring</a>
     <a href="#contact">Contact</a>
   </div>
   <div class="nav-right">
-    <button class="theme-btn" data-theme-toggle aria-label="Toggle theme">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <button class="theme-btn" data-theme-toggle aria-label="Schakel thema">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
-    <a href="#contact" class="nav-cta">Hire me</a>
+    <a href="#contact" class="nav-cta">Neem contact op</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-  </div>
-  <div class="hero-inner">
-    <div class="hero-tag">
+  <div class="hero-left">
+    <div class="hero-available">
       <span class="status-dot"></span>
-      Beschikbaar voor stages & IT rollen — Enschede / Remote
+      Beschikbaar voor stages &amp; IT rollen
     </div>
-    <h1 class="hero-name">
-      <span class="first">Emmanuel</span><br>
-      <span class="last">Tekle</span>
-    </h1>
+    <p class="hero-greeting">Hoi, ik ben</p>
+    <h1 class="hero-name">Emmanuel Tekle</h1>
     <p class="hero-role">
-      Saxion HBO ICT Student · <strong>Cybersecurity & Cloud Infrastructure</strong><br>
-      DevSecOps pipelines, Terraform IaC, Ansible automatisering en home lab security labs — Enschede, NL.
+      HBO ICT student aan Saxion met een passie voor <strong>cybersecurity en cloud infrastructure</strong>. Ik bouw echte systemen, schrijf werkende config en draai een volledig gesegmenteerd Proxmox homelab.
     </p>
-    <div class="hero-chips">
-      <span class="chip c-green">Terraform</span>
-      <span class="chip c-green">Ansible</span>
-      <span class="chip c-blue">Azure</span>
-      <span class="chip c-blue">AWS</span>
-      <span class="chip">GitHub Actions</span>
-      <span class="chip">Docker</span>
-      <span class="chip c-orange">Kali Linux</span>
-      <span class="chip">Proxmox</span>
-      <span class="chip">OPNsense</span>
-      <span class="chip c-orange">Prometheus</span>
-      <span class="chip c-orange">Grafana</span>
+    <div class="hero-tags">
+      <span class="htag ind">Terraform</span>
+      <span class="htag ind">Ansible</span>
+      <span class="htag tea">Azure</span>
+      <span class="htag tea">AWS</span>
+      <span class="htag">Docker</span>
+      <span class="htag grn">Linux</span>
+      <span class="htag grn">Prometheus</span>
+      <span class="htag">Proxmox</span>
+      <span class="htag">GitHub Actions</span>
     </div>
     <div class="hero-actions">
       <a href="#projects" class="btn-primary">
-        <i data-lucide="folder-open" style="width:17px;height:17px"></i>
-        Bekijk projecten
+        <i data-lucide="folder-open"></i>
+        Bekijk mijn werk
       </a>
       <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-        <i data-lucide="linkedin" style="width:17px;height:17px"></i>
+        <i data-lucide="linkedin"></i>
         LinkedIn
       </a>
     </div>
   </div>
-  <div class="hero-scroll">
-    <i data-lucide="chevron-down" style="width:16px;height:16px"></i>
-    scroll
+  <div class="hero-right fade-in">
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <span class="avatar-initials">ET</span>
+        </div>
+      </div>
+      <div class="float-badge fb-1">
+        <i data-lucide="shield"></i> Cybersecurity
+      </div>
+      <div class="float-badge fb-2">
+        <i data-lucide="cloud"></i> Cloud &amp; IaC
+      </div>
+      <div class="float-badge fb-3">
+        <i data-lucide="activity"></i> Monitoring
+      </div>
+    </div>
   </div>
 </section>
 
@@ -307,29 +351,29 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <!-- ABOUT -->
 <section id="about">
   <div class="section-inner">
-    <div class="section-label">// over mij</div>
-    <div class="about-grid">
-      <div class="fade-in">
+    <div class="section-eyebrow">Over mij</div>
+    <h2 class="section-title">Wie ben ik?</h2>
+    <div class="about-layout fade-in">
+      <div class="about-card">
         <div class="about-avatar"><span class="about-initials">ET</span></div>
-        <h2 class="section-title" style="margin-bottom:0.4rem">Hey, ik ben Emmanuel</h2>
-        <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1.25rem">Enschede, Overijssel · Saxion HBO ICT · 2e jaar</p>
+        <div class="about-card-name">Emmanuel Tekle</div>
+        <div class="about-card-sub">Enschede, NL &middot; Saxion HBO ICT<br>2e jaar &middot; 2024–2028</div>
         <div class="about-stats">
           <div class="stat-box"><div class="stat-num">2+</div><div class="stat-label">jaar IT-werkervaring</div></div>
           <div class="stat-box"><div class="stat-num">2028</div><div class="stat-label">afstudeerjaar</div></div>
         </div>
       </div>
-      <div class="about-text fade-in">
-        <p>Ik ben een HBO ICT student aan <strong style="color:var(--text)">Saxion University of Applied Sciences</strong> (2024–2028) met een sterke focus op cybersecurity en cloud infrastructure. Parallel aan mijn studie werk ik bij <strong style="color:var(--text)">Livio</strong> als 1e lijn Helpdesk Medewerker, Frontdesk-receptionist en op de afdeling logistiek.</p>
-        <p>Mijn passie ligt in het leren en begrijpen van systemen en infrastructuur — van <strong style="color:var(--text)">IaC met Terraform & Ansible</strong> tot <strong style="color:var(--text)">DevOps pipelines</strong> en een volledig gesegmenteerd Proxmox home lab. Ik geloof dat security iets is wat je vanaf het begin inbouwt, niet achteraf toevoegt.</p>
-        <p>Buiten de tech vind ik mijn balans in kickboksen, bergwandelen en boulderen.</p>
-        <div class="about-skills">
-          <span class="chip" style="background:var(--primary-dim);color:var(--primary);border-color:rgba(61,184,197,0.25)">DevSecOps</span>
-          <span class="chip">IaC / Terraform</span>
-          <span class="chip">Ansible</span>
-          <span class="chip c-blue">Cloud Security</span>
-          <span class="chip">Linux Admin</span>
-          <span class="chip c-orange">Pentesting</span>
-          <span class="chip">Servicedesk</span>
+      <div class="about-content">
+        <p>Ik studeer HBO ICT aan <strong>Saxion University of Applied Sciences</strong> met als focus cybersecurity en cloud infrastructure. Naast mijn studie werk ik bij <strong>Livio</strong> als 1e lijn Helpdesk Medewerker — elke dag zet ik in de praktijk wat ik op school leer.</p>
+        <p>Wat mij onderscheidt: ik beheer een eigen 3-node Proxmox cluster thuis. Geen click-and-done tutorials, maar alles zelf configureren — van monitoring met Prometheus en Grafana tot alerting via PagerDuty. Zo begrijp ik echt hoe systemen werken.</p>
+        <p>Mijn doel is groeien als <strong>Cloud Security Engineer</strong>. Buiten de tech vind ik mijn balans in kickboksen, bergwandelen en boulderen.</p>
+        <div class="about-tags">
+          <span class="atag">DevSecOps</span>
+          <span class="atag">IaC / Terraform</span>
+          <span class="atag">Cloud Security</span>
+          <span class="atag neutral">Linux Admin</span>
+          <span class="atag neutral">Pentesting</span>
+          <span class="atag neutral">Servicedesk</span>
         </div>
       </div>
     </div>
@@ -341,54 +385,39 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-inner">
-    <div class="section-label">// projecten</div>
+    <div class="section-eyebrow">Projecten</div>
     <h2 class="section-title">Wat ik heb gebouwd</h2>
-    <p class="section-sub">Hands-on projecten waarbij ik theorie omzet in werkende infrastructuur — van monitoring tot security labs.</p>
+    <p class="section-sub">Hands-on projecten waarbij ik theorie omzet in werkende infrastructuur.</p>
     <div class="projects-grid fade-in">
 
-      <!-- MONITORING HOMELAB -->
       <div class="project-card">
         <div class="project-header">
           <div class="project-icon" style="background:var(--orange-dim);color:var(--orange)">
-            <i data-lucide="activity" style="width:22px;height:22px"></i>
+            <i data-lucide="activity" style="width:24px;height:24px"></i>
           </div>
           <div class="project-links">
-            <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub repo">
+            <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
               <i data-lucide="github"></i>
             </a>
           </div>
         </div>
-        <span class="project-badge done"><i data-lucide="check-circle" style="width:11px;height:11px"></i> Voltooid</span>
+        <span class="ps-done"><i data-lucide="check-circle"></i> Voltooid</span>
         <div class="project-name">Monitoring Homelab</div>
-        <p class="project-desc">
-          Volledig zelfgebouwde monitoring stack op een 3-node Proxmox VE cluster. Prometheus scrapet elke 15 seconden metrics van alle nodes en services. Alertmanager routeert incidenten naar PagerDuty — bij een kritiek alert krijg ik een SMS en bij geen reactie een telefoontje. Alle configuratie handmatig geschreven zodat ik precies begrijp wat elke config-regel doet.
-        </p>
-        <div class="project-highlights">
-          <div class="project-highlight"><i data-lucide="check"></i>7 alert rules: NodeDown, DiskSpace, CPU, RAM, EndpointDown, SlowResponse</div>
-          <div class="project-highlight"><i data-lucide="check"></i>blackbox_exporter voor HTTP/TCP checks op alle services</div>
-          <div class="project-highlight"><i data-lucide="check"></i>PagerDuty escalatiebeleid: SMS → telefoontje bij geen reactie</div>
-          <div class="project-highlight"><i data-lucide="check"></i>3 nodes: Dell OptiPlex + HP ProDesk, HA ingesteld</div>
+        <p class="project-desc">Volledige monitoring stack op een 3-node Proxmox VE cluster met consumer hardware. Alle configuratie handmatig geschreven — geen installatiewizards — zodat ik elke config-regel begrijp.</p>
+        <div class="project-points">
+          <div class="pp"><div class="pp-dot"></div><span>Prometheus scrapet elke 15s metrics van alle nodes en services</span></div>
+          <div class="pp"><div class="pp-dot"></div><span>7 alert rules: NodeDown, DiskSpace, CPU, RAM, EndpointDown en meer</span></div>
+          <div class="pp"><div class="pp-dot"></div><span>Alertmanager &rarr; PagerDuty: SMS bij alert, telefoontje bij geen reactie</span></div>
+          <div class="pp"><div class="pp-dot"></div><span>blackbox_exporter voor HTTP/TCP checks op alle services</span></div>
         </div>
         <div class="project-stack">
-          <span class="project-tag">Proxmox VE</span>
-          <span class="project-tag">Prometheus</span>
-          <span class="project-tag">Grafana</span>
-          <span class="project-tag">Alertmanager</span>
-          <span class="project-tag">PagerDuty</span>
-          <span class="project-tag">blackbox_exporter</span>
-          <span class="project-tag">node_exporter</span>
-          <span class="project-tag">Tailscale</span>
-          <span class="project-tag">Linux</span>
-          <span class="project-tag">systemd</span>
+          <span class="ptag">Proxmox VE</span><span class="ptag">Prometheus</span><span class="ptag">Grafana</span><span class="ptag">Alertmanager</span><span class="ptag">PagerDuty</span><span class="ptag">node_exporter</span><span class="ptag">Tailscale</span><span class="ptag">Linux</span><span class="ptag">systemd</span>
         </div>
       </div>
 
-      <!-- PLACEHOLDER: meer projecten -->
-      <div class="project-card" style="border-style:dashed;opacity:0.5;cursor:default;justify-content:center;align-items:center;min-height:220px">
-        <div style="text-align:center">
-          <i data-lucide="plus-circle" style="width:28px;height:28px;color:var(--text-faint);margin-bottom:0.75rem"></i>
-          <div style="font-size:0.85rem;color:var(--text-faint);font-family:var(--font-mono)">Meer projecten binnenkort</div>
-        </div>
+      <div class="project-placeholder">
+        <i data-lucide="plus-circle" style="width:28px;height:28px;color:var(--text-faint)"></i>
+        <span>Meer projecten binnenkort</span>
       </div>
 
     </div>
@@ -400,55 +429,59 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-inner">
-    <div class="section-label">// technische skills</div>
+    <div class="section-eyebrow">Skills</div>
     <h2 class="section-title">Tech Stack</h2>
-    <p class="section-sub"></p>
-    <div class="skills-grid fade-in">
-      <div class="skill-cat">
-        <div class="skill-cat-title" style="color:var(--primary)"><i data-lucide="shield"></i> Security</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-name">Penetration Testing</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Cloud infrastructure building</span><div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Network Security</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Informatiebeveiliging</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+    <p class="section-sub">De tools en technologieën waarmee ik dagelijks werk of actief in verdiep.</p>
+    <div class="skills-layout fade-in">
+      <div class="skill-group">
+        <div class="skill-group-head" style="color:var(--primary)"><i data-lucide="shield"></i> Security</div>
+        <div class="skill-tags">
+          <span class="stag hi">Penetration Testing</span>
+          <span class="stag hi">Network Security</span>
+          <span class="stag">Informatiebeveiliging</span>
+          <span class="stag">Kali Linux</span>
+          <span class="stag">OPNsense</span>
+          <span class="stag">IT Forensics</span>
         </div>
       </div>
-      <div class="skill-cat">
-        <div class="skill-cat-title" style="color:var(--blue)"><i data-lucide="cloud"></i> Cloud & IaC</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-name">Terraform / HCL</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--blue)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Ansible</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--blue)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Azure</span><div class="skill-bar"><div class="skill-fill" style="width:65%;background:var(--blue)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">AWS</span><div class="skill-bar"><div class="skill-fill" style="width:55%;background:var(--blue)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Docker</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--blue)"></div></div></div>
+      <div class="skill-group">
+        <div class="skill-group-head" style="color:var(--teal)"><i data-lucide="cloud"></i> Cloud &amp; IaC</div>
+        <div class="skill-tags">
+          <span class="stag hi">Terraform</span>
+          <span class="stag hi">Ansible</span>
+          <span class="stag hi">Azure</span>
+          <span class="stag">AWS</span>
+          <span class="stag">Docker</span>
+          <span class="stag">GitHub Actions</span>
         </div>
       </div>
-      <div class="skill-cat">
-        <div class="skill-cat-title" style="color:var(--green)"><i data-lucide="terminal"></i> Linux & Netwerk</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-name">Linux </span><div class="skill-bar"><div class="skill-fill" style="width:85%;background:var(--green)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Bash Scripting</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--green)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">IT Forensics</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--green)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">VLAN / Subnetting</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--green)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Proxmox</span><div class="skill-bar"><div class="skill-fill" style="width:80%;background:var(--green)"></div></div></div>
+      <div class="skill-group">
+        <div class="skill-group-head" style="color:var(--green)"><i data-lucide="terminal"></i> Linux &amp; Netwerk</div>
+        <div class="skill-tags">
+          <span class="stag hi">Linux</span>
+          <span class="stag hi">Proxmox</span>
+          <span class="stag">Bash Scripting</span>
+          <span class="stag">VLAN / Subnetting</span>
+          <span class="stag">Tailscale</span>
         </div>
       </div>
-      <div class="skill-cat">
-        <div class="skill-cat-title" style="color:var(--orange)"><i data-lucide="activity"></i> Monitoring</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-name">Prometheus</span><div class="skill-bar"><div class="skill-fill" style="width:80%;background:var(--orange)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Grafana</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--orange)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Alertmanager</span><div class="skill-bar"><div class="skill-fill" style="width:70%;background:var(--orange)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">PagerDuty</span><div class="skill-bar"><div class="skill-fill" style="width:65%;background:var(--orange)"></div></div></div>
+      <div class="skill-group">
+        <div class="skill-group-head" style="color:var(--orange)"><i data-lucide="activity"></i> Monitoring</div>
+        <div class="skill-tags">
+          <span class="stag hi">Prometheus</span>
+          <span class="stag hi">Grafana</span>
+          <span class="stag">Alertmanager</span>
+          <span class="stag">PagerDuty</span>
+          <span class="stag">blackbox_exporter</span>
         </div>
       </div>
-      <div class="skill-cat">
-        <div class="skill-cat-title" style="color:var(--orange)"><i data-lucide="headphones"></i> IT Support</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-name">Servicedesk (1e lijn)</span><div class="skill-bar"><div class="skill-fill" style="width:90%;background:var(--orange)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Probleemoplossing</span><div class="skill-bar"><div class="skill-fill" style="width:85%;background:var(--orange)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Microsoft Office</span><div class="skill-bar"><div class="skill-fill" style="width:80%;background:var(--orange)"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Communicatie</span><div class="skill-bar"><div class="skill-fill" style="width:75%;background:var(--orange)"></div></div></div>
+      <div class="skill-group">
+        <div class="skill-group-head" style="color:var(--text-muted)"><i data-lucide="headphones"></i> IT Support</div>
+        <div class="skill-tags">
+          <span class="stag hi">Servicedesk 1e lijn</span>
+          <span class="stag">Microsoft Office</span>
+          <span class="stag">Probleemoplossing</span>
+          <span class="stag">Communicatie</span>
         </div>
       </div>
     </div>
@@ -460,22 +493,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <!-- CERTS -->
 <section id="certs">
   <div class="section-inner">
-    <div class="section-label">// certificaten</div>
-    <h2 class="section-title">Certificaten</h2>
-    <p class="section-sub">Behaalde certificaten en studiedoelen voor 2026.</p>
-    <div class="certs-grid fade-in">
-
-      <div class="cert-card">
-        <div class="cert-icon" style="background:var(--blue-dim);color:var(--blue)">
-          <i data-lucide="cloud" style="width:22px;height:22px"></i>
-        </div>
-        <div class="cert-info">
-          <div class="cert-name">Azure AZ-104</div>
-          <div class="cert-issuer">Microsoft · Azure Administrator</div>
-          <div class="cert-status cs-progress">In voorbereiding · 2026</div>
-        </div>
+    <div class="section-eyebrow">Certificaten</div>
+    <h2 class="section-title">In voorbereiding</h2>
+    <div class="cert-card fade-in">
+      <div class="cert-icon"><i data-lucide="cloud"></i></div>
+      <div>
+        <div class="cert-name">Microsoft Azure AZ-104</div>
+        <div class="cert-issuer">Microsoft &middot; Azure Administrator Associate</div>
+        <div class="cert-badge"><i data-lucide="clock"></i> In voorbereiding &middot; 2026</div>
       </div>
-
     </div>
   </div>
 </section>
@@ -485,103 +511,75 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-inner">
-    <div class="section-label">// ervaring & opleiding</div>
-    <h2 class="section-title">Achtergrond</h2>
-    <p class="section-sub" style="margin-bottom:2.5rem">Mijn werkervaring en opleiding op een rij.</p>
-    <div class="exp-grid">
+    <div class="section-eyebrow">Achtergrond</div>
+    <h2 class="section-title">Ervaring &amp; Opleiding</h2>
+    <div class="exp-cols fade-in">
 
-      <!-- WERK -->
-      <div class="fade-in">
-        <div class="exp-col-title"><i data-lucide="briefcase"></i> Werkervaring</div>
-        <div class="timeline">
-
+      <div>
+        <div class="exp-col-label"><i data-lucide="briefcase"></i> Werkervaring</div>
+        <div class="tl">
           <div class="tl-item">
             <div class="tl-dot"></div>
-            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Apr 2025 – heden · 1 jr 1 mnd</div>
+            <div class="tl-period">Apr 2025 – heden</div>
             <div class="tl-title">1e Lijn Helpdesk Medewerker</div>
-            <div class="tl-company"><i data-lucide="building-2"></i> Livio · Part-time · Enschede, On-site</div>
-            <p class="tl-desc">Eerste lijn IT support, troubleshooting netwerk- en hardwareproblemen, gebruikersbeheer, escalatie naar technisch team. Servicedesk & ICT afdeling.</p>
+            <div class="tl-org">Livio &middot; Part-time &middot; Enschede</div>
+            <p class="tl-desc">Eerste lijn IT support, troubleshooting netwerk- en hardwareproblemen, gebruikersbeheer en escalatie naar het technisch team.</p>
             <div class="tl-tags"><span class="tag">Servicedesk</span><span class="tag">ICT Support</span><span class="tag">Troubleshooting</span></div>
           </div>
-
           <div class="tl-item">
             <div class="tl-dot"></div>
-            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Mei 2024 – heden · 2 jr</div>
-            <div class="tl-title">Frontdesk-receptionist</div>
-            <div class="tl-company"><i data-lucide="building-2"></i> Livio · Part-time · Enschede</div>
-            <p class="tl-desc">Gastvrije ontvangst, telefoonbeheer en administratieve ondersteuning. Servicedesk taken gecombineerd met frontoffice werkzaamheden.</p>
-            <div class="tl-tags"><span class="tag">Servicedesk</span><span class="tag">Communicatie</span><span class="tag">Administratie</span></div>
+            <div class="tl-period">Mei 2024 – heden</div>
+            <div class="tl-title">Frontdesk-receptionist &amp; Servicemedewerker</div>
+            <div class="tl-org">Livio &middot; Part-time &middot; Enschede</div>
+            <p class="tl-desc">Gastvrije ontvangst, telefoonbeheer, logistieke werkzaamheden en administratieve ondersteuning.</p>
+            <div class="tl-tags"><span class="tag">Communicatie</span><span class="tag">Administratie</span><span class="tag">Logistiek</span></div>
           </div>
-
           <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Mei 2024 – heden · 2 jr</div>
-            <div class="tl-title">Servicemedewerker</div>
-            <div class="tl-company"><i data-lucide="building-2"></i> Livio · Greater Enschede Area</div>
-            <p class="tl-desc">Logistieke werkzaamheden, Microsoft Office, webdesign ondersteuning en overige ICT-gerelateerde taken binnen de organisatie.</p>
-            <div class="tl-tags"><span class="tag">Microsoft Office</span><span class="tag">Webdesign</span><span class="tag">Logistiek</span></div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot green"></div>
-            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Nov 2024 – Apr 2025 · 6 mnd</div>
+            <div class="tl-dot sub"></div>
+            <div class="tl-period">Nov 2024 – Apr 2025</div>
             <div class="tl-title">ICT-medewerker</div>
-            <div class="tl-company"><i data-lucide="building-2"></i> Studentaanhuis · Part-time · Enschede</div>
+            <div class="tl-org">Studentaanhuis &middot; Part-time &middot; Enschede</div>
             <p class="tl-desc">On-site ICT support voor particulieren. Internet probleemoplossing, hardware installatie en troubleshooting.</p>
-            <div class="tl-tags"><span class="tag">Internet Support</span><span class="tag">Probleemoplossing</span><span class="tag">Hardware</span></div>
+            <div class="tl-tags"><span class="tag">ICT Support</span><span class="tag">Hardware</span></div>
           </div>
-
           <div class="tl-item">
             <div class="tl-dot faint"></div>
-            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> Mrt 2023 – Mei 2024 · 1 jr 3 mnd</div>
+            <div class="tl-period">Mrt 2023 – Mei 2024</div>
             <div class="tl-title">Tankstation Medewerker</div>
-            <div class="tl-company"><i data-lucide="building-2"></i> TotalEnergies · Part-time · Enschede</div>
-            <p class="tl-desc">Klantenservice, kassa en dagelijkse operaties op een druk tankstation.</p>
-            <div class="tl-tags"><span class="tag">Klantenservice</span><span class="tag">Retail</span></div>
+            <div class="tl-org">TotalEnergies &middot; Part-time &middot; Enschede</div>
+            <p class="tl-desc">Klantenservice en dagelijkse operaties.</p>
+            <div class="tl-tags"><span class="tag">Klantenservice</span></div>
           </div>
-
           <div class="tl-item">
             <div class="tl-dot faint"></div>
-            <div class="tl-period"><i data-lucide="calendar" style="width:11px;height:11px"></i> 2021 – 2023 · 2 jr</div>
+            <div class="tl-period">2021 – 2023</div>
             <div class="tl-title">Vakkenvuller</div>
-            <div class="tl-company"><i data-lucide="building-2"></i> Albert Heijn · Part-time · Enschede</div>
+            <div class="tl-org">Albert Heijn &middot; Part-time &middot; Enschede</div>
             <p class="tl-desc">Schapbeheer, klantenservice en logistieke ondersteuning.</p>
-            <div class="tl-tags"><span class="tag">Retail</span><span class="tag">Logistiek</span></div>
           </div>
-
         </div>
       </div>
 
-      <!-- OPLEIDING -->
-      <div class="fade-in">
-        <div class="exp-col-title" style="color:var(--blue)"><i data-lucide="graduation-cap" style="color:var(--blue)"></i> Opleiding</div>
-        <div class="timeline edu-timeline">
-
+      <div>
+        <div class="exp-col-label" style="color:var(--blue)"><i data-lucide="graduation-cap" style="color:var(--blue)"></i> Opleiding</div>
+        <div class="tl tl-edu">
           <div class="tl-item">
             <div class="tl-dot edu"></div>
-            <div class="tl-period" style="color:var(--blue)"><i data-lucide="calendar" style="width:11px;height:11px"></i> Aug 2024 – Aug 2028</div>
-            <div class="tl-title">Bachelor ICT</div>
-            <div class="tl-company" style="color:var(--text-muted)"><i data-lucide="building-2"></i> Saxion University of Applied Sciences</div>
-            <p class="tl-desc">HBO Bachelor opleiding ICT met focus op cybersecurity en cloud infrastructure. Hands-on projecten met Terraform, Ansible, Azure en AWS. Actief in security labs en CTF-competities naast de studie.</p>
-            <div class="tl-tags">
-              <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Informatiebeveiliging</span>
-              <span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">Docker</span><span class="tag">Linux</span>
-            </div>
+            <div class="tl-period edu">Aug 2024 – Aug 2028</div>
+            <div class="tl-title">Bachelor HBO ICT</div>
+            <div class="tl-org">Saxion University of Applied Sciences &middot; Enschede</div>
+            <p class="tl-desc">Focus op cybersecurity en cloud infrastructure. Hands-on projecten met Terraform, Ansible, Azure en AWS. Actief in security labs en CTF-competities.</p>
+            <div class="tl-tags"><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Informatiebeveiliging</span><span class="tag">Terraform</span><span class="tag">Ansible</span></div>
           </div>
-
-          <div class="tl-item" style="padding-top:2rem">
-            <div class="tl-dot edu" style="top:2.35rem"></div>
-            <div style="background:var(--blue-dim);border:1px solid rgba(85,145,199,0.2);border-radius:var(--radius-lg);padding:1rem 1.25rem">
-              <div style="font-size:0.78rem;font-weight:700;color:var(--blue);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem"><i data-lucide="target" style="width:14px;height:14px"></i> Studiedoelen</div>
-              <ul style="font-size:0.82rem;color:var(--text-muted);line-height:2;padding-left:1rem;list-style:disc">
-                <li>Master Cybersecurity na HBO</li>
-                <li>Terraform Associate in 2026</li>
-                <li>Azure AZ-104 in 2026</li>
-                <li>Cloud Security Engineer rol</li>
-              </ul>
-            </div>
+        </div>
+        <div class="goal-box">
+          <div class="goal-box-title"><i data-lucide="target"></i> Doelen</div>
+          <div class="goal-list">
+            <div class="goal-item"><i data-lucide="arrow-right"></i><span>Master Cybersecurity na HBO</span></div>
+            <div class="goal-item"><i data-lucide="arrow-right"></i><span>Azure AZ-104 certificaat (2026)</span></div>
+            <div class="goal-item"><i data-lucide="arrow-right"></i><span>Terraform Associate (2026)</span></div>
+            <div class="goal-item"><i data-lucide="arrow-right"></i><span>Cloud Security Engineer rol</span></div>
           </div>
-
         </div>
       </div>
 
@@ -594,26 +592,24 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
-    <div class="section-label">// contact</div>
-    <h2 class="section-title">Neem contact op</h2>
-    <p class="section-sub">Interesse in een stage, samenwerking of gesprek over security en cloud? Stuur me een bericht.</p>
-    <div class="contact-inner">
-      <div class="contact-form fade-in">
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:1.5rem">Stuur een bericht</h3>
-        <div data-fs-success style="background:var(--green-dim);border:1px solid rgba(90,173,65,0.3);border-radius:var(--radius-md);padding:0.9rem 1rem;margin-bottom:1.25rem;display:none;color:var(--green);font-size:0.9rem">
-          ✓ Bericht verzonden! Ik reageer binnen 24 uur.
-        </div>
-        <div data-fs-error style="background:var(--red-dim);border:1px solid rgba(209,90,122,0.3);border-radius:var(--radius-md);padding:0.9rem 1rem;margin-bottom:1.25rem;display:none;color:var(--red);font-size:0.9rem"></div>
+    <div class="section-eyebrow">Contact</div>
+    <h2 class="section-title">Laten we praten</h2>
+    <p class="section-sub">Interesse in een stage, samenwerking of een gesprek over security en cloud? Stuur me een bericht — ik reageer binnen 24 uur.</p>
+    <div class="contact-layout">
+      <div class="contact-form-wrap fade-in">
+        <div class="contact-form-title">Stuur een bericht</div>
+        <div class="fs-success" data-fs-success>Bericht verzonden! Ik neem zo snel mogelijk contact op.</div>
+        <div class="fs-error-box" data-fs-error></div>
         <form id="contact-form">
           <div class="form-group">
             <label class="form-label" for="name">Naam</label>
             <input class="form-input" type="text" id="name" name="name" placeholder="Je naam" data-fs-field required>
-            <span data-fs-error="name" style="color:var(--red);font-size:0.78rem;margin-top:0.3rem;display:block"></span>
+            <span class="fs-field-err" data-fs-error="name"></span>
           </div>
           <div class="form-group">
-            <label class="form-label" for="email">E-mail</label>
+            <label class="form-label" for="email">E-mailadres</label>
             <input class="form-input" type="email" id="email" name="email" placeholder="jouw@email.nl" data-fs-field required>
-            <span data-fs-error="email" style="color:var(--red);font-size:0.78rem;margin-top:0.3rem;display:block"></span>
+            <span class="fs-field-err" data-fs-error="email"></span>
           </div>
           <div class="form-group">
             <label class="form-label" for="subject">Onderwerp</label>
@@ -622,50 +618,38 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
           <div class="form-group">
             <label class="form-label" for="message">Bericht</label>
             <textarea class="form-input" id="message" name="message" placeholder="Vertel me meer..." data-fs-field required></textarea>
-            <span data-fs-error="message" style="color:var(--red);font-size:0.78rem;margin-top:0.3rem;display:block"></span>
+            <span class="fs-field-err" data-fs-error="message"></span>
           </div>
           <button type="submit" class="form-submit" data-fs-submit-btn>
-            <i data-lucide="send" style="width:16px;height:16px"></i>
+            <i data-lucide="send"></i>
             Verstuur bericht
           </button>
         </form>
       </div>
-      <div class="contact-links fade-in">
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem">Of bereik mij via</h3>
-        <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" class="contact-link-card">
-          <i data-lucide="linkedin"></i>
-          <div class="contact-link-info">
-            <div class="contact-link-name">LinkedIn</div>
-            <div class="contact-link-val">Emmanuel Tekle</div>
-          </div>
-          <i data-lucide="external-link" style="width:16px;height:16px;color:var(--text-faint)"></i>
+      <div class="contact-side fade-in">
+        <div class="contact-side-title">Of bereik mij via</div>
+        <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" class="clink">
+          <div class="clink-icon"><i data-lucide="linkedin"></i></div>
+          <div><div class="clink-label">LinkedIn</div><div class="clink-val">Emmanuel Tekle</div></div>
+          <i data-lucide="external-link" style="width:15px;height:15px;color:var(--text-faint);margin-left:auto"></i>
         </a>
-        <a href="https://github.com/E-mma9" target="_blank" rel="noopener noreferrer" class="contact-link-card">
-          <i data-lucide="github"></i>
-          <div class="contact-link-info">
-            <div class="contact-link-name">GitHub</div>
-            <div class="contact-link-val">github.com/E-mma9</div>
-          </div>
-          <i data-lucide="external-link" style="width:16px;height:16px;color:var(--text-faint)"></i>
+        <a href="https://github.com/E-mma9" target="_blank" rel="noopener noreferrer" class="clink">
+          <div class="clink-icon"><i data-lucide="github"></i></div>
+          <div><div class="clink-label">GitHub</div><div class="clink-val">github.com/E-mma9</div></div>
+          <i data-lucide="external-link" style="width:15px;height:15px;color:var(--text-faint);margin-left:auto"></i>
         </a>
-        <a href="mailto:emmanueltekle@gmail.com" class="contact-link-card">
-          <i data-lucide="mail"></i>
-          <div class="contact-link-info">
-            <div class="contact-link-name">E-mail</div>
-            <div class="contact-link-val">emmanueltekle@gmail.com</div>
-          </div>
-          <i data-lucide="arrow-right" style="width:16px;height:16px;color:var(--text-faint)"></i>
+        <a href="mailto:emmanueltekle@gmail.com" class="clink">
+          <div class="clink-icon"><i data-lucide="mail"></i></div>
+          <div><div class="clink-label">E-mail</div><div class="clink-val">emmanueltekle@gmail.com</div></div>
+          <i data-lucide="arrow-right" style="width:15px;height:15px;color:var(--text-faint);margin-left:auto"></i>
         </a>
-        <div class="contact-link-card" style="border-style:dashed;cursor:default">
-          <i data-lucide="map-pin"></i>
-          <div class="contact-link-info">
-            <div class="contact-link-name">Locatie</div>
-            <div class="contact-link-val">Enschede, Overijssel, NL</div>
-          </div>
+        <div class="clink" style="cursor:default;border-style:dashed">
+          <div class="clink-icon"><i data-lucide="map-pin"></i></div>
+          <div><div class="clink-label">Locatie</div><div class="clink-val">Enschede, Overijssel, NL</div></div>
         </div>
-        <div style="background:var(--primary-dim);border:1px solid rgba(61,184,197,0.2);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-top:0.25rem">
-          <div style="font-size:0.8rem;font-weight:600;color:var(--primary);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.5rem"><i data-lucide="calendar" style="width:15px;height:15px"></i> Beschikbaarheid</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6">Open voor werk/stage. Momenteel werkzaam bij <strong style="color:var(--text)">Livio</strong> part-time. Reactietijd gemiddeld 24 uur.</div>
+        <div class="avail-box">
+          <div class="avail-title"><i data-lucide="calendar"></i> Beschikbaarheid</div>
+          <div class="avail-text">Open voor stages en IT-rollen. Momenteel werkzaam bij <strong>Livio</strong> part-time. Reactietijd gemiddeld 24 uur.</div>
         </div>
       </div>
     </div>
@@ -673,31 +657,28 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
 </section>
 
 <footer>
-  <div class="footer-left">
-    <strong>Emmanuel Tekle</strong> · Saxion HBO ICT · Enschede, NL · 2026
-  </div>
-  <div class="footer-social">
+  <div class="footer-copy"><strong>Emmanuel Tekle</strong> &middot; Saxion HBO ICT &middot; Enschede, NL &middot; 2026</div>
+  <div class="footer-links">
     <a href="https://github.com/E-mma9" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
     <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
     <a href="mailto:emmanueltekle@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
-    <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" aria-label="Monitoring Homelab" title="Monitoring-Homelab project"><i data-lucide="activity" style="width:18px;height:18px"></i></a>
   </div>
 </footer>
 
 <script>
 (function(){
-  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
-  let d='dark';
-  const sun='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-  const moon='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-  t&&t.addEventListener('click',()=>{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);t.innerHTML=d==='dark'?moon:sun;});
+  const btn=document.querySelector('[data-theme-toggle]'),root=document.documentElement;
+  let theme='light';
+  const sun='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const moon='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  if(btn) btn.addEventListener('click',()=>{theme=theme==='light'?'dark':'light';root.setAttribute('data-theme',theme);btn.innerHTML=theme==='dark'?sun:moon;});
 })();
 const sections=document.querySelectorAll('section[id]');
 const navLinks=document.querySelectorAll('.nav-links a');
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+e.target.id)l.classList.add('active')})})},{threshold:0.3,rootMargin:'-80px 0px 0px 0px'});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+e.target.id)l.classList.add('active')})})},{threshold:0.3,rootMargin:'-72px 0px 0px 0px'});
 sections.forEach(s=>obs.observe(s));
-window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-formspree('initForm', { formElement: '#contact-form', formId: 'xaqlbeoa' });
+window.formspree=window.formspree||function(){(formspree.q=formspree.q||[]).push(arguments)};
+formspree('initForm',{formElement:'#contact-form',formId:'xaqlbeoa'});
 lucide.createIcons();
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
