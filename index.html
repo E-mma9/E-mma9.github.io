@@ -6,7 +6,7 @@
 <title>Emmanuel Tekle — Cybersecurity & Cloud Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
 :root{
@@ -23,7 +23,7 @@
   --shadow-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
   --shadow-md:0 4px 16px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
   --shadow-lg:0 8px 32px rgba(0,0,0,.1),0 4px 8px rgba(0,0,0,.04);
-  --font:'Inter',sans-serif;--transition:200ms cubic-bezier(.16,1,.3,1);
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;--transition:200ms cubic-bezier(.16,1,.3,1);
 }
 [data-theme="dark"]{
   --bg:#0F172A;--surface:#1E293B;--surface-2:#263548;--surface-3:#334155;
@@ -56,6 +56,8 @@ ul{list-style:none}
 @keyframes float-a{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes float-b{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes float-c{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes cursor-blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes bar-grow{from{width:0}to{width:var(--w)}}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(249,248,245,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,5vw,3.5rem);height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background var(--transition)}
@@ -78,6 +80,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(249,248,245,
 .hero-blob-2{position:fixed;bottom:-20%;left:-10%;width:50vw;height:50vw;max-width:600px;background:radial-gradient(ellipse,rgba(13,148,136,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0}
 [data-theme="dark"] .hero-blob{background:radial-gradient(ellipse,rgba(129,140,248,.09) 0%,transparent 70%)}
 #hero{min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:100px clamp(1.25rem,6vw,5rem) 4rem;max-width:1100px;margin:0 auto;position:relative;z-index:1}
+#hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(91,91,214,.06) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:-1;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
 .hero-left{display:flex;flex-direction:column;align-items:flex-start}
 .hero-available{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;color:var(--green);background:var(--green-dim);border:1px solid rgba(22,163,74,.2);border-radius:var(--radius-full);padding:.35rem 1rem;margin-bottom:1.75rem}
 [data-theme="dark"] .hero-available{border-color:rgba(74,222,128,.2)}
@@ -145,16 +148,22 @@ section:not(#hero){padding:clamp(4.5rem,9vw,7rem) clamp(1.25rem,5vw,5rem)}
 
 /* PROJECTS */
 #projects{background:var(--bg);position:relative;z-index:1}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:1.5rem}
-.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:2rem;transition:all var(--transition);display:flex;flex-direction:column;gap:1.125rem;box-shadow:var(--shadow-sm)}
-.project-card:hover{border-color:rgba(91,91,214,.25);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
-[data-theme="dark"] .project-card:hover{border-color:rgba(129,140,248,.25)}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+@media(max-width:700px){.projects-grid{grid-template-columns:1fr}}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:0;transition:all var(--transition);display:flex;flex-direction:column;box-shadow:var(--shadow-sm);overflow:hidden}
+.project-card:hover{border-color:rgba(91,91,214,.3);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+[data-theme="dark"] .project-card:hover{border-color:rgba(129,140,248,.3)}
+.project-card.featured{grid-column:1/-1}
+.project-card-body{padding:1.75rem;display:flex;flex-direction:column;gap:1rem;flex:1}
 .project-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
 .project-icon{width:48px;height:48px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.project-links{display:flex;gap:.4rem}
+.project-links{display:flex;gap:.4rem;align-items:center}
 .project-link{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-md);color:var(--text-faint);border:1px solid var(--border);transition:all var(--transition)}
 .project-link:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-dim)}
 .project-link i{width:16px;height:16px}
+.repo-stats{display:flex;align-items:center;gap:.625rem}
+.repo-stat{display:flex;align-items:center;gap:.25rem;font-size:.72rem;color:var(--text-faint);font-weight:500}
+.repo-stat i{width:13px;height:13px}
 .ps-done{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:var(--radius-full);background:var(--green-dim);color:var(--green);border:1px solid rgba(22,163,74,.2)}
 [data-theme="dark"] .ps-done{border-color:rgba(74,222,128,.2)}
 .ps-done i{width:11px;height:11px}
@@ -163,10 +172,56 @@ section:not(#hero){padding:clamp(4.5rem,9vw,7rem) clamp(1.25rem,5vw,5rem)}
 .project-points{display:flex;flex-direction:column;gap:.5rem}
 .pp{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:var(--text-muted);line-height:1.5}
 .pp-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:.45rem}
-.project-stack{display:flex;flex-wrap:wrap;gap:.4rem;padding-top:.75rem;border-top:1px solid var(--border)}
+.project-stack{display:flex;flex-wrap:wrap;gap:.4rem;padding-top:.875rem;border-top:1px solid var(--border)}
 .ptag{font-size:.72rem;font-weight:500;padding:.25rem .6rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
 .project-placeholder{background:transparent;border:1.5px dashed var(--border-2);border-radius:var(--radius-2xl);padding:2rem;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:200px;gap:.75rem;opacity:.5}
 .project-placeholder span{font-size:.85rem;color:var(--text-faint);font-weight:500}
+
+/* TERMINAL PREVIEW */
+.project-preview{background:#0D1117;border-bottom:1px solid rgba(255,255,255,.07);font-family:var(--mono);font-size:.76rem;flex-shrink:0}
+.terminal-bar{display:flex;align-items:center;gap:.375rem;padding:.5rem .875rem;background:#161B22;border-bottom:1px solid rgba(255,255,255,.06)}
+.t-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.t-dot-r{background:#FF5F57}.t-dot-y{background:#FFBD2E}.t-dot-g{background:#27C93F}
+.t-title{font-size:.72rem;color:rgba(255,255,255,.35);margin-left:auto;margin-right:auto;font-family:var(--mono)}
+.terminal-body{padding:.75rem 1rem;display:flex;flex-direction:column;gap:.18rem;min-height:130px}
+.t-line{color:rgba(255,255,255,.65);line-height:1.65;white-space:pre}
+.t-cmt{color:#6A9955}.t-key{color:#9CDCFE}.t-val{color:#CE9178}.t-col{color:rgba(255,255,255,.3)}
+.t-str{color:#CE9178}.t-kw{color:#C586C0}.t-num{color:#B5CEA8}
+.t-ok{color:#27C93F;font-weight:600}.t-fire{color:#FF5F57;font-weight:600}.t-warn{color:#FFBD2E;font-weight:600}
+.t-fn{color:#DCDCAA}.t-i{padding-left:1.25em}.t-i2{padding-left:2.5em}
+.t-cursor{display:inline-block;width:.5em;height:1em;background:rgba(255,255,255,.6);vertical-align:text-bottom;animation:cursor-blink 1s step-end infinite}
+
+/* MINI DASHBOARD (monitoring project) */
+.mini-dashboard{background:#0D1117;padding:.875rem 1rem;border-top:1px solid rgba(255,255,255,.05)}
+.mini-dash-row{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem}
+.mini-dash-title{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.4);flex:1}
+.mini-dash-live{font-family:var(--mono);font-size:.65rem;color:#27C93F;font-weight:600;display:flex;align-items:center;gap:.25rem}
+.mini-dash-live::before{content:'';width:6px;height:6px;border-radius:50%;background:#27C93F;display:inline-block;animation:pulse-dot 1.5s ease-in-out infinite}
+.mini-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.625rem}
+.mini-metric{background:rgba(255,255,255,.04);border-radius:.375rem;padding:.4rem .5rem}
+.mm-label{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.35);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.06em}
+.mm-bar-wrap{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-bottom:.25rem}
+.mm-bar{height:100%;border-radius:2px;transition:width 1s ease}
+.mm-bar.ok{background:#27C93F}
+.mm-bar.warn{background:#FFBD2E}
+.mm-val{font-family:var(--mono);font-size:.68rem;color:rgba(255,255,255,.6);font-weight:500}
+.mini-alerts{display:flex;flex-direction:column;gap:.2rem}
+.mini-alert{font-family:var(--mono);font-size:.68rem;padding:.2rem .375rem;border-radius:.25rem}
+.mini-alert.ok{color:#27C93F;background:rgba(39,201,63,.08)}
+.mini-alert.fire{color:#FF5F57;background:rgba(255,95,87,.08)}
+.mini-alert.warn{color:#FFBD2E;background:rgba(255,189,46,.08)}
+
+/* SECURITY SCORE (hardening project) */
+.security-score{background:#0D1117;padding:.875rem 1rem;border-top:1px solid rgba(255,255,255,.05)}
+.score-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.625rem}
+.score-label{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.4)}
+.score-val{font-family:var(--mono);font-size:.9rem;color:#27C93F;font-weight:600}
+.score-bar-wrap{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:.75rem}
+.score-bar{height:100%;border-radius:3px;background:linear-gradient(90deg,#27C93F,#2DD4BF);width:0;transition:width 1.2s ease}
+.score-checks{display:grid;grid-template-columns:1fr 1fr;gap:.25rem}
+.score-check{font-family:var(--mono);font-size:.67rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.3rem}
+.score-check.pass::before{content:'✓';color:#27C93F;font-weight:700}
+.score-check.fail::before{content:'✗';color:#FF5F57;font-weight:700}
 
 /* SKILLS */
 #skills{background:var(--surface);position:relative;z-index:1}
@@ -387,56 +442,167 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
   <div class="section-inner">
     <div class="section-eyebrow">Projecten</div>
     <h2 class="section-title">Wat ik heb gebouwd</h2>
-    <p class="section-sub">Hands-on projecten waarbij ik theorie omzet in werkende infrastructuur.</p>
+    <p class="section-sub">Hands-on projecten waarbij ik theorie omzet in werkende infrastructuur — elke regel config zelf geschreven.</p>
     <div class="projects-grid fade-in">
 
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-icon" style="background:var(--orange-dim);color:var(--orange)">
-            <i data-lucide="activity" style="width:24px;height:24px"></i>
+      <!-- FEATURED: Monitoring Homelab -->
+      <div class="project-card featured">
+        <!-- Terminal preview -->
+        <div class="project-preview">
+          <div class="terminal-bar">
+            <span class="t-dot t-dot-r"></span>
+            <span class="t-dot t-dot-y"></span>
+            <span class="t-dot t-dot-g"></span>
+            <span class="t-title">prometheus.yml — node-pve-1</span>
           </div>
-          <div class="project-links">
-            <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
-              <i data-lucide="github"></i>
-            </a>
+          <div class="terminal-body">
+            <div class="t-line"><span class="t-key">global</span><span class="t-col">:</span></div>
+            <div class="t-line t-i"><span class="t-key">scrape_interval</span><span class="t-col">:</span> <span class="t-num">15s</span>  <span class="t-cmt"># scrapet alle 3 nodes</span></div>
+            <div class="t-line t-i"><span class="t-key">evaluation_interval</span><span class="t-col">:</span> <span class="t-num">15s</span></div>
+            <div class="t-line">&nbsp;</div>
+            <div class="t-line"><span class="t-key">alerting</span><span class="t-col">:</span>  <span class="t-cmt"># → Alertmanager → PagerDuty</span></div>
+            <div class="t-line t-i"><span class="t-key">alertmanagers</span><span class="t-col">:</span></div>
+            <div class="t-line t-i2"><span class="t-col">- </span><span class="t-key">static_configs</span><span class="t-col">:</span> <span class="t-col">[{</span><span class="t-key">targets</span><span class="t-col">:</span> <span class="t-col">[</span><span class="t-str">"localhost:9093"</span><span class="t-col">]}]</span></div>
+            <div class="t-line">&nbsp;</div>
+            <div class="t-line"><span class="t-cmt"># 7 alert rules actief &mdash; NodeDown, DiskSpace, CPU, RAM...</span></div>
+            <div class="t-line"><span class="t-ok">ACTIVE</span>  <span class="t-fn">node_cpu_seconds_total</span><span class="t-col">{</span><span class="t-key">mode</span><span class="t-col">=</span><span class="t-str">"idle"</span><span class="t-col">}</span>  <span class="t-num">0.831</span></div>
+            <div class="t-line"><span class="t-ok">ACTIVE</span>  <span class="t-fn">node_filesystem_avail_bytes</span>  <span class="t-num">42.3GB</span></div>
+          </div>
+          <!-- Mini live dashboard -->
+          <div class="mini-dashboard">
+            <div class="mini-dash-row">
+              <span class="mini-dash-title">Grafana Dashboard — Proxmox Cluster</span>
+              <span class="mini-dash-live">LIVE</span>
+            </div>
+            <div class="mini-metrics">
+              <div class="mini-metric">
+                <div class="mm-label">CPU avg</div>
+                <div class="mm-bar-wrap"><div class="mm-bar ok" style="--w:43%;width:0" data-bar></div></div>
+                <div class="mm-val">43%</div>
+              </div>
+              <div class="mini-metric">
+                <div class="mm-label">RAM</div>
+                <div class="mm-bar-wrap"><div class="mm-bar warn" style="--w:82%;width:0" data-bar></div></div>
+                <div class="mm-val">82%</div>
+              </div>
+              <div class="mini-metric">
+                <div class="mm-label">Disk</div>
+                <div class="mm-bar-wrap"><div class="mm-bar ok" style="--w:35%;width:0" data-bar></div></div>
+                <div class="mm-val">35%</div>
+              </div>
+            </div>
+            <div class="mini-alerts">
+              <div class="mini-alert ok">✓  NodeDown — 3/3 nodes OK</div>
+              <div class="mini-alert ok">✓  DiskSpace — /dev/sda OK</div>
+              <div class="mini-alert warn">⚡ MemUsage — pve-node-2 WARN (82%)</div>
+            </div>
           </div>
         </div>
-        <span class="ps-done"><i data-lucide="check-circle"></i> Voltooid</span>
-        <div class="project-name">Monitoring Homelab</div>
-        <p class="project-desc">Volledige monitoring stack op een 3-node Proxmox VE cluster met consumer hardware. Alle configuratie handmatig geschreven — geen installatiewizards — zodat ik elke config-regel begrijp.</p>
-        <div class="project-points">
-          <div class="pp"><div class="pp-dot"></div><span>Prometheus scrapet elke 15s metrics van alle nodes en services</span></div>
-          <div class="pp"><div class="pp-dot"></div><span>7 alert rules: NodeDown, DiskSpace, CPU, RAM, EndpointDown en meer</span></div>
-          <div class="pp"><div class="pp-dot"></div><span>Alertmanager &rarr; PagerDuty: SMS bij alert, telefoontje bij geen reactie</span></div>
-          <div class="pp"><div class="pp-dot"></div><span>blackbox_exporter voor HTTP/TCP checks op alle services</span></div>
-        </div>
-        <div class="project-stack">
-          <span class="ptag">Proxmox VE</span><span class="ptag">Prometheus</span><span class="ptag">Grafana</span><span class="ptag">Alertmanager</span><span class="ptag">PagerDuty</span><span class="ptag">node_exporter</span><span class="ptag">Tailscale</span><span class="ptag">Linux</span><span class="ptag">systemd</span>
+        <!-- Card body -->
+        <div class="project-card-body">
+          <div class="project-header">
+            <div style="display:flex;flex-direction:column;gap:.5rem;flex:1">
+              <div style="display:flex;align-items:center;gap:.75rem">
+                <div class="project-icon" style="background:var(--orange-dim);color:var(--orange)">
+                  <i data-lucide="activity" style="width:24px;height:24px"></i>
+                </div>
+                <div>
+                  <div class="project-name">Monitoring Homelab</div>
+                  <span class="ps-done"><i data-lucide="check-circle"></i> Voltooid</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-links">
+              <div class="repo-stats">
+                <span class="repo-stat" id="stat-monitoring-stars"><i data-lucide="star"></i> —</span>
+                <span class="repo-stat" id="stat-monitoring-forks"><i data-lucide="git-fork"></i> —</span>
+              </div>
+              <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
+                <i data-lucide="github"></i>
+              </a>
+            </div>
+          </div>
+          <p class="project-desc">Volledige monitoring stack op een 3-node Proxmox VE cluster met consumer hardware. Alle configuratie handmatig geschreven — geen installatiewizards — zodat ik elke config-regel begrijp.</p>
+          <div class="project-points">
+            <div class="pp"><div class="pp-dot"></div><span>Prometheus scrapet elke 15s metrics van alle nodes en services</span></div>
+            <div class="pp"><div class="pp-dot"></div><span>7 alert rules: NodeDown, DiskSpace, CPU, RAM, EndpointDown en meer</span></div>
+            <div class="pp"><div class="pp-dot"></div><span>Alertmanager &rarr; PagerDuty: SMS bij alert, telefoontje bij geen reactie</span></div>
+            <div class="pp"><div class="pp-dot"></div><span>blackbox_exporter voor HTTP/TCP checks op alle services</span></div>
+          </div>
+          <div class="project-stack">
+            <span class="ptag">Proxmox VE</span><span class="ptag">Prometheus</span><span class="ptag">Grafana</span><span class="ptag">Alertmanager</span><span class="ptag">PagerDuty</span><span class="ptag">node_exporter</span><span class="ptag">Tailscale</span><span class="ptag">Linux</span><span class="ptag">systemd</span>
+          </div>
         </div>
       </div>
 
+      <!-- Linux Security Hardening -->
       <div class="project-card">
-        <div class="project-header">
-          <div class="project-icon" style="background:var(--red-dim);color:var(--red)">
-            <i data-lucide="shield-check" style="width:24px;height:24px"></i>
+        <div class="project-preview">
+          <div class="terminal-bar">
+            <span class="t-dot t-dot-r"></span>
+            <span class="t-dot t-dot-y"></span>
+            <span class="t-dot t-dot-g"></span>
+            <span class="t-title">hardening.sh</span>
           </div>
-          <div class="project-links">
-            <a href="https://github.com/E-mma9/Linux-Security-Hardening" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Bekijk op GitHub">
-              <i data-lucide="github"></i>
-            </a>
+          <div class="terminal-body">
+            <div class="t-line"><span class="t-cmt">#!/bin/bash</span></div>
+            <div class="t-line"><span class="t-cmt"># Ubuntu/Debian Security Hardening Script</span></div>
+            <div class="t-line">&nbsp;</div>
+            <div class="t-line"><span class="t-kw">echo</span> <span class="t-str">"[*] Hardening SSH config..."</span></div>
+            <div class="t-line"><span class="t-fn">sed</span> <span class="t-str">-i 's/PermitRootLogin yes/no/'</span> /etc/ssh/sshd_config</div>
+            <div class="t-line"><span class="t-fn">sed</span> <span class="t-str">-i 's/PasswordAuthentication yes/no/'</span> /etc/ssh/sshd_config</div>
+            <div class="t-line">&nbsp;</div>
+            <div class="t-line"><span class="t-kw">echo</span> <span class="t-str">"[*] Configuring UFW..."</span></div>
+            <div class="t-line"><span class="t-fn">ufw</span> default deny incoming</div>
+            <div class="t-line"><span class="t-fn">ufw</span> allow <span class="t-num">22</span>/tcp  <span class="t-cmt"># SSH custom port</span></div>
+            <div class="t-line"><span class="t-fn">ufw</span> enable</div>
+          </div>
+          <!-- Security score -->
+          <div class="security-score">
+            <div class="score-header">
+              <span class="score-label">security-audit.sh — resultaat</span>
+              <span class="score-val">94 / 100</span>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar" style="width:0" data-score="94"></div>
+            </div>
+            <div class="score-checks">
+              <div class="score-check pass">SSH root disabled</div>
+              <div class="score-check pass">PasswordAuth off</div>
+              <div class="score-check pass">UFW actief</div>
+              <div class="score-check pass">auditd running</div>
+              <div class="score-check pass">Fail2ban enabled</div>
+              <div class="score-check pass">Updates current</div>
+            </div>
           </div>
         </div>
-        <span class="ps-done"><i data-lucide="check-circle"></i> Voltooid</span>
-        <div class="project-name">Linux Security Hardening</div>
-        <p class="project-desc">Geautomatiseerde security hardening voor Ubuntu/Debian servers via twee Bash-scripts. Geschreven om basis Linux-beheer en server security hands-on te oefenen.</p>
-        <div class="project-points">
-          <div class="pp"><div class="pp-dot"></div><span>SSH hardening: geen root-login, geen wachtwoordauth, aangepaste poort</span></div>
-          <div class="pp"><div class="pp-dot"></div><span>UFW firewall geconfigureerd — standaard dicht, alleen SSH/HTTP/HTTPS open</span></div>
-          <div class="pp"><div class="pp-dot"></div><span>auditd geïnstalleerd voor security logging en audit trail</span></div>
-          <div class="pp"><div class="pp-dot"></div><span>security-audit.sh: controleert SSH config, firewall, mislukte logins en updates</span></div>
-        </div>
-        <div class="project-stack">
-          <span class="ptag">Bash</span><span class="ptag">Linux</span><span class="ptag">SSH</span><span class="ptag">UFW</span><span class="ptag">auditd</span><span class="ptag">Ubuntu</span><span class="ptag">Debian</span>
+        <div class="project-card-body">
+          <div class="project-header">
+            <div class="project-icon" style="background:var(--red-dim);color:var(--red)">
+              <i data-lucide="shield-check" style="width:24px;height:24px"></i>
+            </div>
+            <div class="project-links">
+              <div class="repo-stats">
+                <span class="repo-stat" id="stat-hardening-stars"><i data-lucide="star"></i> —</span>
+                <span class="repo-stat" id="stat-hardening-forks"><i data-lucide="git-fork"></i> —</span>
+              </div>
+              <a href="https://github.com/E-mma9/Linux-Security-Hardening" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Bekijk op GitHub">
+                <i data-lucide="github"></i>
+              </a>
+            </div>
+          </div>
+          <span class="ps-done"><i data-lucide="check-circle"></i> Voltooid</span>
+          <div class="project-name">Linux Security Hardening</div>
+          <p class="project-desc">Geautomatiseerde security hardening voor Ubuntu/Debian servers via twee Bash-scripts. Geschreven om basis Linux-beheer en server security hands-on te oefenen.</p>
+          <div class="project-points">
+            <div class="pp"><div class="pp-dot"></div><span>SSH hardening: geen root-login, geen wachtwoordauth, aangepaste poort</span></div>
+            <div class="pp"><div class="pp-dot"></div><span>UFW firewall geconfigureerd — standaard dicht, alleen SSH/HTTP/HTTPS open</span></div>
+            <div class="pp"><div class="pp-dot"></div><span>auditd geïnstalleerd voor security logging en audit trail</span></div>
+            <div class="pp"><div class="pp-dot"></div><span>security-audit.sh: controleert SSH config, firewall, mislukte logins en updates</span></div>
+          </div>
+          <div class="project-stack">
+            <span class="ptag">Bash</span><span class="ptag">Linux</span><span class="ptag">SSH</span><span class="ptag">UFW</span><span class="ptag">auditd</span><span class="ptag">Ubuntu</span><span class="ptag">Debian</span>
+          </div>
         </div>
       </div>
 
@@ -698,12 +864,45 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem
   const moon='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   if(btn) btn.addEventListener('click',()=>{theme=theme==='light'?'dark':'light';root.setAttribute('data-theme',theme);btn.innerHTML=theme==='dark'?sun:moon;});
 })();
+
+// Active nav link on scroll
 const sections=document.querySelectorAll('section[id]');
 const navLinks=document.querySelectorAll('.nav-links a');
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+e.target.id)l.classList.add('active')})})},{threshold:0.3,rootMargin:'-72px 0px 0px 0px'});
 sections.forEach(s=>obs.observe(s));
+
+// Animate bars when in view
+const barObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.querySelectorAll('[data-bar]').forEach(b=>{
+      b.style.width=getComputedStyle(b).getPropertyValue('--w');
+    });
+    e.target.querySelectorAll('[data-score]').forEach(b=>{
+      b.style.width=b.dataset.score+'%';
+    });
+    barObs.unobserve(e.target);
+  });
+},{threshold:0.2});
+document.querySelectorAll('.project-card').forEach(c=>barObs.observe(c));
+
+// Fetch GitHub stats
+async function fetchRepoStats(repo,starsEl,forksEl){
+  try{
+    const r=await fetch('https://api.github.com/repos/E-mma9/'+repo,{headers:{'Accept':'application/vnd.github.v3+json'}});
+    if(!r.ok) return;
+    const d=await r.json();
+    if(starsEl) starsEl.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> '+d.stargazers_count;
+    if(forksEl) forksEl.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="6" cy="3" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg> '+d.forks_count;
+  }catch(_){}
+}
+fetchRepoStats('Monitoring-Homelab',document.getElementById('stat-monitoring-stars'),document.getElementById('stat-monitoring-forks'));
+fetchRepoStats('Linux-Security-Hardening',document.getElementById('stat-hardening-stars'),document.getElementById('stat-hardening-forks'));
+
+// Formspree
 window.formspree=window.formspree||function(){(formspree.q=formspree.q||[]).push(arguments)};
 formspree('initForm',{formElement:'#contact-form',formId:'xaqlbeoa'});
+
 lucide.createIcons();
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
