@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projecten — Emmanuel Tekle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+:root{
+  --bg:#F9F8F5;--surface:#FFFFFF;--surface-2:#F4F3EF;--surface-3:#ECEAE5;
+  --border:rgba(0,0,0,0.08);--border-2:rgba(0,0,0,0.14);
+  --text:#1C1917;--text-muted:#6B6966;--text-faint:#A8A29E;
+  --primary:#5B5BD6;--primary-dim:rgba(91,91,214,0.08);--primary-glow:rgba(91,91,214,0.2);
+  --teal:#0D9488;--teal-dim:rgba(13,148,136,0.1);
+  --green:#16A34A;--green-dim:rgba(22,163,74,0.08);
+  --orange:#EA580C;--orange-dim:rgba(234,88,12,0.08);
+  --blue:#2563EB;--blue-dim:rgba(37,99,235,0.08);
+  --red:#DC2626;--red-dim:rgba(220,38,38,0.08);
+  --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-2xl:1.5rem;--radius-full:9999px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 16px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.1),0 4px 8px rgba(0,0,0,.04);
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;--transition:200ms cubic-bezier(.16,1,.3,1);
+}
+[data-theme="dark"]{
+  --bg:#0F172A;--surface:#1E293B;--surface-2:#263548;--surface-3:#334155;
+  --border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.14);
+  --text:#F1F5F9;--text-muted:#94A3B8;--text-faint:#475569;
+  --primary:#818CF8;--primary-dim:rgba(129,140,248,.1);--primary-glow:rgba(129,140,248,.25);
+  --teal:#2DD4BF;--teal-dim:rgba(45,212,191,.1);
+  --green:#4ADE80;--green-dim:rgba(74,222,128,.1);
+  --orange:#FB923C;--orange-dim:rgba(251,146,60,.1);
+  --blue:#60A5FA;--blue-dim:rgba(96,165,250,.1);
+  --red:#F87171;--red-dim:rgba(248,113,113,.1);
+  --shadow-sm:0 1px 3px rgba(0,0,0,.4);--shadow-md:0 4px 16px rgba(0,0,0,.35);--shadow-lg:0 8px 32px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:88px}
+body{min-height:100dvh;font-family:var(--font);font-size:1rem;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;transition:background var(--transition),color var(--transition)}
+img,svg{display:block;max-width:100%}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:var(--radius-sm)}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes cursor-blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes float-a{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(249,248,245,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 clamp(1.25rem,5vw,3.5rem);height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background var(--transition)}
+[data-theme="dark"] nav{background:rgba(15,23,42,.94)}
+.nav-logo{font-weight:800;font-size:1rem;color:var(--text);display:flex;align-items:center;gap:.625rem;letter-spacing:-.02em}
+.nav-logo-badge{width:34px;height:34px;border-radius:var(--radius-md);background:var(--primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:800;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:.125rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--text-muted);padding:.4rem .875rem;border-radius:var(--radius-full);transition:color var(--transition),background var(--transition)}
+.nav-links a:hover{color:var(--text);background:var(--surface-3)}
+.nav-links a.active{color:var(--primary);background:var(--primary-dim)}
+.nav-right{display:flex;align-items:center;gap:.5rem}
+.theme-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);color:var(--text-muted);border:1px solid var(--border);transition:all var(--transition)}
+.theme-btn:hover{color:var(--text);background:var(--surface-3);border-color:var(--border-2)}
+.nav-cta{font-size:.875rem;font-weight:600;color:#fff;background:var(--primary);padding:.45rem 1.1rem;border-radius:var(--radius-full);transition:all var(--transition);box-shadow:0 2px 8px var(--primary-glow)}
+.nav-cta:hover{filter:brightness(1.08);box-shadow:0 4px 16px var(--primary-glow)}
+@media(max-width:768px){.nav-links{display:none}}
+
+/* BACKGROUND BLOBS */
+.hero-blob{position:fixed;top:-30%;right:-20%;width:70vw;height:70vw;max-width:800px;max-height:800px;background:radial-gradient(ellipse,rgba(91,91,214,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0}
+.hero-blob-2{position:fixed;bottom:-20%;left:-10%;width:50vw;height:50vw;max-width:600px;background:radial-gradient(ellipse,rgba(13,148,136,.05) 0%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0}
+[data-theme="dark"] .hero-blob{background:radial-gradient(ellipse,rgba(129,140,248,.09) 0%,transparent 70%)}
+
+/* SHARED */
+.section-eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.625rem}
+.divider{height:1px;background:var(--border)}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:.925rem;color:#fff;background:var(--primary);padding:.75rem 1.5rem;border-radius:var(--radius-full);transition:all var(--transition);box-shadow:0 4px 20px var(--primary-glow)}
+.btn-primary:hover{filter:brightness(1.07);transform:translateY(-1px);box-shadow:0 6px 24px var(--primary-glow)}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;font-size:.925rem;color:var(--text-muted);border:1.5px solid var(--border-2);padding:.75rem 1.5rem;border-radius:var(--radius-full);transition:all var(--transition);background:var(--surface)}
+.btn-secondary:hover{color:var(--text);border-color:var(--text-muted);background:var(--surface-2);transform:translateY(-1px)}
+.btn-primary i,.btn-secondary i{width:17px;height:17px}
+.ps-done{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:var(--radius-full);background:var(--green-dim);color:var(--green);border:1px solid rgba(22,163,74,.2)}
+[data-theme="dark"] .ps-done{border-color:rgba(74,222,128,.2)}
+.ps-done i{width:11px;height:11px}
+.ptag{font-size:.72rem;font-weight:500;padding:.25rem .6rem;border-radius:var(--radius-full);border:1px solid var(--border-2);color:var(--text-muted);background:var(--surface-2)}
+
+/* TERMINAL STYLES */
+.project-preview{background:#0D1117;border-radius:var(--radius-xl);font-family:var(--mono);font-size:.76rem;overflow:hidden}
+.terminal-bar{display:flex;align-items:center;gap:.375rem;padding:.5rem .875rem;background:#161B22;border-bottom:1px solid rgba(255,255,255,.06)}
+.t-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.t-dot-r{background:#FF5F57}.t-dot-y{background:#FFBD2E}.t-dot-g{background:#27C93F}
+.t-title{font-size:.72rem;color:rgba(255,255,255,.35);margin-left:auto;margin-right:auto;font-family:var(--mono)}
+.terminal-body{padding:.875rem 1rem;display:flex;flex-direction:column;gap:.2rem}
+.t-line{color:rgba(255,255,255,.65);line-height:1.7;white-space:pre-wrap;word-break:break-all}
+.t-cmt{color:#6A9955}.t-key{color:#9CDCFE}.t-col{color:rgba(255,255,255,.3)}
+.t-str{color:#CE9178}.t-kw{color:#C586C0}.t-num{color:#B5CEA8}
+.t-ok{color:#27C93F;font-weight:600}.t-fire{color:#FF5F57;font-weight:600}.t-warn{color:#FFBD2E;font-weight:600}
+.t-fn{color:#DCDCAA}.t-i{padding-left:1.25em}.t-i2{padding-left:2.5em}
+.t-cursor{display:inline-block;width:.5em;height:1em;background:rgba(255,255,255,.6);vertical-align:text-bottom;animation:cursor-blink 1s step-end infinite}
+
+/* PAGE HERO */
+#page-hero{padding:clamp(6rem,12vw,9rem) clamp(1.25rem,5vw,5rem) clamp(3rem,5vw,4.5rem);position:relative;z-index:1;text-align:center}
+.page-hero-inner{max-width:680px;margin:0 auto}
+.page-hero-title{font-size:clamp(2.4rem,5vw,3.75rem);font-weight:800;letter-spacing:-.04em;margin-bottom:1rem;line-height:1.05;background:linear-gradient(135deg,var(--text) 0%,var(--primary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+[data-theme="dark"] .page-hero-title{background:linear-gradient(135deg,#F1F5F9 0%,#818CF8 100%);-webkit-background-clip:text;background-clip:text}
+.page-hero-sub{color:var(--text-muted);font-size:1.05rem;line-height:1.75;margin-bottom:2.25rem;max-width:54ch;margin-left:auto;margin-right:auto}
+.page-hero-actions{display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap}
+.project-nav-pills{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:2.25rem}
+.project-nav-pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:600;padding:.4rem 1rem;border-radius:var(--radius-full);border:1.5px solid var(--border-2);color:var(--text-muted);background:var(--surface);transition:all var(--transition)}
+.project-nav-pill:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-dim);transform:translateY(-1px)}
+.project-nav-pill i{width:14px;height:14px}
+
+/* PROJECT SECTION */
+.project-section{padding:clamp(4rem,8vw,6.5rem) clamp(1.25rem,5vw,5rem);position:relative;z-index:1}
+.project-section-inner{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:3.5rem}
+
+/* PROJECT HEADER */
+.project-section-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:1.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.project-title-group{display:flex;align-items:center;gap:1.25rem}
+.project-section-icon{width:60px;height:60px;border-radius:var(--radius-xl);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:var(--shadow-md)}
+.project-section-icon i{width:28px;height:28px}
+.project-section-name{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.4rem}
+.project-section-meta{display:flex;align-items:center;gap:.625rem;flex-wrap:wrap;margin-top:.375rem}
+.project-section-links{display:flex;align-items:center;gap:.625rem;flex-wrap:wrap}
+.gh-btn{display:inline-flex;align-items:center;gap:.5rem;font-size:.825rem;font-weight:600;padding:.45rem 1rem;border-radius:var(--radius-full);border:1.5px solid var(--border-2);color:var(--text-muted);background:var(--surface-2);transition:all var(--transition)}
+.gh-btn:hover{color:var(--text);border-color:var(--text-muted);background:var(--surface-3);transform:translateY(-1px)}
+.gh-btn i{width:15px;height:15px}
+.repo-stat-inline{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;color:var(--text-faint);font-family:var(--mono)}
+
+/* OVERVIEW */
+.overview-text{color:var(--text-muted);font-size:.95rem;line-height:1.85;max-width:74ch}
+.overview-text+.overview-text{margin-top:.875rem}
+.overview-text strong{color:var(--text);font-weight:600}
+.stack-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem}
+
+/* ARCHITECTURE */
+.section-block-title{font-size:1.05rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+.section-block-title i{width:17px;height:17px;color:var(--primary)}
+.arch-images{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+@media(max-width:680px){.arch-images{grid-template-columns:1fr}}
+.arch-img-wrap{border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--border);background:var(--surface-2);cursor:zoom-in;transition:all var(--transition);box-shadow:var(--shadow-sm)}
+.arch-img-wrap:hover{border-color:rgba(91,91,214,.35);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.arch-img-wrap img{width:100%;height:210px;object-fit:cover;object-position:top center;display:block}
+.arch-img-caption{padding:.625rem 1rem;font-size:.75rem;font-weight:500;color:var(--text-muted);font-family:var(--mono);border-top:1px solid var(--border)}
+
+/* COMPONENTS */
+.components-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media(max-width:580px){.components-grid{grid-template-columns:1fr}}
+.component-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.5rem;transition:all var(--transition)}
+.component-card:hover{border-color:rgba(91,91,214,.25);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.component-card-head{display:flex;align-items:center;gap:.75rem;margin-bottom:.875rem}
+.component-icon{width:40px;height:40px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.component-icon i{width:20px;height:20px}
+.component-name{font-weight:700;font-size:.95rem;line-height:1.2}
+.component-port{font-size:.7rem;font-weight:600;color:var(--text-faint);font-family:var(--mono);margin-top:.15rem}
+.component-desc{font-size:.82rem;color:var(--text-muted);line-height:1.7;margin-bottom:.75rem}
+.component-points{display:flex;flex-direction:column;gap:.3rem}
+.cp{display:flex;align-items:flex-start;gap:.5rem;font-size:.78rem;color:var(--text-muted);line-height:1.5}
+.cp-dot{width:5px;height:5px;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:.45rem}
+
+/* SCREENSHOTS GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:700px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.gallery-grid{grid-template-columns:1fr}}
+.gallery-item{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);cursor:zoom-in;transition:all var(--transition);background:var(--surface-2);box-shadow:var(--shadow-sm)}
+.gallery-item:hover{border-color:rgba(91,91,214,.3);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.gallery-item img{width:100%;height:155px;object-fit:cover;object-position:top center;display:block}
+.gallery-caption{padding:.45rem .75rem;font-size:.7rem;font-weight:500;color:var(--text-muted);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid var(--border)}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.93);display:none;align-items:center;justify-content:center;padding:2rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.lightbox.open{display:flex}
+.lightbox-inner{position:relative;max-width:min(90vw,1200px);max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:.875rem}
+.lightbox-img{max-height:82vh;max-width:100%;border-radius:var(--radius-lg);box-shadow:0 24px 80px rgba(0,0,0,.8);object-fit:contain}
+.lightbox-caption{color:rgba(255,255,255,.6);font-size:.8rem;font-family:var(--mono);text-align:center}
+.lightbox-close{position:fixed;top:1.25rem;right:1.25rem;width:42px;height:42px;border-radius:var(--radius-full);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition);z-index:1}
+.lightbox-close:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.3)}
+.lightbox-close i{width:18px;height:18px}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:var(--radius-full);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition)}
+.lightbox-nav:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.3)}
+.lightbox-nav i{width:22px;height:22px}
+.lightbox-prev{left:1rem}
+.lightbox-next{right:1rem}
+.lightbox-counter{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.45);font-size:.75rem;font-family:var(--mono);letter-spacing:.05em}
+
+/* CONFIG TABS */
+.tab-buttons{display:flex;gap:.25rem;border-bottom:1px solid var(--border);padding-bottom:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-btn{font-size:.76rem;font-weight:600;color:var(--text-faint);padding:.5rem .875rem;border-radius:var(--radius-md) var(--radius-md) 0 0;border:1px solid transparent;border-bottom:none;transition:all var(--transition);white-space:nowrap;font-family:var(--mono);background:transparent;position:relative;bottom:-1px;cursor:pointer}
+.tab-btn.active{color:var(--text);background:var(--surface);border-color:var(--border)}
+[data-theme="dark"] .tab-btn.active{background:#0D1117;border-color:rgba(255,255,255,.1)}
+.tab-btn:hover:not(.active){color:var(--text-muted);background:var(--surface-2)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.tab-pane .project-preview{border-radius:0 var(--radius-xl) var(--radius-xl) var(--radius-xl)}
+
+/* LEARNINGS */
+.learnings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:680px){.learnings-grid{grid-template-columns:1fr}}
+.learning-card{background:linear-gradient(135deg,var(--primary-dim),transparent);border:1px solid rgba(91,91,214,.15);border-radius:var(--radius-xl);padding:1.5rem;transition:all var(--transition)}
+[data-theme="dark"] .learning-card{border-color:rgba(129,140,248,.15)}
+.learning-card:hover{border-color:rgba(91,91,214,.3);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.learning-icon{width:40px;height:40px;border-radius:var(--radius-md);background:var(--primary-dim);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.learning-icon i{width:20px;height:20px}
+.learning-title{font-weight:700;font-size:.9rem;margin-bottom:.4rem}
+.learning-text{font-size:.81rem;color:var(--text-muted);line-height:1.7}
+
+/* STEPS */
+.steps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media(max-width:580px){.steps-grid{grid-template-columns:1fr}}
+.step-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.25rem;display:flex;align-items:flex-start;gap:1rem;transition:all var(--transition)}
+.step-card:hover{border-color:rgba(91,91,214,.2);box-shadow:var(--shadow-md)}
+.step-num{width:36px;height:36px;border-radius:var(--radius-full);background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0;font-family:var(--mono)}
+.step-title{font-weight:700;font-size:.9rem;margin-bottom:.3rem}
+.step-desc{font-size:.8rem;color:var(--text-muted);line-height:1.65}
+.step-desc code{font-family:var(--mono);font-size:.76rem;background:var(--surface-3);padding:.1em .35em;border-radius:.25rem;color:var(--text)}
+
+/* TERMINALS SIDE BY SIDE */
+.terminals-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:680px){.terminals-grid{grid-template-columns:1fr}}
+.terminal-label{font-size:.72rem;font-weight:700;color:var(--text-faint);font-family:var(--mono);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em}
+
+/* PLACEHOLDER */
+.more-placeholder{background:transparent;border:2px dashed var(--border-2);border-radius:var(--radius-2xl);padding:3.5rem;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.625rem;opacity:.45;text-align:center;max-width:1000px;margin:0 auto}
+.more-placeholder i{width:32px;height:32px;color:var(--text-faint)}
+.more-placeholder span{font-size:.9rem;color:var(--text-faint);font-weight:500}
+.more-placeholder .mp-sub{font-size:.78rem;color:var(--text-faint);font-family:var(--mono)}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem clamp(1.25rem,5vw,5rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.footer-copy{font-size:.8rem;color:var(--text-faint)}
+.footer-copy strong{color:var(--text-muted);font-weight:600}
+.footer-links{display:flex;align-items:center;gap:.375rem}
+.footer-links a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);color:var(--text-faint);border:1px solid var(--border);transition:all var(--transition)}
+.footer-links a:hover{color:var(--primary);background:var(--primary-dim);border-color:rgba(91,91,214,.2)}
+.footer-links a i{width:17px;height:17px}
+</style>
+</head>
+<body>
+
+<div class="hero-blob"></div>
+<div class="hero-blob-2"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-badge">ET</div>
+    <span>Emmanuel Tekle</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#about">Over mij</a>
+    <a href="projects.html" class="active">Projecten</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="index.html#experience">Ervaring</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" data-theme-toggle aria-label="Schakel thema">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="index.html#contact" class="nav-cta">Neem contact op</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-eyebrow">Portfolio</div>
+    <h1 class="page-hero-title">Mijn Projecten</h1>
+    <p class="page-hero-sub">Hands-on infrastructuurprojecten — elk systeem zelf gebouwd, elke config zelf geschreven. Geen wizards, geen copy-paste tutorials.</p>
+    <div class="page-hero-actions">
+      <a href="index.html" class="btn-secondary">
+        <i data-lucide="arrow-left"></i>
+        Terug naar home
+      </a>
+      <a href="https://github.com/E-mma9" target="_blank" rel="noopener noreferrer" class="btn-primary">
+        <i data-lucide="github"></i>
+        GitHub profiel
+      </a>
+    </div>
+    <div class="project-nav-pills">
+      <a href="#monitoring" class="project-nav-pill">
+        <i data-lucide="activity"></i>
+        Monitoring Homelab
+      </a>
+      <a href="#hardening" class="project-nav-pill">
+        <i data-lucide="shield-check"></i>
+        Linux Security Hardening
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     MONITORING HOMELAB
+═══════════════════════════════════════════ -->
+<section id="monitoring" class="project-section">
+  <div class="project-section-inner">
+
+    <!-- Header -->
+    <div class="project-section-header">
+      <div class="project-title-group">
+        <div class="project-section-icon" style="background:var(--orange-dim);color:var(--orange)">
+          <i data-lucide="activity"></i>
+        </div>
+        <div>
+          <div class="project-section-name">Monitoring Homelab</div>
+          <div class="project-section-meta">
+            <span class="ps-done"><i data-lucide="check-circle"></i> Voltooid</span>
+            <span style="font-size:.75rem;color:var(--text-faint);font-family:var(--mono)">3-node Proxmox VE cluster</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-section-links">
+        <span class="repo-stat-inline" id="stat-m-stars"></span>
+        <a href="https://github.com/E-mma9/Monitoring-Homelab" target="_blank" rel="noopener noreferrer" class="gh-btn">
+          <i data-lucide="github"></i> Bekijk op GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div>
+      <p class="overview-text">
+        Volledige enterprise-grade monitoring stack op een <strong>3-node Proxmox VE cluster</strong> met consumer hardware. Alle configuratie handmatig geschreven vanuit de officiële documentatie — geen installatiewizards, geen pre-built templates. Het doel: elke regel begrijpen en kunnen verklaren.
+      </p>
+      <p class="overview-text">
+        De stack scraped elke 15 seconden metrics van alle nodes en services, slaat die <strong>180 dagen</strong> op in Prometheus, visualiseert ze live in Grafana en stuurt bij incidenten een <strong>SMS via PagerDuty</strong> — en bij geen reactie automatisch een telefoontje.
+      </p>
+      <div class="stack-pills">
+        <span class="ptag">Proxmox VE</span>
+        <span class="ptag">Prometheus</span>
+        <span class="ptag">Grafana</span>
+        <span class="ptag">Alertmanager</span>
+        <span class="ptag">PagerDuty</span>
+        <span class="ptag">node_exporter</span>
+        <span class="ptag">blackbox_exporter</span>
+        <span class="ptag">Tailscale</span>
+        <span class="ptag">Linux</span>
+        <span class="ptag">systemd</span>
+      </div>
+    </div>
+
+    <!-- Architecture -->
+    <div>
+      <div class="section-block-title"><i data-lucide="git-branch"></i> Architectuur</div>
+      <div class="arch-images">
+        <div class="arch-img-wrap" onclick="openLightbox('monitoring',0)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/proxmox-cluster.png" alt="Proxmox Cluster Schematic" loading="lazy">
+          <div class="arch-img-caption">Proxmox 3-node cluster — hardware layout</div>
+        </div>
+        <div class="arch-img-wrap" onclick="openLightbox('monitoring',1)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/architecture-diagram.png" alt="Monitoring Stack Architecture" loading="lazy">
+          <div class="arch-img-caption">Monitoring stack — volledige architectuur</div>
+        </div>
+      </div>
+      <!-- Data flow terminal -->
+      <div class="project-preview">
+        <div class="terminal-bar">
+          <span class="t-dot t-dot-r"></span><span class="t-dot t-dot-y"></span><span class="t-dot t-dot-g"></span>
+          <span class="t-title">data-flow — monitoring stack</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-cmt"># ── DATA COLLECTION ──────────────────────────────────────</span></div>
+          <div class="t-line"><span class="t-key">node_exporter</span><span class="t-col"> :9100  </span><span class="t-col">→ </span><span class="t-fn">pve</span><span class="t-col"> + </span><span class="t-fn">node2</span><span class="t-col"> + </span><span class="t-fn">node3</span><span class="t-col">  (CPU, RAM, disk, network)</span></div>
+          <div class="t-line"><span class="t-key">blackbox_exporter</span><span class="t-col"> :9115 </span><span class="t-col">→ </span><span class="t-num">6</span><span class="t-col"> services via HTTP/ICMP probe</span></div>
+          <div class="t-line">&nbsp;</div>
+          <div class="t-line"><span class="t-cmt"># ── AGGREGATION ──────────────────────────────────────────</span></div>
+          <div class="t-line"><span class="t-fn">Prometheus</span><span class="t-col"> :9090  </span><span class="t-col">← scrapet alle targets elke </span><span class="t-num">15s</span></div>
+          <div class="t-line t-i"><span class="t-col">↳ evalueert </span><span class="t-num">7</span><span class="t-col"> alert rules (NodeDown, DiskSpace, CPU, RAM, EndpointDown...)</span></div>
+          <div class="t-line t-i"><span class="t-col">↳ PromQL queries — </span><span class="t-num">180</span><span class="t-col"> dagen retentie</span></div>
+          <div class="t-line">&nbsp;</div>
+          <div class="t-line"><span class="t-cmt"># ── VISUALISATION & ALERTING ─────────────────────────────</span></div>
+          <div class="t-line"><span class="t-fn">Grafana</span><span class="t-col">       :3000  </span><span class="t-col">← query-on-demand dashboards</span></div>
+          <div class="t-line"><span class="t-fn">Alertmanager</span><span class="t-col">  :9093  </span><span class="t-col">← ontvangt fired alerts van Prometheus</span></div>
+          <div class="t-line t-i"><span class="t-col">↳ </span><span class="t-warn">warning</span><span class="t-col">  → PagerDuty SMS</span></div>
+          <div class="t-line t-i"><span class="t-col">↳ </span><span class="t-fire">critical</span><span class="t-col">  → PagerDuty SMS + telefoontje bij geen reactie in </span><span class="t-num">30m</span></div>
+          <div class="t-line">&nbsp;</div>
+          <div class="t-line"><span class="t-cmt"># ── REMOTE ACCESS ────────────────────────────────────────</span></div>
+          <div class="t-line"><span class="t-fn">Tailscale</span><span class="t-col"> mesh VPN  →  geen open poorten richting internet</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Components -->
+    <div>
+      <div class="section-block-title"><i data-lucide="cpu"></i> Componenten</div>
+      <div class="components-grid">
+        <div class="component-card">
+          <div class="component-card-head">
+            <div class="component-icon" style="background:var(--orange-dim);color:var(--orange)"><i data-lucide="database"></i></div>
+            <div>
+              <div class="component-name">Prometheus</div>
+              <div class="component-port">port :9090 &mdash; metrics store &amp; evaluator</div>
+            </div>
+          </div>
+          <p class="component-desc">De kern van de stack. Pull-gebaseerd: scrapt elke 15s metrics van alle targets via HTTP. Slaat time-series data lokaal op en evalueert continu de alert rules.</p>
+          <div class="component-points">
+            <div class="cp"><div class="cp-dot"></div><span>PromQL voor queries op dashboards en alert expressions</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>180 dagen retentie — trends en historische incidenten</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>Self-monitoring: scrapt ook zichzelf (:9090)</span></div>
+          </div>
+        </div>
+        <div class="component-card">
+          <div class="component-card-head">
+            <div class="component-icon" style="background:var(--orange-dim);color:var(--orange)"><i data-lucide="bar-chart-2"></i></div>
+            <div>
+              <div class="component-name">Grafana</div>
+              <div class="component-port">port :3000 &mdash; visualisatie</div>
+            </div>
+          </div>
+          <p class="component-desc">Verbindt Prometheus als datasource en toont alle metrics als real-time grafieken, gauges en tabellen. Slaat zelf geen data op — altijd live queries.</p>
+          <div class="component-points">
+            <div class="cp"><div class="cp-dot"></div><span>Cluster overview: CPU, RAM, disk per node side-by-side</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>Alert status panels — directe visuele feedback</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>Toegankelijk via Tailscale VPN van overal</span></div>
+          </div>
+        </div>
+        <div class="component-card">
+          <div class="component-card-head">
+            <div class="component-icon" style="background:var(--red-dim);color:var(--red)"><i data-lucide="bell"></i></div>
+            <div>
+              <div class="component-name">Alertmanager</div>
+              <div class="component-port">port :9093 &mdash; alert routing</div>
+            </div>
+          </div>
+          <p class="component-desc">Ontvangt fired alerts van Prometheus, groepeert duplicaten en levert ze af bij PagerDuty. Scheiding van detectie (Prometheus) en bezorging (Alertmanager).</p>
+          <div class="component-points">
+            <div class="cp"><div class="cp-dot"></div><span>group_by alertname — 3 nodes down = 1 incident</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>30s group_wait — bundelt gerelateerde alerts</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>send_resolved: true — automatisch opgelost-notificatie</span></div>
+          </div>
+        </div>
+        <div class="component-card">
+          <div class="component-card-head">
+            <div class="component-icon" style="background:var(--teal-dim);color:var(--teal)"><i data-lucide="wifi"></i></div>
+            <div>
+              <div class="component-name">Blackbox Exporter</div>
+              <div class="component-port">port :9115 &mdash; external probing</div>
+            </div>
+          </div>
+          <p class="component-desc">Voert echte HTTP/HTTPS en ICMP checks uit op alle services van buitenaf — pakt problemen op voordat gebruikers ze merken.</p>
+          <div class="component-points">
+            <div class="cp"><div class="cp-dot"></div><span>6 services: Vaultwarden, Grafana, Nginx PM, Pi-hole, Paperless, Glance</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>ICMP ping checks op alle 3 Proxmox nodes</span></div>
+            <div class="cp"><div class="cp-dot"></div><span>SlowResponse alert bij responstijd &gt;5 seconden</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screenshots -->
+    <div>
+      <div class="section-block-title"><i data-lucide="image"></i> Screenshots</div>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox('monitoring',2)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/grafana-cluster-overview.png" alt="Grafana Cluster Overview" loading="lazy">
+          <div class="gallery-caption">Grafana — cluster overview</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('monitoring',3)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/prometheus-targets.png" alt="Prometheus Targets" loading="lazy">
+          <div class="gallery-caption">Prometheus — scrape targets</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('monitoring',4)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/alertmanager.png" alt="Alertmanager UI" loading="lazy">
+          <div class="gallery-caption">Alertmanager — active alerts</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('monitoring',5)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/blackbox-exporter.png" alt="Blackbox Exporter" loading="lazy">
+          <div class="gallery-caption">Blackbox Exporter — probe results</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('monitoring',6)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/pagerduty-incident.png" alt="PagerDuty Incident" loading="lazy">
+          <div class="gallery-caption">PagerDuty — incident triggered</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('monitoring',7)" title="Klik om te vergroten">
+          <img src="assets/projects/monitoring/pagerduty-service.png" alt="PagerDuty Service Directory" loading="lazy">
+          <div class="gallery-caption">PagerDuty — service directory</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Config Spotlight -->
+    <div>
+      <div class="section-block-title"><i data-lucide="code-2"></i> Config Spotlight</div>
+      <div class="config-tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="switchTab(this,'prometheus')">prometheus.yml</button>
+          <button class="tab-btn" onclick="switchTab(this,'alertrules')">alert_rules.yml</button>
+          <button class="tab-btn" onclick="switchTab(this,'alertmanager')">alertmanager.yml</button>
+        </div>
+        <!-- Tab: prometheus.yml -->
+        <div class="tab-pane active" id="tab-prometheus">
+          <div class="project-preview">
+            <div class="terminal-bar">
+              <span class="t-dot t-dot-r"></span><span class="t-dot t-dot-y"></span><span class="t-dot t-dot-g"></span>
+              <span class="t-title">/etc/prometheus/prometheus.yml</span>
+            </div>
+            <div class="terminal-body">
+              <div class="t-line"><span class="t-key">global</span><span class="t-col">:</span></div>
+              <div class="t-line t-i"><span class="t-key">scrape_interval</span><span class="t-col">:</span>     <span class="t-num">15s</span>  <span class="t-cmt"># industry standard — snel genoeg, niet te zwaar</span></div>
+              <div class="t-line t-i"><span class="t-key">evaluation_interval</span><span class="t-col">:</span> <span class="t-num">15s</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-key">alerting</span><span class="t-col">:</span></div>
+              <div class="t-line t-i"><span class="t-key">alertmanagers</span><span class="t-col">:</span></div>
+              <div class="t-line t-i2"><span class="t-col">- </span><span class="t-key">static_configs</span><span class="t-col">: [{</span><span class="t-key">targets</span><span class="t-col">: [</span><span class="t-str">"localhost:9093"</span><span class="t-col">]}]</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-key">scrape_configs</span><span class="t-col">:</span></div>
+              <div class="t-line t-i"><span class="t-col">- </span><span class="t-key">job_name</span><span class="t-col">:</span> <span class="t-str">'proxmox-nodes'</span></div>
+              <div class="t-line t-i2"><span class="t-key">static_configs</span><span class="t-col">:</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-col">- </span><span class="t-key">targets</span><span class="t-col">:</span></div>
+              <div class="t-line" style="padding-left:5em"><span class="t-col">- </span><span class="t-str">'192.168.1.249:9100'</span>   <span class="t-cmt"># pve — primary + ZFS storage</span></div>
+              <div class="t-line" style="padding-left:5em"><span class="t-col">- </span><span class="t-str">'192.168.1.211:9100'</span>   <span class="t-cmt"># node2 — services node</span></div>
+              <div class="t-line" style="padding-left:5em"><span class="t-col">- </span><span class="t-str">'192.168.1.74:9100'</span>    <span class="t-cmt"># node3</span></div>
+              <div class="t-line t-i2"><span class="t-key">labels</span><span class="t-col">: {</span><span class="t-key">group</span><span class="t-col">:</span> <span class="t-str">'proxmox'</span><span class="t-col">}</span>  <span class="t-cmt"># PromQL: up{group="proxmox"}</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line t-i"><span class="t-col">- </span><span class="t-key">job_name</span><span class="t-col">:</span> <span class="t-str">'blackbox-http'</span>  <span class="t-cmt"># HTTP checks: verwacht 200/301/302</span></div>
+              <div class="t-line t-i2"><span class="t-key">metrics_path</span><span class="t-col">:</span> <span class="t-str">/probe</span></div>
+              <div class="t-line t-i2"><span class="t-key">params</span><span class="t-col">: {</span><span class="t-key">module</span><span class="t-col">: [</span><span class="t-str">http_2xx</span><span class="t-col">]}</span></div>
+              <div class="t-line t-i2"><span class="t-cmt"># relabel_configs stuurt request via blackbox_exporter door</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Tab: alert_rules.yml -->
+        <div class="tab-pane" id="tab-alertrules">
+          <div class="project-preview">
+            <div class="terminal-bar">
+              <span class="t-dot t-dot-r"></span><span class="t-dot t-dot-y"></span><span class="t-dot t-dot-g"></span>
+              <span class="t-title">/etc/prometheus/alert_rules.yml</span>
+            </div>
+            <div class="terminal-body">
+              <div class="t-line"><span class="t-cmt"># Pending → Firing → Alertmanager → PagerDuty → jouw telefoon</span></div>
+              <div class="t-line"><span class="t-key">groups</span><span class="t-col">:</span></div>
+              <div class="t-line t-i"><span class="t-col">- </span><span class="t-key">name</span><span class="t-col">:</span> <span class="t-str">node_alerts</span></div>
+              <div class="t-line t-i2"><span class="t-key">rules</span><span class="t-col">:</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line t-i2"><span class="t-col">- </span><span class="t-key">alert</span><span class="t-col">:</span> <span class="t-fire">NodeDown</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">expr</span><span class="t-col">:</span>  <span class="t-fn">up</span><span class="t-col">{</span><span class="t-key">job</span><span class="t-col">=</span><span class="t-str">"proxmox-nodes"</span><span class="t-col">}</span> <span class="t-num">== 0</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">for</span><span class="t-col">:</span>   <span class="t-num">1m</span>  <span class="t-cmt"># 1 min wachten filtert korte network blips</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">labels</span><span class="t-col">: {</span><span class="t-key">severity</span><span class="t-col">:</span> <span class="t-fire">critical</span><span class="t-col">}</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line t-i2"><span class="t-col">- </span><span class="t-key">alert</span><span class="t-col">:</span> <span class="t-warn">DiskSpaceWarning</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">expr</span><span class="t-col">:</span>  <span class="t-num">100</span> <span class="t-col">- (</span><span class="t-fn">node_filesystem_avail_bytes</span><span class="t-col">{</span><span class="t-key">mountpoint</span><span class="t-col">=</span><span class="t-str">"/"</span><span class="t-col">}</span></div>
+              <div class="t-line" style="padding-left:5em"><span class="t-col">/ </span><span class="t-fn">node_filesystem_size_bytes</span><span class="t-col">{</span><span class="t-key">mountpoint</span><span class="t-col">=</span><span class="t-str">"/"</span><span class="t-col">}</span> <span class="t-col">* </span><span class="t-num">100</span><span class="t-col">) > </span><span class="t-num">85</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">for</span><span class="t-col">:</span>   <span class="t-num">5m</span>  <span class="t-cmt"># filtert tijdelijke pieken van grote copies</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line t-i2"><span class="t-col">- </span><span class="t-key">alert</span><span class="t-col">:</span> <span class="t-warn">HighMemoryUsage</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">expr</span><span class="t-col">:</span>  <span class="t-num">100</span> <span class="t-col">* (1 - (</span><span class="t-fn">node_memory_MemAvailable_bytes</span> <span class="t-col">/</span> <span class="t-fn">node_memory_MemTotal_bytes</span><span class="t-col">)) > </span><span class="t-num">90</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">for</span><span class="t-col">:</span>   <span class="t-num">5m</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line t-i"><span class="t-col">- </span><span class="t-key">name</span><span class="t-col">:</span> <span class="t-str">blackbox_alerts</span></div>
+              <div class="t-line t-i2"><span class="t-col">- </span><span class="t-key">alert</span><span class="t-col">:</span> <span class="t-fire">EndpointDown</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">expr</span><span class="t-col">:</span>  <span class="t-fn">probe_success</span> <span class="t-num">== 0</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">for</span><span class="t-col">:</span>   <span class="t-num">2m</span>  <span class="t-cmt"># 2 min — ruimte voor container restarts</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Tab: alertmanager.yml -->
+        <div class="tab-pane" id="tab-alertmanager">
+          <div class="project-preview">
+            <div class="terminal-bar">
+              <span class="t-dot t-dot-r"></span><span class="t-dot t-dot-y"></span><span class="t-dot t-dot-g"></span>
+              <span class="t-title">/etc/alertmanager/alertmanager.yml</span>
+            </div>
+            <div class="terminal-body">
+              <div class="t-line"><span class="t-key">global</span><span class="t-col">:</span></div>
+              <div class="t-line t-i"><span class="t-key">resolve_timeout</span><span class="t-col">:</span> <span class="t-num">1m</span>  <span class="t-cmt"># anti-flapping: wacht voor "resolved" te sturen</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-key">route</span><span class="t-col">:</span></div>
+              <div class="t-line t-i"><span class="t-key">receiver</span><span class="t-col">:</span>        <span class="t-str">'pagerduty'</span></div>
+              <div class="t-line t-i"><span class="t-key">group_by</span><span class="t-col">:</span>       <span class="t-col">[</span><span class="t-str">'alertname'</span><span class="t-col">]</span>  <span class="t-cmt"># 3 nodes down = 1 incident, niet 3</span></div>
+              <div class="t-line t-i"><span class="t-key">group_wait</span><span class="t-col">:</span>     <span class="t-num">30s</span>  <span class="t-cmt"># bundelt gerelateerde alerts samen</span></div>
+              <div class="t-line t-i"><span class="t-key">group_interval</span><span class="t-col">:</span> <span class="t-num">5m</span></div>
+              <div class="t-line t-i"><span class="t-key">repeat_interval</span><span class="t-col">:</span><span class="t-num">4h</span>  <span class="t-cmt"># herinnering als probleem aanhoudt</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-key">receivers</span><span class="t-col">:</span></div>
+              <div class="t-line t-i"><span class="t-col">- </span><span class="t-key">name</span><span class="t-col">:</span> <span class="t-str">'pagerduty'</span></div>
+              <div class="t-line t-i2"><span class="t-key">pagerduty_configs</span><span class="t-col">:</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-col">- </span><span class="t-key">severity</span><span class="t-col">:</span> <span class="t-str">'{{ if eq .CommonLabels.severity "critical" }}critical{{ else }}warning{{ end }}'</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">description</span><span class="t-col">:</span> <span class="t-str">'{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'</span></div>
+              <div class="t-line" style="padding-left:3.75em"><span class="t-key">send_resolved</span><span class="t-col">:</span> <span class="t-ok">true</span>  <span class="t-cmt"># notificatie als probleem is opgelost</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learnings -->
+    <div>
+      <div class="section-block-title"><i data-lucide="lightbulb"></i> Wat ik geleerd heb</div>
+      <div class="learnings-grid">
+        <div class="learning-card">
+          <div class="learning-icon"><i data-lucide="eye"></i></div>
+          <div class="learning-title">Proactief vs reactief</div>
+          <div class="learning-text">Met de juiste thresholds en <code style="font-family:var(--mono);font-size:.75rem;background:rgba(255,255,255,.1);padding:.1em .3em;border-radius:.25rem">for</code>-durations vang je problemen op voor gebruikers ze merken. Alert-tuning is een vak — te gevoelig en je wordt blind voor ruis.</div>
+        </div>
+        <div class="learning-card">
+          <div class="learning-icon"><i data-lucide="file-text"></i></div>
+          <div class="learning-title">Config van scratch schrijven</div>
+          <div class="learning-text">Door alles vanuit de documentatie te schrijven zonder templates leer je wat elk veld doet. Relabeling in Prometheus leek magie — nu begrijp ik elke stap.</div>
+        </div>
+        <div class="learning-card">
+          <div class="learning-icon"><i data-lucide="layers"></i></div>
+          <div class="learning-title">Separation of concerns</div>
+          <div class="learning-text">Prometheus detecteert, Alertmanager bezorgt. Die scheiding maakt debuggen en uitbreiden veel eenvoudiger — één component aanpassen raakt de rest niet.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     LINUX SECURITY HARDENING
+═══════════════════════════════════════════ -->
+<section id="hardening" class="project-section" style="background:var(--surface)">
+  <div class="project-section-inner">
+
+    <!-- Header -->
+    <div class="project-section-header">
+      <div class="project-title-group">
+        <div class="project-section-icon" style="background:var(--red-dim);color:var(--red)">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div>
+          <div class="project-section-name">Linux Security Hardening</div>
+          <div class="project-section-meta">
+            <span class="ps-done"><i data-lucide="check-circle"></i> Voltooid</span>
+            <span style="font-size:.75rem;color:var(--text-faint);font-family:var(--mono)">Ubuntu / Debian automation</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-section-links">
+        <a href="https://github.com/E-mma9/Linux-Security-Hardening" target="_blank" rel="noopener noreferrer" class="gh-btn">
+          <i data-lucide="github"></i> Bekijk op GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div>
+      <p class="overview-text">
+        Twee Bash-scripts die een Ubuntu/Debian server automatisch hardenen en auditen. Geschreven om <strong>Linux security fundamentals</strong> hands-on te leren — van SSH lockdown tot firewall configuratie en audit logging. Getest op Ubuntu 22.04 LTS.
+      </p>
+      <p class="overview-text">
+        <strong>harden-server.sh</strong> configureert het systeem in één run: updates, SSH hardening, UFW firewall, auditd installatie. <strong>security-audit.sh</strong> rapporteert daarna de actuele security status — SSH config, firewall regels, mislukte login-pogingen en SUID-bestanden.
+      </p>
+      <div class="stack-pills">
+        <span class="ptag">Bash</span>
+        <span class="ptag">Linux</span>
+        <span class="ptag">SSH</span>
+        <span class="ptag">UFW</span>
+        <span class="ptag">auditd</span>
+        <span class="ptag">Ubuntu 22.04</span>
+        <span class="ptag">Debian</span>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div>
+      <div class="section-block-title"><i data-lucide="list-ordered"></i> Wat harden-server.sh doet</div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">System updates</div>
+            <div class="step-desc">Voert <code>apt upgrade</code> uit en zet <code>unattended-upgrades</code> aan voor automatische security patches — geen handmatig updaten vergeten.</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">SSH hardening</div>
+            <div class="step-desc">Root login uitschakelen, wachtwoordauth uitzetten, poort naar <code>2222</code> — alleen key-based authenticatie mogelijk.</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">UFW firewall</div>
+            <div class="step-desc">Default <code>deny incoming</code>. Alleen SSH (2222), HTTP (80) en HTTPS (443) expliciet toegestaan. Al het andere geblokkeerd.</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-title">auditd installatie</div>
+            <div class="step-desc">Installeert en activeert <code>auditd</code> voor security event logging — audit trail van system calls, bestands-accessen en gebruikersacties.</div>
+          </div>
+        </div>
+        <div class="step-card" style="grid-column:1/-1">
+          <div class="step-num" style="background:var(--teal)">5</div>
+          <div>
+            <div class="step-title">Automatische security audit</div>
+            <div class="step-desc">Draait <code>security-audit.sh</code> direct na hardening — controleert SSH config, firewall status, SUID-bestanden en mislukte SSH-logins. Geeft directe visuele bevestiging dat alles correct geconfigureerd is.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terminal output -->
+    <div>
+      <div class="section-block-title"><i data-lucide="terminal"></i> Script output</div>
+      <div class="terminals-grid">
+        <div>
+          <div class="terminal-label">harden-server.sh</div>
+          <div class="project-preview">
+            <div class="terminal-bar">
+              <span class="t-dot t-dot-r"></span><span class="t-dot t-dot-y"></span><span class="t-dot t-dot-g"></span>
+              <span class="t-title">sudo ./harden-server.sh</span>
+            </div>
+            <div class="terminal-body">
+              <div class="t-line"><span class="t-ok">=== Linux Security Hardening Script ===</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">1/5</span> Updating system...</div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> All packages up to date</div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> unattended-upgrades enabled</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">2/5</span> Hardening SSH config...</div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> PermitRootLogin      <span class="t-fire">no</span></div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> PasswordAuthentication <span class="t-fire">no</span></div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> Port <span class="t-num">2222</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">3/5</span> Configuring UFW firewall...</div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> Default incoming: <span class="t-fire">deny</span></div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> Allow <span class="t-num">2222</span>/tcp <span class="t-num">80</span>/tcp <span class="t-num">443</span>/tcp</div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> Firewall active and enabled</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">4/5</span> Installing auditd...</div>
+              <div class="t-line t-i"><span class="t-ok">✓</span> auditd installed &amp; running</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">5/5</span> Running security audit...</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-ok">Hardening Compleet ✓</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="terminal-label">security-audit.sh</div>
+          <div class="project-preview">
+            <div class="terminal-bar">
+              <span class="t-dot t-dot-r"></span><span class="t-dot t-dot-y"></span><span class="t-dot t-dot-g"></span>
+              <span class="t-title">sudo ./security-audit.sh</span>
+            </div>
+            <div class="terminal-body">
+              <div class="t-line"><span class="t-ok">Linux Security Audit</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">SSH configuration:</span></div>
+              <div class="t-line t-i"><span class="t-key">Port</span>                    <span class="t-num">2222</span></div>
+              <div class="t-line t-i"><span class="t-key">PermitRootLogin</span>         <span class="t-fire">no</span></div>
+              <div class="t-line t-i"><span class="t-key">PasswordAuthentication</span>  <span class="t-fire">no</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">UFW firewall status:</span></div>
+              <div class="t-line t-i"><span class="t-key">Status</span><span class="t-col">:</span>   <span class="t-ok">active</span></div>
+              <div class="t-line t-i"><span class="t-key">Default</span><span class="t-col">:</span>  <span class="t-fire">deny</span> (incoming)</div>
+              <div class="t-line t-i"><span class="t-num">2222</span>/tcp  <span class="t-ok">ALLOW</span>  Anywhere</div>
+              <div class="t-line t-i"><span class="t-num">80</span>/tcp    <span class="t-ok">ALLOW</span>  Anywhere</div>
+              <div class="t-line t-i"><span class="t-num">443</span>/tcp   <span class="t-ok">ALLOW</span>  Anywhere</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-warn">Failed SSH logins (24h):</span></div>
+              <div class="t-line t-i"><span class="t-fire">3</span> mislukte pogingen gedetecteerd</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-ok">Audit Complete ✓</span><span class="t-cursor"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MORE PROJECTS -->
+<section style="padding:clamp(3.5rem,6vw,5rem) clamp(1.25rem,5vw,5rem);background:var(--bg);position:relative;z-index:1">
+  <div style="max-width:1000px;margin:0 auto">
+    <div class="more-placeholder">
+      <i data-lucide="plus-circle"></i>
+      <span>Meer projecten binnenkort</span>
+      <span class="mp-sub">DevSecOps Pipeline &nbsp;&middot;&nbsp; Azure IaC &nbsp;&middot;&nbsp; Cloud Security</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy"><strong>Emmanuel Tekle</strong> &middot; Saxion HBO ICT &middot; Enschede, NL &middot; 2026</div>
+  <div class="footer-links">
+    <a href="https://github.com/E-mma9" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
+    <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+    <a href="mailto:emmanueltekle@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX OVERLAY -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+  <button class="lightbox-close" onclick="closeLightbox()"><i data-lucide="x"></i></button>
+  <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)"><i data-lucide="chevron-left"></i></button>
+  <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)"><i data-lucide="chevron-right"></i></button>
+  <div class="lightbox-inner">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
+
+<script>
+// ── Lightbox ──────────────────────────────────────────────
+const galleries = {
+  monitoring: [
+    { src:'assets/projects/monitoring/proxmox-cluster.png',        caption:'Proxmox 3-node cluster — hardware layout' },
+    { src:'assets/projects/monitoring/architecture-diagram.png',   caption:'Monitoring stack — volledige architectuur' },
+    { src:'assets/projects/monitoring/grafana-cluster-overview.png', caption:'Grafana — cluster overview dashboard' },
+    { src:'assets/projects/monitoring/prometheus-targets.png',     caption:'Prometheus — scrape targets status' },
+    { src:'assets/projects/monitoring/alertmanager.png',           caption:'Alertmanager — active alerts view' },
+    { src:'assets/projects/monitoring/blackbox-exporter.png',      caption:'Blackbox Exporter — HTTP probe results' },
+    { src:'assets/projects/monitoring/pagerduty-incident.png',     caption:'PagerDuty — triggered incident' },
+    { src:'assets/projects/monitoring/pagerduty-service.png',      caption:'PagerDuty — service directory' },
+  ]
+};
+let currentGallery = null, currentIndex = 0;
+
+function openLightbox(gallery, idx) {
+  currentGallery = gallery; currentIndex = idx;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLightboxOnBg(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
+function navigateLightbox(dir) {
+  const items = galleries[currentGallery];
+  currentIndex = (currentIndex + dir + items.length) % items.length;
+  updateLightbox();
+}
+function updateLightbox() {
+  const item = galleries[currentGallery][currentIndex];
+  const img = document.getElementById('lightbox-img');
+  img.src = item.src; img.alt = item.caption;
+  document.getElementById('lightbox-caption').textContent = item.caption;
+  document.getElementById('lightbox-counter').textContent = (currentIndex + 1) + ' / ' + galleries[currentGallery].length;
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navigateLightbox(-1);
+  if (e.key === 'ArrowRight') navigateLightbox(1);
+});
+
+// ── Tabs ──────────────────────────────────────────────────
+function switchTab(btn, tabId) {
+  const container = btn.closest('.config-tabs');
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  container.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+// ── Theme toggle ─────────────────────────────────────────
+(function(){
+  const btn = document.querySelector('[data-theme-toggle]'), root = document.documentElement;
+  let theme = 'light';
+  const sun = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const moon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  if (btn) btn.addEventListener('click', () => { theme = theme === 'light' ? 'dark' : 'light'; root.setAttribute('data-theme', theme); btn.innerHTML = theme === 'dark' ? sun : moon; });
+})();
+
+// ── GitHub stats ─────────────────────────────────────────
+async function fetchStars(repo, el) {
+  try {
+    const r = await fetch('https://api.github.com/repos/E-mma9/' + repo, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+    if (!r.ok) return;
+    const d = await r.json();
+    el.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> ' + d.stargazers_count + ' stars &nbsp;·&nbsp; ' + d.forks_count + ' forks';
+  } catch (_) {}
+}
+const mStars = document.getElementById('stat-m-stars');
+if (mStars) fetchStars('Monitoring-Homelab', mStars);
+
+lucide.createIcons();
+</script>
+
+</body>
+</html>
