@@ -1,38 +1,34 @@
 ---
-title: "Hardening Ubuntu with Bash, not Ansible"
+title: "Hardening Ubuntu with Bash"
 date: 2026-03-25
-summary: "Why I wrote a 200-line Bash hardening script before reaching for a config management tool."
+summary: "Two scripts for taking a fresh Ubuntu/Debian box to a defensible baseline."
 tags: ["linux", "bash", "security", "ssh", "ufw", "auditd"]
 showTableOfContents: true
 ---
 
-## The temptation to over-engineer
+I wrote two Bash scripts to harden a fresh Ubuntu/Debian server and audit it afterwards. Posting the structure and a few notes here.
 
-When I started thinking about hardening fresh Ubuntu servers, the obvious answer was Ansible. I already use Ansible for other things. There are battle-tested roles like `dev-sec/ansible-collection-hardening`. Done in an afternoon.
+## What gets configured
 
-I wrote Bash instead. Here's why.
+`harden.sh`:
 
-## The skill gap I was actually closing
+- SSH — disable root login, disable password auth, change to a non-default port
+- UFW — default-deny, allow SSH/HTTP/HTTPS
+- `auditd` for security logging
+- `unattended-upgrades` for security patches
+- `fail2ban` for brute-force protection
 
-Ansible abstracts away *what's happening on the box.* When the role finishes and SSH is hardened, you know the outcome, but you don't always know which file got edited and which line changed. For my own learning, I needed to actually touch:
+`security-audit.sh`:
 
-- `/etc/ssh/sshd_config` — change `PermitRootLogin`, `PasswordAuthentication`, `Port`
-- `/etc/default/ufw` — set default-deny
-- `/etc/audit/rules.d/audit.rules` — define what to audit
-- `/etc/apt/apt.conf.d/50unattended-upgrades` — security-only auto-updates
+- Verifies SSH config against the hardened baseline
+- Checks UFW status and rules
+- Reports failed logins from `journalctl`
+- Lists pending updates
+- Exits non-zero on drift (useful for CI / cron)
 
-I needed to know the file, the directive, and why it matters. Ansible would have hidden all three.
+## Idempotency
 
-## The script structure
-
-Two scripts, both idempotent:
-
-```
-harden.sh         # apply baseline
-security-audit.sh # verify baseline
-```
-
-Idempotency in Bash isn't free. Every change is wrapped in a check:
+Bash idempotency takes a bit of care. Each change is wrapped in a check so the script can be re-run safely:
 
 ```bash
 ssh_set() {
@@ -49,11 +45,9 @@ ssh_set "PasswordAuthentication" "no"
 ssh_set "Port" "2222"
 ```
 
-Two patterns to notice: matching the key with `^${key}[[:space:]]` avoids matching commented-out duplicates, and the function handles both update and insert. Running the script twice produces the same file.
+Matching `^${key}[[:space:]]` avoids picking up commented-out lines. The function handles both update and insert in one place.
 
-## The audit script earns its keep
-
-`security-audit.sh` reads the same baseline and reports drift. Exit code 0 = compliant, 1 = drift. That makes it CI-friendly.
+## The audit script
 
 ```bash
 check() {
@@ -74,11 +68,11 @@ check "UFW active" "ufw status | grep -q 'Status: active'"
 check "auditd running" "systemctl is-active --quiet auditd"
 ```
 
-The `[OK]/[FAIL]` columnar output is intentional — I can pipe it into a Slack notification when I run it on a schedule.
+`[OK]/[FAIL]` columnar output is easy to pipe into a Slack notification or store in a log.
 
-## When to switch to Ansible
+## When this stops being the right tool
 
-For *one* server, Bash is faster and clearer. For ten, I'd switch — the inventory and the playbook structure are worth the abstraction tax. The script taught me the *what.* Ansible would have only taught me the *how.*
+For one server, Bash is fine. For ten, I'd move to Ansible — the inventory and playbook structure pay for themselves. The scripts were a way to get familiar with the actual files and directives. After that, config management makes more sense.
 
 ## Repo
 

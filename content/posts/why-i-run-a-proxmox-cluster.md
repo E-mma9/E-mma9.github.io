@@ -1,56 +1,54 @@
 ---
-title: "Why I run a 3-node Proxmox cluster at home"
+title: "Notes on my 3-node Proxmox cluster"
 date: 2026-01-18
-summary: "Three machines, consumer hardware, no enterprise budget — and what I get out of it that a single VPS can't give me."
+summary: "Hardware, networks, and what I've learned running three nodes at home."
 tags: ["proxmox", "homelab", "linux", "virtualization"]
 showTableOfContents: true
 ---
 
-## The pitch most homelabbers skip
+A short write-up on my home Proxmox cluster — why three nodes, how it's wired, and what I've learned. I get asked about this a lot, so this is the canonical answer.
 
-People ask me why I run three machines instead of one beefy server. The honest answer: I wanted to fail.
+## Hardware
 
-Not the dramatic kind. Just the everyday kind — pull a power cable, watch what happens. Reboot a node mid-deploy, see which workloads survive. You can't simulate any of that on a single server. You can't write a runbook for HA failover if you've never failed over.
+Three identical second-hand Intel N100 mini-PCs, ~€180 each. Each one has:
 
-## The hardware
+- N100 CPU, 16 GB RAM, 512 GB NVMe
+- 2.5 GbE — matters for cluster + storage traffic
+- Headless, Proxmox VE 8
 
-Three identical second-hand mini PCs, ~€180 each. Each one is:
+Total around €600. Power draw is roughly 8 W idle, 15 W loaded per node.
 
-- Intel N100, 16 GB RAM, 512 GB NVMe
-- 2.5 GbE — important for cluster traffic
-- Headless, runs Proxmox VE 8
+## Why three instead of one
 
-Total cluster cost: under €600. About the same as one decent NAS.
+A single bigger server would be cheaper to run and quieter. Three nodes give me things a single host can't:
 
-## What I actually get from three nodes
+- **HA pairs** — Pi-hole and a few other services run as an HA pair across two nodes. I can take a node down for kernel updates without breaking DNS for the house.
+- **Live migration** — `qm migrate <vmid> <target>` moves a VM between hosts with a few seconds of network blip. Useful operationally, and useful for testing.
+- **Real failure modes** — pulling a power cable on one node behaves differently from rebooting a single host. The behaviour during recovery is the actual reason I have three.
 
-**Real high-availability.** I run Pi-hole as an HA pair across two nodes. When I take node 1 down for kernel updates, my whole house still resolves DNS. Before this setup, every kernel update was a downtime event because I had services I cared about on the box.
+## Networks
 
-**Storage HA via Ceph.** This is the spicy one. Ceph on three N100s is *not* fast, but it's resilient. If I pull a disk, my VMs don't notice. The cluster heals. It's also taught me more about distributed storage than any AWS whitepaper.
+Four VLANs, segmented on an OPNsense box:
 
-**Live migration.** `qm migrate <vmid> <target>` and a VM moves between hosts with seconds of network blip. Useful operationally; even more useful for testing — I can move a workload onto an isolated node and intentionally degrade it without affecting anything else.
+- **MGMT (VLAN 10)** — Proxmox UI, SSH, cluster heartbeat
+- **STORAGE (VLAN 20)** — Ceph backend, jumbo frames (MTU 9000)
+- **PROD (VLAN 30)** — VM traffic
+- **TRUST (VLAN 100)** — daily-driver hosts
 
-## What it doesn't give me
+Splitting storage from production traffic means a heavy workload doesn't starve the management plane.
 
-Cost savings. The N100 nodes use about 8 W each idle, ~15 W loaded. Three of them, 24/7, is roughly €60–80/year in electricity. A single beefier box would run cheaper. I'm paying for the topology, not the compute.
+## Storage
 
-Quiet operation either — even fanless N100s, you can hear three of them gently humming in a closet.
+I tried Ceph for a while because I wanted to learn it. On three N100s it's not fast, but it does heal correctly when I pull a disk. After about three months I moved most things back to ZFS replication — simpler to reason about, and at this scale the resilience of Ceph wasn't worth its operational weight for me.
 
-## How it's organized
+## What it's not
 
-Networks:
+- Not cheaper than a single server, on hardware or electricity
+- Not quieter — three fans humming
+- Not simpler
 
-- **MGMT (VLAN 10)** — Proxmox web UI, SSH, cluster heartbeat
-- **STORAGE (VLAN 20)** — Ceph backend traffic, jumbo frames
-- **PROD (VLAN 30)** — actual VM traffic
-- **TRUST (VLAN 100)** — my laptop, phone, daily-driver hosts
+It's just closer to a production setup, which is the only reason I run it.
 
-Segmentation matters. Cluster traffic on its own VLAN means if I saturate the lab playing with a workload, my management plane doesn't suffer. Storage traffic on its own VLAN with MTU 9000 means Ceph isn't fighting normal network traffic for bandwidth.
+## What I'd do differently
 
-## What I'd change
-
-I'd start with three nodes again. I would *not* try to run Ceph on them again — at this scale, ZFS replication is enough and an order of magnitude less complicated. Ceph was educational, but for actual lab workloads it's overkill.
-
-## The honest summary
-
-A homelab cluster isn't cheaper, quieter, or simpler than a single server. It's just *more like production.* If your goal is to learn how real systems behave under failure, that's worth a lot.
+Start with three nodes again, but skip Ceph and go straight to ZFS + scheduled replication. The time I spent on Ceph was educational but not directly useful for the workloads I actually run at home.
