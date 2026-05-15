@@ -5,7 +5,7 @@ date: 2026-05-15
 summary: "Cybersecurity & cloud infrastructure student in Enschede. Homelab nerd, helpdesk by day."
 ---
 
-HBO ICT student at **Saxion University of Applied Sciences** in Enschede. Second year, graduating 2028. Focused on cybersecurity and cloud infrastructure. Currently part-time first-line helpdesk at **Livio** — production every day.
+HBO ICT student at **Saxion University of Applied Sciences** in Enschede. Second year, graduating 2028. Focused on cybersecurity and cloud infrastructure. Currently **2nd-line Sysadmin** at **Livio** in Enschede — production every day.
 
 The philosophy: *build real things, kept simple enough to defend in an interview.*
 
@@ -37,7 +37,8 @@ Not click-and-done — that's the point.
 
 ## Background
 
-- **Apr 2025 — now** · 1st-line Helpdesk · *Livio* · Enschede
+- **May 2026 — now** · 2nd-line Sysadmin · *Livio* · Enschede
+- **Apr 2025 — May 2026** · 1st-line Helpdesk · *Livio* · Enschede
 - **May 2024 — now** · Frontdesk & Service · *Livio* · Enschede
 - **Nov 2024 — Apr 2025** · ICT technician · *Studentaanhuis* · Enschede
 - **Mar 2023 — May 2024** · Service worker · *TotalEnergies* · Enschede
