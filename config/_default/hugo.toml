@@ -18,6 +18,7 @@ buildFuture = false
   github = "https://github.com/E-mma9"
   linkedin = "https://linkedin.com/in/emmanuel-tekle-3485b334a"
   location = "Enschede, NL"
+  goatcounter = "emmanueltekle"
 
 [outputs]
   home = ["HTML", "RSS"]
