@@ -29,12 +29,6 @@ A 3-node Proxmox cluster on consumer N100 mini-PCs. Every config file written by
 
 Not click-and-done — that's the point.
 
-## Currently learning
-
-- Microsoft Azure **AZ-104** (Administrator Associate) — 2026
-- **Terraform Associate** — 2026
-- More Kubernetes than is healthy
-
 ## Background
 
 - **May 2026 — now** · 2nd-line Sysadmin · *Livio* · Enschede
