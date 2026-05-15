@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emmanuel Tekle — A working notebook on cloud, security, and the lab.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f3ece1;
+  --paper-warm: #ece3d3;
+  --ink: #161210;
+  --ink-soft: #3a322c;
+  --ink-faint: #6b5e54;
+  --rule: #2a221c;
+  --rule-soft: rgba(22,18,16,.18);
+  --accent: #b8311c;
+  --accent-deep: #8c1e10;
+  --teal: #0a4a45;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Paper texture & vignette */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at top, transparent 60%, rgba(0,0,0,.05)),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,.012) 2px, rgba(0,0,0,.012) 3px);
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: .06;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+main { position: relative; z-index: 2; }
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 2px solid var(--rule);
+  padding: 1.25rem clamp(1.5rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+.mast-meta {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.mast-meta.r { text-align: right; }
+.mast-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: -.02em;
+  text-align: center;
+}
+
+/* ISSUE STRIP */
+.issue {
+  display: flex;
+  justify-content: space-between;
+  padding: .65rem clamp(1.5rem, 4vw, 4rem);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border-bottom: 1px solid var(--rule-soft);
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.issue strong { color: var(--accent); font-weight: 500; }
+
+/* HERO */
+.hero {
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  border-bottom: 1px solid var(--rule-soft);
+}
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+
+.hero-kicker {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-kicker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--accent);
+  opacity: .4;
+  max-width: 200px;
+}
+h1.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  line-height: .92;
+  letter-spacing: -.03em;
+  margin-bottom: 1.5rem;
+  font-variation-settings: "opsz" 144, "SOFT" 0;
+}
+h1.hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  color: var(--accent);
+}
+.hero-lede {
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 38ch;
+  font-weight: 400;
+}
+.hero-lede strong { color: var(--ink); font-weight: 600; }
+
+.hero-aside {
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+}
+.hero-aside dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: .65rem 1.5rem;
+  align-items: baseline;
+  font-size: .92rem;
+}
+.hero-aside dt {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.hero-aside dd { color: var(--ink); }
+.hero-aside dd em { font-style: italic; color: var(--accent); }
+.hero-aside .photo {
+  margin-bottom: 1.5rem;
+  width: 100%;
+  aspect-ratio: 4/5;
+  background:
+    radial-gradient(ellipse at 40% 30%, var(--accent) 0%, transparent 55%),
+    linear-gradient(135deg, var(--paper-warm) 0%, var(--accent-deep) 100%);
+  filter: contrast(1.05) saturate(.85);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-aside .photo::after {
+  content: 'fig. I';
+  position: absolute;
+  bottom: .65rem; right: .85rem;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .15em;
+  color: var(--paper);
+  text-transform: uppercase;
+}
+
+/* ARTICLE / opening paragraph */
+.opening {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.5rem;
+  border-bottom: 2px solid var(--rule);
+}
+@media (max-width: 900px) { .opening { grid-template-columns: 1fr; } }
+.opening p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.opening p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 5rem;
+  line-height: .85;
+  float: left;
+  padding: .1em .15em 0 0;
+  color: var(--accent);
+  font-style: italic;
+}
+
+/* SECTION HEAD */
+.sec {
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.sec-roman {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: .4rem;
+  letter-spacing: .05em;
+}
+.sec-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -.025em;
+  line-height: 1;
+  margin-bottom: 2.5rem;
+  max-width: 18ch;
+}
+.sec-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+
+/* DISPATCHES (posts) */
+.dispatches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+@media (max-width: 900px) { .dispatches { grid-template-columns: 1fr; } }
+.dispatch {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: color .2s ease;
+}
+.dispatch:hover .d-title { color: var(--accent); }
+.d-meta {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 1rem;
+}
+.d-meta .num { color: var(--accent); margin-right: .5rem; }
+.d-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  margin-bottom: .75rem;
+  transition: color .2s ease;
+}
+.d-summary {
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+.d-tags {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--ink-faint);
+  letter-spacing: .05em;
+}
+.d-tags::before { content: '— '; }
+
+/* DOCKET (projects) — listed like a contents page */
+.docket .row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: baseline;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+}
+.docket .row:last-child { border-bottom: 1px solid var(--rule); }
+.docket .num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--accent);
+}
+.docket .info h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -.02em;
+  margin-bottom: .35rem;
+}
+.docket .info p {
+  font-size: .95rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  line-height: 1.55;
+}
+.docket .meta {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: right;
+  max-width: 180px;
+}
+.docket .meta .pill { color: var(--teal); }
+.docket .row:hover h3 { color: var(--accent); }
+
+/* PULLQUOTE */
+.pullquote {
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+  text-align: center;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.pullquote blockquote {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  max-width: 28ch;
+  margin: 0 auto 1rem;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+.pullquote blockquote::before { content: '“'; color: var(--accent); margin-right: .15em; }
+.pullquote blockquote::after { content: '”'; color: var(--accent); margin-left: .15em; }
+.pullquote .attr {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* COLOPHON / contact */
+.colophon {
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+@media (max-width: 900px) { .colophon { grid-template-columns: 1fr; } }
+.colophon .sec-roman { color: var(--paper-warm); }
+.colophon .sec-title { color: var(--paper); }
+.colophon .sec-title em { color: var(--accent); }
+.colophon p { color: var(--paper-warm); font-size: 1rem; line-height: 1.6; max-width: 40ch; }
+.colophon dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 1rem 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(243,236,225,.2);
+  padding-top: 1.5rem;
+}
+.colophon dt {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: .65;
+}
+.colophon dd a {
+  color: var(--paper);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease;
+}
+.colophon dd a:hover { border-bottom-color: var(--accent); }
+
+footer {
+  padding: 1.25rem clamp(1.5rem, 4vw, 4rem);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border-top: 2px solid var(--rule);
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<main>
+
+  <header class="masthead">
+    <div class="mast-meta">Vol. I · Iss. 003</div>
+    <div class="mast-title">EMMANUEL — TEKLE</div>
+    <div class="mast-meta r">Enschede, NL · May MMXXVI</div>
+  </header>
+
+  <div class="issue">
+    <div><strong>● in this issue:</strong> proxmox, prometheus &amp; promises</div>
+    <div>est. 2024 · printed on the web</div>
+  </div>
+
+  <section class="hero">
+    <div>
+      <div class="hero-kicker">Cover Story</div>
+      <h1 class="hero-title">A working <em>notebook</em> on cloud, security &amp; the lab.</h1>
+      <p class="hero-lede">
+        <strong>Emmanuel Tekle</strong> is an HBO ICT student at Saxion, focused on cybersecurity and cloud infrastructure. He runs a three-node Proxmox cluster from a closet in Enschede and writes about what breaks.
+      </p>
+    </div>
+    <aside class="hero-aside">
+      <div class="photo" aria-hidden="true"></div>
+      <dl>
+        <dt>Role</dt><dd>Helpdesk · Livio</dd>
+        <dt>Study</dt><dd>HBO ICT · Saxion</dd>
+        <dt>Focus</dt><dd><em>Cloud security</em></dd>
+        <dt>Status</dt><dd>Open to internships</dd>
+        <dt>Filed</dt><dd>15 May 2026</dd>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="opening">
+    <p>The promise of a homelab, as it is normally sold, is that you can run a docker-compose and get the same observability stack the professionals run. That promise is half-true: you can run the stack. You will not understand it. This site is a record of what happens when a student tries to learn by ignoring the shortcut.</p>
+    <p>Inside: a Prometheus + Alertmanager pipeline written by hand and tested by deliberate fault injection; two Bash scripts that harden a fresh Ubuntu box well enough to defend in an interview; and a defence of why three €180 mini-PCs are a better teacher than any cloud-credit voucher.</p>
+    <p>The author is currently a first-line helpdesk technician at <em>Livio</em> in Enschede, studying HBO ICT at <em>Saxion</em>, and looking for internships in cloud or security starting summer 2026. Letters, briefs and opportunities are received at the address printed in the colophon.</p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-roman">I. Dispatches</div>
+    <h2 class="sec-title">Recent <em>writing</em> from the homelab.</h2>
+    <div class="dispatches">
+      <a class="dispatch" href="#">
+        <div class="d-meta"><span class="num">№ 03</span>02 Apr 2026 · 8 min</div>
+        <div class="d-title">Building a monitoring stack from scratch</div>
+        <p class="d-summary">On rejecting the all-in-one homelab installer and writing a Prometheus + Alertmanager + PagerDuty pipeline that you can defend, label by label, route by route.</p>
+        <div class="d-tags">prometheus, alertmanager, homelab</div>
+      </a>
+      <a class="dispatch" href="#">
+        <div class="d-meta"><span class="num">№ 02</span>25 Mar 2026 · 6 min</div>
+        <div class="d-title">Hardening Ubuntu with Bash, <em>not</em> Ansible</div>
+        <p class="d-summary">A two-hundred-line script, a defence of touching files directly, and a confession of when the same author would, in fact, reach for config management.</p>
+        <div class="d-tags">linux, bash, security</div>
+      </a>
+      <a class="dispatch" href="#">
+        <div class="d-meta"><span class="num">№ 01</span>18 Jan 2026 · 7 min</div>
+        <div class="d-title">Why I run a three-node Proxmox cluster at home</div>
+        <p class="d-summary">A clear-eyed accounting: not cheaper, not quieter, not simpler — but more like production. The case for failing on purpose.</p>
+        <div class="d-tags">proxmox, homelab, virtualization</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="pullquote">
+    <blockquote>Build real things, kept simple enough to defend in an interview.</blockquote>
+    <div class="attr">— the operating philosophy, on a sticky note above the cluster</div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-roman">II. The Docket</div>
+    <h2 class="sec-title">Projects, <em>shipped</em> &amp; in print.</h2>
+    <div class="docket">
+      <a class="row" href="#">
+        <div class="num">i.</div>
+        <div class="info">
+          <h3>Monitoring Homelab</h3>
+          <p>A production-style Prometheus + Grafana + Alertmanager stack on three Proxmox nodes. Seven alert rules, all tested by deliberate fault injection; PagerDuty SMS and voice escalation; blackbox probes against every public endpoint.</p>
+        </div>
+        <div class="meta"><span class="pill">prometheus</span><br>grafana · pagerduty<br>proxmox</div>
+      </a>
+      <a class="row" href="#">
+        <div class="num">ii.</div>
+        <div class="info">
+          <h3>Linux Security Hardening</h3>
+          <p>Two idempotent Bash scripts: one takes a fresh Ubuntu/Debian box to a defensible baseline, the other audits the box against that baseline with a CI-friendly exit code. Written with the rule that every line should be readable in an interview.</p>
+        </div>
+        <div class="meta"><span class="pill">bash</span><br>ssh · ufw · auditd<br>fail2ban</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="colophon">
+    <div>
+      <div class="sec-roman">III. Colophon</div>
+      <h2 class="sec-title">Write back, please. <em>I read everything.</em></h2>
+      <p>This notebook is set in <strong style="color:var(--paper);">Fraunces</strong> for the display, <strong style="color:var(--paper);">JetBrains Mono</strong> for the marginalia, and published from a Hugo build on a quiet Tuesday morning. Letters — about internships, about the homelab, or about something I got wrong — are welcomed below.</p>
+    </div>
+    <div>
+      <dl>
+        <dt>Email</dt><dd><a href="mailto:emmanueltekle@gmail.com">emmanueltekle@gmail.com</a></dd>
+        <dt>Github</dt><dd><a href="https://github.com/E-mma9">/E-mma9</a></dd>
+        <dt>LinkedIn</dt><dd><a href="https://linkedin.com/in/emmanuel-tekle-3485b334a">/in/emmanuel-tekle</a></dd>
+        <dt>City</dt><dd>Enschede · Overijssel · NL</dd>
+        <dt>Hours</dt><dd>Evenings &amp; weekends · CET</dd>
+      </dl>
+    </div>
+  </section>
+
+  <footer>
+    <div>© MMXXVI E. Tekle · all opinions are unfinished</div>
+    <div><a href="/mockups/">← back to picker</a></div>
+  </footer>
+
+</main>
+</body>
+</html>

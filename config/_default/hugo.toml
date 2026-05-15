@@ -1,0 +1,40 @@
+baseURL = "https://emmanueltekle.nl/"
+defaultContentLanguage = "en"
+title = "Emmanuel Tekle"
+
+[languages.en]
+  locale = "en"
+  label = "English"
+enableRobotsTXT = true
+paginate = 20
+summaryLength = 30
+buildDrafts = false
+buildFuture = false
+
+[params]
+  description = "HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure."
+  author = "Emmanuel Tekle"
+  email = "emmanueltekle@gmail.com"
+  github = "https://github.com/E-mma9"
+  linkedin = "https://linkedin.com/in/emmanuel-tekle-3485b334a"
+  location = "Enschede, NL"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+    style = "github-light"
+    tabWidth = 2
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[permalinks]
+  posts = "/posts/:slug/"
+  projects = "/projects/:slug/"

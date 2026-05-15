@@ -1,0 +1,8 @@
+<nav class="topnav">
+  <a class="nav-id" href="{{ "/" | relURL }}"><span class="accent">●</span> emmanuel.tekle</a>
+  <div class="nav-links">
+    <a href="{{ "/posts/" | relURL }}"{{ if hasPrefix .RelPermalink "/posts" }} class="active"{{ end }}>writing</a>
+    <a href="{{ "/projects/" | relURL }}"{{ if hasPrefix .RelPermalink "/projects" }} class="active"{{ end }}>projects</a>
+    <a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>about</a>
+  </div>
+</nav>

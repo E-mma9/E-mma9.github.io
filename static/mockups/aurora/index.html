@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emmanuel Tekle — Cybersecurity & Cloud Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #050416;
+  --bg-mid: #0c0a2a;
+  --ink: #f8fafc;
+  --ink-dim: #cbd5e1;
+  --ink-faint: #64748b;
+  --cyan: #67e8f9;
+  --coral: #fb7185;
+  --amber: #fbbf24;
+  --violet: #a78bfa;
+  --hairline: rgba(255,255,255,.07);
+  --hairline-bright: rgba(255,255,255,.14);
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-display);
+  background: var(--bg-deep);
+  color: var(--ink);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ====== AURORA BACKGROUND ====== */
+.aurora-stage {
+  position: fixed; inset: 0; z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora-stage::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 50% 40% at 18% 22%, var(--coral) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 82% 35%, var(--cyan) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 45% at 50% 85%, var(--violet) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 30% 70%, var(--amber) 0%, transparent 55%);
+  filter: blur(80px) saturate(140%);
+  opacity: .55;
+  animation: drift 32s ease-in-out infinite;
+}
+.aurora-stage::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at top, transparent 0%, var(--bg-deep) 80%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(255,255,255,.012) 3px, rgba(255,255,255,.012) 4px);
+}
+@keyframes drift {
+  0%,100% { transform: translate(0,0) rotate(0); }
+  33% { transform: translate(2%, -3%) rotate(2deg); }
+  66% { transform: translate(-2%, 3%) rotate(-1deg); }
+}
+
+/* Grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ====== NAV ====== */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 0;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .05em;
+  margin-bottom: 6rem;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan), 0 0 24px rgba(103,232,249,.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(.85); }
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  color: var(--ink-dim);
+  text-decoration: none;
+  text-transform: lowercase;
+  letter-spacing: .05em;
+  transition: color .2s ease;
+  position: relative;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 100%;
+  height: 1px; background: var(--cyan);
+  transition: right .3s ease;
+}
+.nav-links a:hover::after { right: 0; }
+
+/* ====== HERO ====== */
+.hero { padding: 4rem 0 8rem; position: relative; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: .7rem;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 2.5rem;
+  padding: .4rem 1rem;
+  border: 1px solid rgba(103,232,249,.25);
+  border-radius: 999px;
+  background: rgba(103,232,249,.05);
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+h1.hero-name {
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  line-height: .88;
+  margin-bottom: 2rem;
+  max-width: 14ch;
+}
+.hero-name em {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  background: linear-gradient(105deg, var(--coral) 0%, var(--amber) 50%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  color: var(--ink-dim);
+  max-width: 52ch;
+  line-height: 1.55;
+  margin-bottom: 3rem;
+}
+.hero-sub strong { color: var(--ink); font-weight: 600; }
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--hairline);
+  max-width: 720px;
+}
+.meta-item .label {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: .5rem;
+}
+.meta-item .value {
+  font-size: 1rem;
+  color: var(--ink);
+}
+.meta-item .value .accent { color: var(--cyan); }
+
+/* ====== WORK BAR ====== */
+.work {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2rem;
+  margin: 8rem 0 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--hairline);
+}
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+}
+.section-title em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--ink-dim); }
+.work-cta {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: var(--ink-dim);
+  text-decoration: none;
+  letter-spacing: .05em;
+}
+.work-cta:hover { color: var(--cyan); }
+
+/* ====== CARDS ====== */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 7rem;
+}
+@media (max-width: 800px) { .posts { grid-template-columns: 1fr; } }
+
+.post {
+  position: relative;
+  padding: 2rem 1.75rem 1.75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), border-color .3s ease;
+  display: flex; flex-direction: column;
+  min-height: 280px;
+}
+.post::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.post:hover { transform: translateY(-4px); border-color: var(--hairline-bright); }
+.post:hover::before { opacity: 1; }
+
+.post-date {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .15em;
+  color: var(--ink-faint);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+.post-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  margin-bottom: .75rem;
+  color: var(--ink);
+}
+.post-summary {
+  font-size: .9rem;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+.post-tags {
+  display: flex; flex-wrap: wrap; gap: .35rem;
+  margin-top: auto;
+}
+.post-tag {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  color: var(--ink-faint);
+  border: 1px solid var(--hairline);
+}
+
+/* ====== PROJECTS — wide cards ====== */
+.projects { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 7rem; }
+.project {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem 2.25rem;
+  background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: all .4s cubic-bezier(.16,1,.3,1);
+  position: relative;
+  overflow: hidden;
+}
+.project:hover {
+  border-color: var(--hairline-bright);
+  background: linear-gradient(135deg, rgba(103,232,249,.06), rgba(255,255,255,.01));
+}
+.project-num {
+  font-family: var(--font-mono);
+  font-size: .9rem;
+  color: var(--ink-faint);
+  letter-spacing: .1em;
+}
+.project-body h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: .35rem;
+}
+.project-body p {
+  font-size: .9rem;
+  color: var(--ink-dim);
+  max-width: 64ch;
+}
+.project-stack {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: var(--ink-faint);
+  letter-spacing: .05em;
+  text-align: right;
+  max-width: 180px;
+}
+@media (max-width: 800px) { .project { grid-template-columns: 1fr; gap: 1rem; } .project-stack { text-align: left; max-width: none; } }
+
+/* ====== CONTACT ====== */
+.contact {
+  margin-top: 7rem;
+  padding: 5rem 0 4rem;
+  border-top: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+}
+@media (max-width: 800px) { .contact { grid-template-columns: 1fr; gap: 2rem; } }
+.contact h2 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+.contact h2 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(105deg, var(--coral), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.contact-links { display: flex; flex-direction: column; gap: .75rem; }
+.contact-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: padding-left .3s ease, color .3s ease;
+}
+.contact-link:hover { padding-left: 1rem; color: var(--cyan); }
+.contact-link .handle { font-family: var(--font-mono); font-size: .85rem; color: var(--ink-faint); }
+
+footer {
+  padding: 3rem 0 2rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .15em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+footer a { color: var(--cyan); text-decoration: none; }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1); }
+.reveal.on { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="aurora-stage"></div>
+
+<main>
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-logo-dot"></span>
+      <span>E.Tekle</span>
+    </div>
+    <div class="nav-links">
+      <a href="#work">work</a>
+      <a href="#projects">projects</a>
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Open to internships · Cloud security focus</div>
+    <h1 class="hero-name">Building <em>real</em> infra, learning out loud.</h1>
+    <p class="hero-sub">
+      I'm <strong>Emmanuel Tekle</strong> — an HBO ICT student in Enschede, NL. I run a 3-node Proxmox cluster, write my own Prometheus rules, and harden Linux servers from scratch. Focus areas: <strong>cybersecurity</strong>, <strong>cloud infrastructure</strong>, and the gap between them.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="label">Status</div>
+        <div class="value"><span class="accent">●</span> Available 2026</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Based</div>
+        <div class="value">Enschede, NL</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Studying</div>
+        <div class="value">HBO ICT · Saxion</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Currently</div>
+        <div class="value">Livio · Helpdesk</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTS -->
+  <section id="work" class="work">
+    <div>
+      <div class="section-eyebrow">// recent writing</div>
+      <h2 class="section-title">Notes from <em>the homelab</em></h2>
+    </div>
+    <a href="#" class="work-cta">all posts →</a>
+  </section>
+  <section class="posts">
+    <a class="post reveal" href="#">
+      <div class="post-date">02 Apr 2026 · 8 min read</div>
+      <div class="post-title">Building a monitoring stack from scratch</div>
+      <p class="post-summary">Why I deleted the all-in-one homelab installer and wrote my own Prometheus + Alertmanager + PagerDuty pipeline by hand.</p>
+      <div class="post-tags"><span class="post-tag">prometheus</span><span class="post-tag">alertmanager</span><span class="post-tag">homelab</span></div>
+    </a>
+    <a class="post reveal" href="#">
+      <div class="post-date">25 Mar 2026 · 6 min read</div>
+      <div class="post-title">Hardening Ubuntu with Bash, not Ansible</div>
+      <p class="post-summary">A 200-line Bash hardening script and the skill gap I closed by avoiding config management for once.</p>
+      <div class="post-tags"><span class="post-tag">linux</span><span class="post-tag">bash</span><span class="post-tag">security</span></div>
+    </a>
+    <a class="post reveal" href="#">
+      <div class="post-date">18 Jan 2026 · 7 min read</div>
+      <div class="post-title">Why I run a 3-node Proxmox cluster at home</div>
+      <p class="post-summary">Three N100 mini-PCs, ~€180 each, and what they give me that a single VPS never could: real failure modes.</p>
+      <div class="post-tags"><span class="post-tag">proxmox</span><span class="post-tag">homelab</span><span class="post-tag">virtualization</span></div>
+    </a>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="work">
+    <div>
+      <div class="section-eyebrow">// shipped</div>
+      <h2 class="section-title">Things I <em>actually built</em></h2>
+    </div>
+    <a href="#" class="work-cta">github →</a>
+  </section>
+  <section class="projects">
+    <a class="project" href="#">
+      <div class="project-num">01</div>
+      <div class="project-body">
+        <h3>Monitoring Homelab</h3>
+        <p>Production-style Prometheus + Grafana + Alertmanager stack on a 3-node Proxmox cluster. 15s scrape, 7 alert rules, PagerDuty SMS + voice escalation. Tested by triggering each rule deliberately.</p>
+      </div>
+      <div class="project-stack">prometheus<br>alertmanager<br>pagerduty<br>proxmox</div>
+    </a>
+    <a class="project" href="#">
+      <div class="project-num">02</div>
+      <div class="project-body">
+        <h3>Linux Security Hardening</h3>
+        <p>Two idempotent Bash scripts that take a fresh Ubuntu/Debian box to a defensible baseline — SSH, UFW, auditd, fail2ban, unattended-upgrades — and an audit script that reports drift with a CI-friendly exit code.</p>
+      </div>
+      <div class="project-stack">bash<br>ssh · ufw<br>auditd<br>fail2ban</div>
+    </a>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Let's <em>talk</em>.</h2>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:emmanueltekle@gmail.com">
+        <span>Email</span>
+        <span class="handle">emmanueltekle@gmail.com</span>
+      </a>
+      <a class="contact-link" href="https://github.com/E-mma9">
+        <span>GitHub</span>
+        <span class="handle">@E-mma9</span>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/emmanuel-tekle-3485b334a">
+        <span>LinkedIn</span>
+        <span class="handle">/in/emmanuel-tekle</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    Emmanuel Tekle · Enschede NL · concept · <a href="/mockups/">back to picker</a>
+  </footer>
+</main>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('on')), { threshold: .15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>etekle@homelab:~$</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e0a;
+  --bg-glow: #001a06;
+  --green: #33ff66;
+  --green-dim: #1a8033;
+  --green-faint: #0f4019;
+  --amber: #ffb000;
+  --cyan: #00d9ff;
+  --red: #ff5555;
+  --white: #e6f4ea;
+  --gray: #5a7a5e;
+  --font: 'JetBrains Mono', ui-monospace, monospace;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
+body {
+  background: var(--bg);
+  color: var(--green);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.55;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* CRT effects */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(51,255,102,.04) 2px, rgba(51,255,102,.04) 3px);
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 101;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%);
+}
+.bg-glow {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at center top, var(--bg-glow) 0%, var(--bg) 60%);
+}
+
+main {
+  position: relative;
+  z-index: 2;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2rem clamp(1rem, 4vw, 2.5rem) 4rem;
+}
+
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  font-size: .72rem;
+  color: var(--gray);
+  padding: .5rem 0 1.25rem;
+  border-bottom: 1px dashed var(--green-faint);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.statusbar .blink::after { content: '█'; color: var(--green); animation: blink 1.1s steps(2, end) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.statusbar .k { color: var(--amber); }
+.statusbar .v { color: var(--white); }
+
+/* Terminal */
+.term-header {
+  color: var(--gray);
+  font-size: .72rem;
+  letter-spacing: .04em;
+  margin-bottom: .25rem;
+}
+.term-frame {
+  border: 1px solid var(--green-dim);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  background: rgba(51,255,102,.02);
+  position: relative;
+  min-height: 280px;
+}
+.term-frame .prompt { color: var(--cyan); }
+.term-frame .user { color: var(--amber); }
+.term-frame .host { color: var(--cyan); }
+.term-frame .path { color: var(--green); }
+.term-frame .cmd { color: var(--white); }
+.term-frame .out { color: var(--green); }
+.term-frame .ok { color: var(--green); }
+.term-frame .warn { color: var(--amber); }
+.term-frame pre { white-space: pre-wrap; font: inherit; color: inherit; margin: 0; }
+.cursor { color: var(--green); animation: blink 1.1s steps(2,end) infinite; }
+
+.term-line {
+  display: block;
+  opacity: 0;
+  transition: opacity .1s linear;
+  white-space: pre-wrap;
+}
+.term-line.on { opacity: 1; }
+
+/* Hero */
+h1.hero {
+  font-family: 'VT323', monospace;
+  font-size: clamp(3.5rem, 11vw, 7.5rem);
+  color: var(--green);
+  line-height: 1;
+  letter-spacing: .02em;
+  text-shadow: 0 0 4px rgba(51,255,102,.7), 0 0 18px rgba(51,255,102,.4), 0 0 40px rgba(51,255,102,.18);
+  margin: 1.75rem 0 1rem;
+}
+.hero-line {
+  font-size: .95rem;
+  color: var(--green);
+  margin-bottom: 1rem;
+}
+.hero-line .label { color: var(--gray); }
+
+/* Boxes */
+.box { margin: 2.5rem 0; }
+.box-title {
+  color: var(--amber);
+  font-size: .78rem;
+  letter-spacing: .12em;
+  margin-bottom: .35rem;
+  text-transform: uppercase;
+}
+.box-frame {
+  border: 1px solid var(--green-dim);
+  padding: 1rem 1.25rem;
+  background: rgba(51,255,102,.015);
+}
+
+/* About */
+.about-text { white-space: pre-wrap; font-size: .88rem; line-height: 1.7; }
+.about-text .dim { color: var(--gray); }
+.about-text .cmd { color: var(--white); }
+.about-text .amber { color: var(--amber); }
+.about-text .cyan { color: var(--cyan); }
+
+/* Posts */
+.posts-list { font-size: .85rem; }
+.posts-list .row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.25rem;
+  padding: .55rem 0;
+  border-bottom: 1px dotted var(--green-faint);
+  align-items: baseline;
+}
+.posts-list .row:last-child { border-bottom: none; }
+.posts-list .row .date { color: var(--gray); font-size: .78rem; }
+.posts-list .row .title {
+  color: var(--white);
+  text-decoration: none;
+  display: block;
+  font-size: .95rem;
+  margin-bottom: .15rem;
+}
+.posts-list .row .title:hover { color: var(--green); }
+.posts-list .row .meta { color: var(--gray); font-size: .75rem; }
+.posts-list .row .meta .tag { color: var(--amber); }
+
+/* Projects */
+.proj { margin-top: 1rem; padding-bottom: 1.25rem; border-bottom: 1px dashed var(--green-faint); }
+.proj:last-child { border-bottom: none; }
+.proj h3 { color: var(--white); font-size: 1rem; font-weight: 700; margin-bottom: .35rem; }
+.proj h3 .id { color: var(--cyan); margin-right: .5rem; }
+.proj p { font-size: .85rem; color: var(--green); max-width: 70ch; margin-bottom: .6rem; }
+.proj .stack { font-size: .72rem; color: var(--gray); }
+.proj .stack .pill { display: inline-block; margin-right: .3rem; color: var(--amber); }
+.proj a.link { color: var(--cyan); text-decoration: none; font-size: .8rem; }
+.proj a.link::before { content: '└─ '; color: var(--green-dim); }
+.proj a.link:hover { text-decoration: underline; }
+
+/* Skills */
+.nmap-out { font-size: .82rem; }
+.nmap-out .line { padding: .12rem 0; }
+.nmap-out .port { color: var(--cyan); width: 80px; display: inline-block; }
+.nmap-out .state { color: var(--green); width: 80px; display: inline-block; }
+.nmap-out .service { color: var(--white); }
+.nmap-out .ver { color: var(--gray); margin-left: .5rem; }
+
+/* Contact */
+.contact-list { font-size: .9rem; }
+.contact-list .row {
+  padding: .35rem 0;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+}
+.contact-list .row .k { color: var(--amber); }
+.contact-list .row .v { color: var(--white); }
+.contact-list .row .v a { color: var(--cyan); text-decoration: none; }
+.contact-list .row .v a:hover { text-decoration: underline; }
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--green-faint);
+  color: var(--gray);
+  font-size: .72rem;
+  text-align: center;
+}
+footer a { color: var(--cyan); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<main>
+
+  <div class="statusbar">
+    <div>
+      <span class="k">tty</span>=<span class="v">/dev/pts/0</span> ·
+      <span class="k">user</span>=<span class="v">etekle</span> ·
+      <span class="k">host</span>=<span class="v">homelab.lan</span>
+    </div>
+    <div>
+      <span class="k">load</span>=<span class="v">0.42 0.58 0.71</span> ·
+      <span class="k">uptime</span>=<span class="v">42d 13h</span> <span class="blink"></span>
+    </div>
+  </div>
+
+  <div class="term-header">─ session ── /dev/pts/0 ─────────────────────────────────────</div>
+  <div class="term-frame" id="bootterm">
+<span class="term-line"><span class="prompt">[</span><span class="user">etekle</span>@<span class="host">homelab</span> <span class="path">~</span><span class="prompt">]$</span> <span class="cmd">whoami</span></span><span class="term-line">etekle</span><span class="term-line"><span class="prompt">[</span><span class="user">etekle</span>@<span class="host">homelab</span> <span class="path">~</span><span class="prompt">]$</span> <span class="cmd">uname -a</span></span><span class="term-line">Linux homelab 6.5.0-pve #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux</span><span class="term-line"><span class="prompt">[</span><span class="user">etekle</span>@<span class="host">homelab</span> <span class="path">~</span><span class="prompt">]$</span> <span class="cmd">pveversion --verbose | head -3</span></span><span class="term-line">proxmox-ve: 8.2.0 (running kernel: 6.5.0-pve)
+pve-manager: 8.2.4 (running version: 8.2.4)
+pve-kernel-helper: 8.1.0</span><span class="term-line"><span class="prompt">[</span><span class="user">etekle</span>@<span class="host">homelab</span> <span class="path">~</span><span class="prompt">]$</span> <span class="cmd">kubectl get nodes</span></span><span class="term-line">NAME    STATUS   ROLES           AGE   VERSION
+pve-01  <span class="ok">Ready</span>    control-plane   42d   v1.30.1
+pve-02  <span class="ok">Ready</span>    &lt;none&gt;          42d   v1.30.1
+pve-03  <span class="ok">Ready</span>    &lt;none&gt;          42d   v1.30.1</span><span class="term-line"><span class="prompt">[</span><span class="user">etekle</span>@<span class="host">homelab</span> <span class="path">~</span><span class="prompt">]$</span> <span class="cmd">curl -s prom:9090/api/v1/alerts | jq .data.alerts[].labels.severity</span></span><span class="term-line"><span class="ok">"info"</span>
+<span class="ok">"info"</span>
+<span class="warn">"warning"</span></span><span class="term-line"><span class="prompt">[</span><span class="user">etekle</span>@<span class="host">homelab</span> <span class="path">~</span><span class="prompt">]$</span> <span class="cmd">echo $RESUME</span></span><span class="term-line"><span class="cursor">█</span></span>
+  </div>
+
+  <h1 class="hero">Emmanuel Tekle</h1>
+  <div class="hero-line">
+    <span class="label">// </span>HBO ICT student · cloud + sec · Enschede, NL <span class="cursor">█</span>
+  </div>
+
+  <div class="box">
+    <div class="box-title">┌─ whoami ────────────</div>
+    <div class="box-frame">
+<pre class="about-text"><span class="dim">$</span> <span class="cmd">cat /home/etekle/about.txt</span>
+
+I run a 3-node Proxmox cluster on consumer hardware. Every
+config file is hand-written. Prometheus scrapes every 15s,
+Alertmanager pages my phone, Tailscale stitches it together.
+
+Currently 1st-line helpdesk at <span class="amber">Livio</span>. Studying HBO ICT
+at <span class="amber">Saxion</span>. Open to internships and junior cloud-security
+roles starting <span class="cyan">summer 2026</span>.
+
+The philosophy: build real things, keep them simple enough
+to defend in an interview.</pre>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title">┌─ tail -n 3 ~/.posts ────────────</div>
+    <div class="box-frame">
+      <div class="posts-list">
+        <div class="row">
+          <div class="date">[2026-04-02]</div>
+          <div>
+            <a href="#" class="title">Building a monitoring stack from scratch</a>
+            <div class="meta">8 min · <span class="tag">#prometheus</span> <span class="tag">#alertmanager</span> <span class="tag">#homelab</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="date">[2026-03-25]</div>
+          <div>
+            <a href="#" class="title">Hardening Ubuntu with Bash, not Ansible</a>
+            <div class="meta">6 min · <span class="tag">#linux</span> <span class="tag">#bash</span> <span class="tag">#security</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="date">[2026-01-18]</div>
+          <div>
+            <a href="#" class="title">Why I run a 3-node Proxmox cluster at home</a>
+            <div class="meta">7 min · <span class="tag">#proxmox</span> <span class="tag">#homelab</span> <span class="tag">#virtualization</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title">┌─ ls ~/projects ────────────</div>
+    <div class="box-frame">
+      <div class="proj">
+        <h3><span class="id">[001]</span>monitoring-homelab/</h3>
+        <p>Production-style monitoring stack: Prometheus + Grafana + Alertmanager + blackbox_exporter on a 3-node Proxmox cluster. Seven alert rules, PagerDuty SMS + voice escalation, all rules tested by deliberate fault injection.</p>
+        <div class="stack">
+          <span class="pill">prometheus</span><span class="pill">grafana</span><span class="pill">alertmanager</span><span class="pill">pagerduty</span><span class="pill">proxmox</span>
+        </div>
+        <a href="#" class="link">github.com/E-mma9/Monitoring-Homelab</a>
+      </div>
+      <div class="proj">
+        <h3><span class="id">[002]</span>linux-security-hardening/</h3>
+        <p>Two idempotent Bash scripts. harden.sh takes a fresh Ubuntu/Debian box to a defensible baseline (SSH, UFW, auditd, fail2ban). security-audit.sh reports drift with a CI-friendly exit code.</p>
+        <div class="stack">
+          <span class="pill">bash</span><span class="pill">ssh</span><span class="pill">ufw</span><span class="pill">auditd</span><span class="pill">linux</span>
+        </div>
+        <a href="#" class="link">github.com/E-mma9/Linux-Security-Hardening</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title">┌─ nmap -sV emmanuel.local ────────────</div>
+    <div class="box-frame">
+<pre style="white-space:pre-wrap;font-size:.85rem;line-height:1.55;color:var(--green);margin:0;">Starting Nmap 7.94 ( https://nmap.org ) at 2026-05-15
+Nmap scan report for emmanuel.local (10.42.0.1)
+Host is up (0.0008s latency).
+Not shown: 992 closed services.</pre>
+      <div class="nmap-out" style="margin-top:.6rem;">
+        <div class="line"><span class="port">22/tcp  </span><span class="state">open</span><span class="service">ssh-hardening</span><span class="ver">OpenSSH 9.x · custom port · no-password</span></div>
+        <div class="line"><span class="port">80/tcp  </span><span class="state">open</span><span class="service">linux       </span><span class="ver">Ubuntu/Debian admin · 2y</span></div>
+        <div class="line"><span class="port">443/tcp </span><span class="state">open</span><span class="service">cloud       </span><span class="ver">Azure · AWS · GitHub Actions</span></div>
+        <div class="line"><span class="port">8080/tcp</span><span class="state">open</span><span class="service">iac         </span><span class="ver">Terraform · Ansible · Docker</span></div>
+        <div class="line"><span class="port">9090/tcp</span><span class="state">open</span><span class="service">monitoring  </span><span class="ver">Prometheus · Grafana · Alertmanager</span></div>
+        <div class="line"><span class="port">5432/tcp</span><span class="state">open</span><span class="service">netsec      </span><span class="ver">OPNsense · VLAN · WireGuard · Tailscale</span></div>
+        <div class="line"><span class="port">3389/tcp</span><span class="state">open</span><span class="service">pentest     </span><span class="ver">Kali · CTF · network security</span></div>
+        <div class="line"><span class="port">25/tcp  </span><span class="state">open</span><span class="service">support     </span><span class="ver">Servicedesk 1st-line · 2y</span></div>
+      </div>
+<pre style="white-space:pre-wrap;font-size:.82rem;line-height:1.55;color:var(--gray);margin-top:.6rem;">Service detection performed. Done: 1 IP address (1 host up) in 0.42s</pre>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-title">┌─ /etc/contact.conf ────────────</div>
+    <div class="box-frame">
+      <div class="contact-list">
+        <div class="row"><span class="k">email</span><span class="v"><a href="mailto:emmanueltekle@gmail.com">emmanueltekle@gmail.com</a></span></div>
+        <div class="row"><span class="k">github</span><span class="v"><a href="https://github.com/E-mma9">github.com/E-mma9</a></span></div>
+        <div class="row"><span class="k">linkedin</span><span class="v"><a href="https://linkedin.com/in/emmanuel-tekle-3485b334a">/in/emmanuel-tekle</a></span></div>
+        <div class="row"><span class="k">location</span><span class="v">Enschede, Overijssel, NL <span style="color:var(--gray);">// 52.2215°N 6.8937°E</span></span></div>
+        <div class="row"><span class="k">status</span><span class="v" style="color:var(--green);">● accepting offers for 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    [SIGTERM] · session closed · <a href="/mockups/">cd /mockups</a>
+  </footer>
+
+</main>
+
+<script>
+  const lines = document.querySelectorAll('#bootterm .term-line');
+  const delays = [80, 280, 360, 620, 780, 1100, 1300, 1700, 2150, 2700, 2900, 3200];
+  lines.forEach((el, i) => setTimeout(() => el.classList.add('on'), delays[i] || 3500));
+</script>
+</body>
+</html>

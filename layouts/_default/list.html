@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="prompt"><span class="a">$</span>ls {{ if eq .Section "posts" }}~/writing{{ else if eq .Section "projects" }}~/projects{{ else }}~/{{ .Section }}{{ end }}</div>
+
+<h1 class="page-title">{{ .Title }}</h1>
+
+{{ with .Content }}
+<div class="bio">{{ . }}</div>
+{{ end }}
+
+<section class="posts list-full">
+  {{ range .Pages.ByDate.Reverse }}
+  <a class="post" href="{{ .RelPermalink }}">
+    <div class="p-date">{{ .Date.Format "02 Jan 2006" }}</div>
+    <div class="p-body">
+      <div class="p-title">{{ .Title }}</div>
+      {{ with .Params.summary }}<p class="p-summary">{{ . }}</p>{{ end }}
+      {{ with .Params.tags }}
+      <div class="p-tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+      {{ end }}
+    </div>
+  </a>
+  {{ end }}
+</section>
+{{ end }}

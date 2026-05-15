@@ -1,0 +1,14 @@
+# Hugo build artifacts
+public/
+resources/_gen/
+hugo_stats.json
+.hugo_build.lock
+
+# Node (not used yet, but Blowfish may pull tailwind tooling)
+node_modules/
+
+# Editor
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

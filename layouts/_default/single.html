@@ -1,0 +1,31 @@
+{{ define "main" }}
+<article class="article">
+  <div class="prompt">
+    <span class="a">$</span>cat {{ if eq .Section "posts" }}~/writing/{{ .File.BaseFileName }}.md{{ else if eq .Section "projects" }}~/projects/{{ .File.BaseFileName }}{{ else }}~/{{ .File.BaseFileName }}.md{{ end }}
+  </div>
+
+  <h1 class="article-title">{{ .Title }}</h1>
+
+  <div class="article-meta">
+    {{ if not .Date.IsZero }}<span>{{ .Date.Format "02 Jan 2006" }}</span>{{ end }}
+    {{ if gt .ReadingTime 0 }}<span class="dot-sep">·</span><span>{{ .ReadingTime }} min read</span>{{ end }}
+    {{ with .Params.tags }}<span class="dot-sep">·</span>{{ range . }}<span class="tag">{{ . }}</span>{{ end }}{{ end }}
+  </div>
+
+  {{ with .Params.summary }}<p class="article-lede">{{ . }}</p>{{ end }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.externalUrl }}
+  <div class="external-out">
+    <a href="{{ . }}">view on github →</a>
+  </div>
+  {{ end }}
+
+  <div class="article-foot">
+    <a href="{{ if eq .Section "posts" }}{{ "/posts/" | relURL }}{{ else if eq .Section "projects" }}{{ "/projects/" | relURL }}{{ else }}{{ "/" | relURL }}{{ end }}">← back to {{ if eq .Section "posts" }}writing{{ else if eq .Section "projects" }}projects{{ else }}home{{ end }}</a>
+  </div>
+</article>
+{{ end }}

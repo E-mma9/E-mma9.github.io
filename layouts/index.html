@@ -1,0 +1,89 @@
+{{ define "main" }}
+<div class="prompt"><span class="a">$</span>whoami</div>
+
+<h1 class="name">{{ site.Params.author }}</h1>
+
+<div class="bio">
+  {{ .Content }}
+</div>
+
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ if $posts }}
+<section class="sec-head">
+  <h2><span class="a">$</span>tail -n 3 ~/writing</h2>
+  <a href="{{ "/posts/" | relURL }}">all posts →</a>
+</section>
+<section class="posts">
+  {{ range first 3 $posts.ByDate.Reverse }}
+  <a class="post" href="{{ .RelPermalink }}">
+    <div class="p-date">{{ .Date.Format "02 Jan 2006" }}</div>
+    <div class="p-title">{{ .Title }}</div>
+  </a>
+  {{ end }}
+</section>
+{{ end }}
+
+{{ $projects := where site.RegularPages "Section" "projects" }}
+{{ if $projects }}
+<section class="sec-head">
+  <h2><span class="a">$</span>ls ~/projects</h2>
+  <a href="{{ "/projects/" | relURL }}">all projects →</a>
+</section>
+<section class="posts">
+  {{ range first 3 $projects.ByDate.Reverse }}
+  <a class="post" href="{{ .RelPermalink }}">
+    <div class="p-date">{{ .Date.Format "02 Jan 2006" }}</div>
+    <div class="p-title">{{ .Title }}</div>
+  </a>
+  {{ end }}
+</section>
+{{ end }}
+
+<section class="sec-head">
+  <h2><span class="a">$</span>cat ~/.contact</h2>
+</section>
+<nav class="contact">
+  <a href="mailto:{{ site.Params.email }}">
+    <span class="k">email</span>
+    <span class="v">{{ site.Params.email }}</span>
+  </a>
+  <a href="{{ site.Params.github }}">
+    <span class="k">github</span>
+    <span class="v">/E-mma9</span>
+  </a>
+  <a href="{{ site.Params.linkedin }}">
+    <span class="k">linkedin</span>
+    <span class="v">/in/emmanuel-tekle</span>
+  </a>
+</nav>
+
+<section class="sec-head">
+  <h2><span class="a">$</span>echo "..." &gt;&gt; ~/inbox</h2>
+  <span class="sec-meta">replies within 24h</span>
+</section>
+
+<form class="contact-form" action="https://formspree.io/f/xaqlbeoa" method="POST">
+  <div class="field-row">
+    <div class="field">
+      <label for="name">name</label>
+      <input id="name" name="name" type="text" required placeholder="your name">
+    </div>
+    <div class="field">
+      <label for="email">email</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com">
+    </div>
+  </div>
+  <div class="field">
+    <label for="subject">subject</label>
+    <input id="subject" name="subject" type="text" placeholder="internship · question · ...">
+  </div>
+  <div class="field">
+    <label for="message">message</label>
+    <textarea id="message" name="message" rows="5" required placeholder="tell me more"></textarea>
+  </div>
+  <input type="hidden" name="_subject" value="New message from emmanueltekle.nl">
+  <button type="submit" class="submit">
+    <span class="a">$</span> send message
+  </button>
+</form>
+{{ end }}

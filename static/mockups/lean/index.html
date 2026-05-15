@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emmanuel Tekle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f3ece0;
+  --paper-warm: #ebe2d2;
+  --ink: #1a1410;
+  --ink-soft: #4a3f36;
+  --ink-faint: #8a7d6f;
+  --ink-ghost: #b8aa9a;
+  --accent: #b8311c;        /* rust ink */
+  --accent-soft: rgba(184,49,28,.10);
+  --rule: rgba(26,20,16,.10);
+  --rule-bright: rgba(26,20,16,.22);
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Subtle paper grain */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: .04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 5vw, 2.5rem) 5rem;
+  position: relative;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: clamp(4rem, 10vw, 7rem);
+  font-size: .82rem;
+}
+.nav-id {
+  color: var(--ink-soft);
+  letter-spacing: .02em;
+}
+.nav-id .accent { color: var(--accent); }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.nav-links a:hover { color: var(--accent); }
+
+@keyframes blink { 50% { opacity: 0; } }
+.cursor { display: inline-block; color: var(--accent); animation: blink 1.15s steps(2,end) infinite; margin-left: .15em; }
+
+/* HERO */
+.prompt {
+  color: var(--ink-faint);
+  font-size: .8rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: .02em;
+}
+.prompt .a { color: var(--accent); margin-right: .35em; }
+
+h1.name {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin-bottom: 1.75rem;
+  color: var(--ink);
+}
+
+.bio {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 56ch;
+  margin-bottom: 2.25rem;
+}
+.bio strong { color: var(--ink); font-weight: 600; }
+.bio .mark {
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 0 .25em;
+  font-weight: 500;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  font-size: .82rem;
+  color: var(--ink-soft);
+  margin-bottom: clamp(5rem, 11vw, 8rem);
+  padding: .65rem 1rem;
+  background: var(--accent-soft);
+  border-left: 2px solid var(--accent);
+  width: fit-content;
+  max-width: 100%;
+}
+.status .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: blink 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.status .accent { color: var(--accent); font-weight: 500; }
+
+/* SECTION HEAD */
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: .9rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule-bright);
+}
+.sec-head h2 {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: .8rem;
+  color: var(--ink-soft);
+  letter-spacing: .02em;
+}
+.sec-head h2 .a { color: var(--accent); margin-right: .35em; }
+.sec-head a {
+  font-size: .74rem;
+  color: var(--ink-faint);
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: color .2s ease;
+}
+.sec-head a:hover { color: var(--accent); }
+
+/* POSTS */
+.posts { margin-bottom: clamp(4rem, 10vw, 7rem); }
+.post {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left .25s ease;
+}
+.post:last-child { border-bottom: none; }
+.post:hover { padding-left: .5rem; }
+.post:hover .p-title { color: var(--accent); }
+.p-date {
+  font-size: .76rem;
+  color: var(--ink-faint);
+  letter-spacing: .02em;
+  padding-top: .15em;
+}
+.p-title {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: -.005em;
+  line-height: 1.4;
+  color: var(--ink);
+  transition: color .2s ease;
+}
+
+/* CONTACT */
+.contact { font-size: .9rem; margin-bottom: 0; }
+.contact a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: .85rem 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  text-decoration: none;
+  transition: padding-left .25s ease, color .2s ease;
+}
+.contact a:hover { padding-left: .5rem; color: var(--accent); }
+.contact a:last-child { border-bottom: none; }
+.contact .k {
+  color: var(--ink-soft);
+  letter-spacing: .02em;
+  font-weight: 500;
+}
+.contact .v { color: var(--ink-faint); font-size: .8rem; }
+
+/* FOOTER */
+footer {
+  margin-top: clamp(5rem, 11vw, 8rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: .72rem;
+  color: var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: .02em;
+}
+footer a { color: var(--ink-faint); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav>
+    <div class="nav-id"><span class="accent">●</span> emmanuel.tekle</div>
+    <div class="nav-links">
+      <a href="#">writing</a>
+      <a href="#">projects</a>
+      <a href="#">about</a>
+    </div>
+  </nav>
+
+  <div class="prompt">
+    <span class="a">$</span>whoami
+  </div>
+
+  <h1 class="name">Emmanuel Tekle</h1>
+
+  <p class="bio">
+    HBO ICT student in Enschede, focused on <strong>cybersecurity</strong> and <strong>cloud infrastructure</strong>. I run a <span class="mark">3-node Proxmox cluster</span>, write my own Prometheus rules, and learn out loud. Currently looking for an internship in 2026.
+  </p>
+
+  <div class="status">
+    <span class="dot"></span>
+    <span><span class="accent">available</span> · 1st-line helpdesk at Livio · replies within 24h</span>
+  </div>
+
+  <section class="sec-head">
+    <h2><span class="a">$</span>tail -n 3 ~/writing</h2>
+    <a href="#">all posts →</a>
+  </section>
+  <section class="posts">
+    <a class="post" href="#">
+      <div class="p-date">02 Apr 2026</div>
+      <div class="p-title">Building a monitoring stack from scratch</div>
+    </a>
+    <a class="post" href="#">
+      <div class="p-date">25 Mar 2026</div>
+      <div class="p-title">Hardening Ubuntu with Bash, not Ansible</div>
+    </a>
+    <a class="post" href="#">
+      <div class="p-date">18 Jan 2026</div>
+      <div class="p-title">Why I run a 3-node Proxmox cluster at home</div>
+    </a>
+  </section>
+
+  <section class="sec-head">
+    <h2><span class="a">$</span>cat ~/.contact</h2>
+  </section>
+  <nav class="contact">
+    <a href="mailto:emmanueltekle@gmail.com">
+      <span class="k">email</span>
+      <span class="v">emmanueltekle@gmail.com</span>
+    </a>
+    <a href="https://github.com/E-mma9">
+      <span class="k">github</span>
+      <span class="v">/E-mma9</span>
+    </a>
+    <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a">
+      <span class="k">linkedin</span>
+      <span class="v">/in/emmanuel-tekle</span>
+    </a>
+  </nav>
+
+  <footer>
+    <div>© 2026 — Enschede, NL <span class="cursor">█</span></div>
+    <div><a href="/mockups/">← all mockups</a></div>
+  </footer>
+
+</div>
+
+</body>
+</html>

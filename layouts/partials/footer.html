@@ -1,0 +1,9 @@
+<footer class="sitefoot">
+  <div>© {{ now.Year }} — {{ site.Params.location }} <span class="cursor">█</span></div>
+  <div class="foot-links">
+    <a href="mailto:{{ site.Params.email }}">email</a>
+    <a href="{{ site.Params.github }}">github</a>
+    <a href="{{ site.Params.linkedin }}">linkedin</a>
+    {{ with .OutputFormats.Get "rss" }}<a href="{{ .Permalink }}">rss</a>{{ end }}
+  </div>
+</footer>
