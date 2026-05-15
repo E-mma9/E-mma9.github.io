@@ -12,8 +12,13 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="{{ .Permalink }}">
-{{ with .OutputFormats.Get "rss" -}}
-  <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+<link rel="alternate" type="application/rss+xml" href="{{ "/posts/index.xml" | absURL }}" title="{{ site.Title }} — Blog">
+<link rel="alternate" type="application/rss+xml" href="{{ "/index.xml" | absURL }}" title="{{ site.Title }} — All">
+{{ with site.Params.github -}}
+<link rel="me" href="{{ . }}">
+{{ end -}}
+{{ with site.Params.linkedin -}}
+<link rel="me" href="{{ . }}">
 {{ end -}}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
