@@ -4,5 +4,6 @@
     <a href="{{ "/posts/" | relURL }}"{{ if hasPrefix .RelPermalink "/posts" }} class="active"{{ end }}>writing</a>
     <a href="{{ "/projects/" | relURL }}"{{ if hasPrefix .RelPermalink "/projects" }} class="active"{{ end }}>projects</a>
     <a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>about</a>
+    <a href="{{ site.Params.cv | relURL }}" target="_blank" rel="noopener noreferrer">cv</a>
   </div>
 </nav>

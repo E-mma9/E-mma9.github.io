@@ -2,7 +2,7 @@
 title: "About"
 description: "Background, focus, and what I'm working towards."
 date: 2026-05-15
-summary: "Cybersecurity & cloud infrastructure student in Enschede. Homelab nerd, helpdesk by day."
+summary: "Cybersecurity & cloud infrastructure student in Enschede. Homelab nerd, sysadmin by day."
 ---
 
 HBO ICT student at **Saxion University of Applied Sciences** in Enschede. Second year, graduating 2028. Focused on cybersecurity and cloud infrastructure. Currently **2nd-line Sysadmin** at **Livio** in Enschede — production every day.
@@ -42,3 +42,4 @@ Not click-and-done — that's the point.
 - email — [emmanueltekle@gmail.com](mailto:emmanueltekle@gmail.com)
 - github — [/E-mma9](https://github.com/E-mma9)
 - linkedin — [/in/emmanuel-tekle](https://linkedin.com/in/emmanuel-tekle-3485b334a)
+- cv — [download](/Emmanuel_Tekle_CV.pdf)
