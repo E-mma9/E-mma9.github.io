@@ -5,7 +5,7 @@ date: 2026-05-15
 summary: "Cybersecurity & cloud infrastructure student in Enschede. Homelab nerd, sysadmin by day."
 ---
 
-HBO ICT student at **Saxion University of Applied Sciences** in Enschede. Second year, graduating 2028. Focused on cybersecurity and cloud infrastructure. Currently **2nd-line Sysadmin** at **Livio** in Enschede — production every day.
+HBO ICT student at **Saxion University of Applied Sciences** in Enschede. Third year, graduating 2028. Focused on cybersecurity and cloud infrastructure. Currently **2nd-line Sysadmin** at **Livio** in Enschede — production every day.
 
 The philosophy: *build real things, kept simple enough to defend in an interview.*
 

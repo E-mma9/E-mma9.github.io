@@ -17,7 +17,7 @@
     <link>{{ .Permalink }}</link>
     <description>{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}</description>
     <generator>Hugo</generator>
-    <language>{{ site.Language.Locale | default "en" }}</language>
+    <language>{{ site.Language.Lang | default "en" }}</language>
     {{ with site.Params.author -}}
     <managingEditor>{{ $.Site.Params.email }} ({{ . }})</managingEditor>
     <webMaster>{{ $.Site.Params.email }} ({{ . }})</webMaster>

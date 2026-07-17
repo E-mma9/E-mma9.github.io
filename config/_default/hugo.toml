@@ -1,15 +1,17 @@
 baseURL = "https://emmanueltekle.nl/"
 defaultContentLanguage = "en"
 title = "Emmanuel Tekle"
+enableRobotsTXT = true
+summaryLength = 30
+buildDrafts = false
+buildFuture = false
+
+[pagination]
+  pagerSize = 20
 
 [languages.en]
   locale = "en"
   label = "English"
-enableRobotsTXT = true
-paginate = 20
-summaryLength = 30
-buildDrafts = false
-buildFuture = false
 
 [params]
   description = "HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure."

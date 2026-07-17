@@ -1,2 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ubuntu · Emmanuel Tekle</title><link>https://emmanueltekle.nl/tags/ubuntu/</link><description>HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure.</description><generator>Hugo</generator><language>en</language><managingEditor>emmanueltekle@gmail.com (Emmanuel Tekle)</managingEditor><webMaster>emmanueltekle@gmail.com (Emmanuel Tekle)</webMaster><copyright>© 2026 Emmanuel Tekle</copyright><lastBuildDate>Wed, 08 Jul 2026 20:50:00 +0200</lastBuildDate><atom:link href="https://emmanueltekle.nl/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux Security Hardening</title><link>https://emmanueltekle.nl/projects/linux-security-hardening/</link><pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate><author>emmanueltekle@gmail.com (Emmanuel Tekle)</author><guid>https://emmanueltekle.nl/projects/linux-security-hardening/</guid><description>Two Bash scripts that harden a fresh Ubuntu/Debian box and audit it afterwards.</description><content:encoded>&lt;![CDATA[<p>Two Bash scripts that take a freshly-installed Ubuntu or Debian server and harden it to a sensible baseline, then audit the result.</p><h2 id="what-it-does">What it does</h2><p><strong><code>harden.sh</code></strong></p><ul><li>SSH hardening — no root login, no password auth, non-default port</li><li>UFW firewall — default-deny, only SSH/HTTP/HTTPS open</li><li><code>auditd</code> installed and configured for security logging</li><li><code>unattended-upgrades</code> enabled for security patches</li><li>Fail2ban for brute-force protection</li></ul><p><strong><code>security-audit.sh</code></strong></p><ul><li>Verifies SSH config matches hardened baseline</li><li>Checks firewall rules</li><li>Reports failed login attempts from<code>journalctl</code></li><li>Lists pending updates</li><li>Exit code reflects pass/fail for CI integration</li></ul><h2 id="why">Why</h2><p>Wrote this to practice basic Linux admin and server-side security hands-on. The scripts are short and readable on purpose — every line is something I&rsquo;d be able to defend in an interview.</p><h2 id="repo">Repo</h2><p><a href="https://github.com/E-mma9/Linux-Security-Hardening">github.com/E-mma9/Linux-Security-Hardening</a></p>
-]]></content:encoded><category>linux</category><category>bash</category><category>ssh</category><category>ufw</category><category>auditd</category><category>security</category><category>ubuntu</category><category>debian</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ubuntu · Emmanuel Tekle</title>
+    <link>https://emmanueltekle.nl/tags/ubuntu/</link>
+    <description>HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure.</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <managingEditor>emmanueltekle@gmail.com (Emmanuel Tekle)</managingEditor>
+    <webMaster>emmanueltekle@gmail.com (Emmanuel Tekle)</webMaster>
+    <copyright>© 2026 Emmanuel Tekle</copyright>
+    <lastBuildDate>Fri, 17 Jul 2026 14:14:36 +0000</lastBuildDate>
+    <atom:link href="https://emmanueltekle.nl/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Linux Security Hardening</title>
+      <link>https://emmanueltekle.nl/projects/linux-security-hardening/</link>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate>
+      <author>emmanueltekle@gmail.com (Emmanuel Tekle)</author>
+      <guid>https://emmanueltekle.nl/projects/linux-security-hardening/</guid>
+      <description>Two Bash scripts that harden a fresh Ubuntu/Debian box and audit it afterwards.</description>
+      <content:encoded>&lt;![CDATA[<p>Two Bash scripts that take a freshly-installed Ubuntu or Debian server and harden it to a sensible baseline, then audit the result.</p>
+<h2 id="what-it-does">What it does</h2>
+<p><strong><code>harden.sh</code></strong></p>
+<ul>
+<li>SSH hardening — no root login, no password auth, non-default port</li>
+<li>UFW firewall — default-deny, only SSH/HTTP/HTTPS open</li>
+<li><code>auditd</code> installed and configured for security logging</li>
+<li><code>unattended-upgrades</code> enabled for security patches</li>
+<li>Fail2ban for brute-force protection</li>
+</ul>
+<p><strong><code>security-audit.sh</code></strong></p>
+<ul>
+<li>Verifies SSH config matches hardened baseline</li>
+<li>Checks firewall rules</li>
+<li>Reports failed login attempts from <code>journalctl</code></li>
+<li>Lists pending updates</li>
+<li>Exit code reflects pass/fail for CI integration</li>
+</ul>
+<h2 id="why">Why</h2>
+<p>Wrote this to practice basic Linux admin and server-side security hands-on. The scripts are short and readable on purpose — every line is something I&rsquo;d be able to defend in an interview.</p>
+<h2 id="repo">Repo</h2>
+<p><a href="https://github.com/E-mma9/Linux-Security-Hardening">github.com/E-mma9/Linux-Security-Hardening</a></p>
+]]></content:encoded>
+      
+      <category>linux</category>
+      
+      <category>bash</category>
+      
+      <category>ssh</category>
+      
+      <category>ufw</category>
+      
+      <category>auditd</category>
+      
+      <category>security</category>
+      
+      <category>ubuntu</category>
+      
+      <category>debian</category>
+      
+    </item>
+    
+  </channel>
+</rss>
