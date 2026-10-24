@@ -1,0 +1,8 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" -}}
+{{- $dark := .Get "dark" -}}
+<figure class="figure{{ if $dark }} figure-dark{{ end }}">
+  <img src="{{ $src | relURL }}" alt="{{ $alt }}" width="{{ .Get "width" }}" height="{{ .Get "height" }}" loading="lazy">
+  {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

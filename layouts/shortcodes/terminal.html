@@ -1,0 +1,7 @@
+{{- $title := .Get "title" | default "terminal" -}}
+{{- $lines := split (trim .Inner "\n") "\n" -}}
+<div class="terminal">
+  <div class="terminal-bar">{{ $title }}</div>
+  <pre>{{ range $i, $l := $lines }}{{ if $i }}
+{{ end }}{{ if hasPrefix $l "✓ " }}<span class="ok">{{ $l }}</span>{{ else }}{{ $l }}{{ end }}{{ end }}</pre>
+</div>
