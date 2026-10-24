@@ -326,8 +326,13 @@ main { padding-bottom: 4rem; }
   font-size: 0.85rem;
   line-height: 1.55;
   padding: 1rem 1.1rem;
+  margin: 0;
   overflow-x: auto;
   white-space: pre;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: #e2e8f0;
 }
 .terminal .ok { color: #4ade80; }
 
