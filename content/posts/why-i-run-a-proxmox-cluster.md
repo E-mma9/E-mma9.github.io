@@ -1,7 +1,7 @@
 ---
 title: "Notes on my 3-node Proxmox cluster"
 date: 2026-01-18
-summary: "Hardware, networks, and what I've learned running three nodes at home."
+summary: "Hardware, networking, and what I've learned running three nodes at home."
 tags: ["proxmox", "homelab", "linux", "virtualization"]
 showTableOfContents: true
 ---
@@ -10,36 +10,32 @@ A short write-up on my home Proxmox cluster — why three nodes, how it's wired,
 
 ## Hardware
 
-Three identical second-hand Intel N100 mini-PCs, ~€180 each. Each one has:
+Three second-hand small-form-factor PCs, a Dell OptiPlex and two HP ProDesks, all on Intel i5 CPUs:
 
-- N100 CPU, 16 GB RAM, 512 GB NVMe
-- 2.5 GbE — matters for cluster + storage traffic
-- Headless, Proxmox VE 8
+- **pve** — 16 GB RAM, 238 GB NVMe for the OS, plus a 931 GB HDD as a ZFS pool for backups
+- **node2** — 8 GB RAM, 119 GB NVMe
+- **node3** — 8 GB RAM, 119 GB SSD
 
-Total around €600. Power draw is roughly 8 W idle, 15 W loaded per node.
+All three run Proxmox VE 9, headless, joined in one cluster with high availability enabled.
 
 ## Why three instead of one
 
 A single bigger server would be cheaper to run and quieter. Three nodes give me things a single host can't:
 
-- **HA pairs** — Pi-hole and a few other services run as an HA pair across two nodes. I can take a node down for kernel updates without breaking DNS for the house.
-- **Live migration** — `qm migrate <vmid> <target>` moves a VM between hosts with a few seconds of network blip. Useful operationally, and useful for testing.
+- **Quorum** — three is the minimum for the cluster to keep making decisions when one node drops out. With two, losing one locks the cluster up.
+- **HA** — Proxmox restarts a failed service up to three times on the same node, then migrates it to another one. I can take a node down for kernel updates without losing the services on it.
+- **Live migration** — `pct migrate` and `qm migrate` move a workload between hosts with a few seconds of network blip. Useful operationally, and useful for testing.
 - **Real failure modes** — pulling a power cable on one node behaves differently from rebooting a single host. The behaviour during recovery is the actual reason I have three.
 
-## Networks
+## Networking
 
-Four VLANs, segmented on an OPNsense box:
-
-- **MGMT (VLAN 10)** — Proxmox UI, SSH, cluster heartbeat
-- **STORAGE (VLAN 20)** — Ceph backend, jumbo frames (MTU 9000)
-- **PROD (VLAN 30)** — VM traffic
-- **TRUST (VLAN 100)** — daily-driver hosts
-
-Splitting storage from production traffic means a heavy workload doesn't starve the management plane.
+Everything sits on one bridged LAN via `vmbr0`, not segmented yet. Remote access goes over Tailscale, so nothing is exposed to the internet: no port forwards, no public IPs on the nodes.
 
 ## Storage
 
-I tried Ceph for a while because I wanted to learn it. On three N100s it's not fast, but it does heal correctly when I pull a disk. After about three months I moved most things back to ZFS replication — simpler to reason about, and at this scale the resilience of Ceph wasn't worth its operational weight for me.
+Storage is local on each node. There is no shared storage: a distributed storage layer would need an extra disk per node, and I did not want to spend on that yet. The ZFS pool on `pve` holds the backups for the whole cluster.
+
+The trade-off shows up on failover. Without shared storage, HA has to copy the container disk to the target node before it can start there, so a failover takes minutes rather than seconds. For a homelab that's fine.
 
 ## What it's not
 
@@ -51,4 +47,4 @@ It's just closer to a production setup, which is the only reason I run it.
 
 ## What I'd do differently
 
-Start with three nodes again, but skip Ceph and go straight to ZFS + scheduled replication. The time I spent on Ceph was educational but not directly useful for the workloads I actually run at home.
+Shared storage first. An extra disk per node for distributed storage, or an NFS share, would turn failover from minutes into seconds. Network segmentation is next on the list.

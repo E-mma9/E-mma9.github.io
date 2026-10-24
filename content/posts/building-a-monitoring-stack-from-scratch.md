@@ -10,15 +10,18 @@ I wanted monitoring on my home cluster, so I set up Prometheus, Alertmanager and
 
 ## The setup
 
-Three Proxmox nodes. Each host runs `node_exporter`. One VM runs Prometheus and Alertmanager. Another runs `blackbox_exporter` for HTTP probes.
+Three Proxmox nodes. Each host runs `node_exporter` directly, because it needs the host's kernel data. Prometheus, Alertmanager, Grafana and `blackbox_exporter` run together in one LXC container.
 
-Prometheus has three scrape jobs:
+Prometheus scrapes every 15 seconds. The two jobs that matter:
 
 ```yaml
 scrape_configs:
-  - job_name: 'nodes'
+  - job_name: 'proxmox-nodes'
     static_configs:
-      - targets: ['10.0.0.10:9100', '10.0.0.11:9100', '10.0.0.12:9100']
+      - targets:
+          - '192.168.1.249:9100'   # pve
+          - '192.168.1.211:9100'   # node2
+          - '192.168.1.74:9100'    # node3
 
   - job_name: 'blackbox-http'
     metrics_path: /probe
@@ -26,22 +29,31 @@ scrape_configs:
       module: [http_2xx]
     static_configs:
       - targets:
-          - https://cloud.emmanueltekle.nl
-          - https://emmanueltekle.nl
+          - 'http://192.168.1.30:81'       # Nginx Proxy Manager
+          - 'http://192.168.1.223/admin'   # Pi-hole
+          - 'http://localhost:3000'        # Grafana
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 127.0.0.1:9115
-
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']
+        replacement: localhost:9115
 ```
 
 The `blackbox-http` relabel block took me a while to get right. The `__param_target` rewrite is what tells `blackbox_exporter` which URL to probe on each scrape — without it, you get metrics but the target is empty.
+
+## Alert rules
+
+Seven rules, each with a `for` duration so a short spike doesn't page me:
+
+- `NodeDown` — node_exporter unreachable for 1 minute
+- `DiskSpaceWarning` — root partition above 85% for 5 minutes
+- `DiskSpaceCritical` — above 95% for 2 minutes
+- `HighMemoryUsage` — RAM above 90% for 5 minutes
+- `HighCPUUsage` — CPU above 95% for 10 minutes
+- `EndpointDown` — HTTP probe failing for 2 minutes
+- `SlowResponse` — response slower than 5 seconds for 5 minutes
 
 ## Alertmanager
 
@@ -62,7 +74,7 @@ route:
 receivers:
   - name: 'default-pagerduty'
     pagerduty_configs:
-      - service_key: '...'
+      - routing_key: '...'
   - name: 'null'
 ```
 
@@ -82,7 +94,7 @@ I needed to verify alerts actually reach PagerDuty without breaking a real servi
     summary: "Manual test alert"
 ```
 
-Reload Prometheus, wait for the alert to fire, get the SMS. Five minutes later the voice escalation came in because I didn't acknowledge it. Then I disabled the rule again.
+Reload Prometheus, wait for the alert to fire, get the text message. A few minutes later the phone call came in because I didn't acknowledge it. Then I disabled the rule again.
 
 ## Things that tripped me up
 
