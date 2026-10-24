@@ -56,7 +56,7 @@ sshd[4581]: Failed password for project from 192.168.159.1 port 30543 ssh2
 
 ## Why
 
-I wrote these to practise Linux administration and server-side security hands-on. The scripts are short and readable on purpose: every line is something I can explain and defend.
+I wrote these to practice Linux administration and server-side security hands-on. The scripts are short and readable on purpose: every line is something I can explain and defend.
 
 ## What I'd do next
 

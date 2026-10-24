@@ -10,7 +10,7 @@ tech: ["Java", "Spring Boot", "PostgreSQL", "Flyway", "Maven", "Kubernetes"]
 repo: "https://github.com/E-mma9/mini-payments-api"
 ---
 
-A small payments service built to practise platform work at a payments-grade standard: strict business rules, migrations, tests, and a delivery pipeline that scans before it ships.
+A small payments service built to practice platform work at a payments-grade standard: strict business rules, migrations, tests, and a delivery pipeline that scans before it ships.
 
 ## What exists today
 
