@@ -68,3 +68,12 @@ if [ "$fail" -ne 0 ]; then
   echo "FAILED"; exit 1
 fi
 echo "OK"
+
+# --deploy: GitHub Pages serves the repo root of main, so copy the build there.
+# Only generated paths are removed; source dirs (content, layouts, assets, static,
+# config, data, docs, scripts) and .nojekyll/.gitignore are never touched.
+if [ "${1:-}" = "--deploy" ]; then
+  rm -rf about css tags categories posts projects img index.html index.xml sitemap.xml robots.txt
+  cp -R public/. .
+  echo "DEPLOYED to repo root"
+fi

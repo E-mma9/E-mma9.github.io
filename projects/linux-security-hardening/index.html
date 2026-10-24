@@ -1,106 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Linux Security Hardening · Emmanuel Tekle</title>
-<meta name="description" content="HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure.">
-<meta name="author" content="Emmanuel Tekle">
-<meta name="theme-color" content="#0b1015">
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Linux Security Hardening · Emmanuel Tekle</title><meta name=description content="DevOps & Platform Engineer in the making. Azure-certified (AZ-104) Cloud & Cybersecurity student in Enschede, available Feb – Jul 2027."><meta name=author content="Emmanuel Tekle"><meta name=theme-color content="#ffffff"><meta property="og:title" content="Linux Security Hardening"><meta property="og:description" content="DevOps & Platform Engineer in the making. Azure-certified (AZ-104) Cloud & Cybersecurity student in Enschede, available Feb – Jul 2027."><meta property="og:type" content="article"><meta property="og:url" content="https://emmanueltekle.nl/projects/linux-security-hardening/"><meta name=twitter:card content="summary"><link rel=canonical href=https://emmanueltekle.nl/projects/linux-security-hardening/><link rel=alternate type=application/rss+xml href=https://emmanueltekle.nl/posts/index.xml title="Emmanuel Tekle — Blog"><link rel=alternate type=application/rss+xml href=https://emmanueltekle.nl/index.xml title="Emmanuel Tekle — All"><link rel=me href=https://github.com/E-mma9><link rel=me href=https://linkedin.com/in/emmanuel-tekle-3485b334a><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.3666abe61eaa27447710a9ba313ba78deefcb594e8d0be52b7575a20ffd9ff3e.css integrity="sha256-Nmar5h6qJ0R3EKm6MTunje78tZTo0L5St1daIP/Z/z4="><link rel=icon type=image/svg+xml href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='0.5' y='0.5' width='31' height='31' rx='7' fill='%23ffffff' stroke='%23e2e8f0'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%231d4ed8'/%3E%3C/svg%3E"><script data-goatcounter=https://emmanueltekle.goatcounter.com/count async src=//gc.zgo.at/count.js></script></head><body><div class=page><div class=wrap-wide><nav class=topnav><a class=nav-id href=/>Emmanuel Tekle</a><div class=nav-links><a href=/#work>Work</a>
+<a href=/projects/ class=active>Projects</a>
+<a href=/posts/>Writing</a>
+<a class=btn-cv href=/Emmanuel_Tekle_CV.pdf target=_blank rel="noopener noreferrer">CV ↓</a></div></nav></div><main class=wrap><article class=article><h1 class=article-title>Linux Security Hardening</h1><div class=article-meta><span>Nov 2025 – Apr 2026</span>
+<span class=dot-sep>·</span><span class="status status-done">Complete</span></div><p class=article-lede>Two Bash scripts that bring a fresh Ubuntu/Debian server to a sensible baseline and audit the result.</p><div class=article-actions><a class="btn btn-secondary" href=https://github.com/E-mma9/Linux-Security-Hardening target=_blank rel="noopener noreferrer">View on GitHub →</a><div class=tags><span class=tag>Bash</span><span class=tag>Ubuntu</span><span class=tag>SSH</span><span class=tag>UFW</span><span class=tag>auditd</span></div></div><div class=prose><p>Two short Bash scripts: one hardens a freshly installed Ubuntu or Debian server, the other reports on the result. Tested on Ubuntu LTS.</p><h2 id=what-harden-serversh-does>What <code>harden-server.sh</code> does</h2><ol><li>Updates the system and enables <code>unattended-upgrades</code> for automatic security patches.</li><li>Hardens SSH: no root login, no password authentication, port moved to 2222.</li><li>Configures UFW: default deny incoming, allow outgoing, open only 2222, 80 and 443.</li><li>Installs and enables <code>auditd</code> for security event logging.</li></ol><h2 id=what-security-auditsh-reports>What <code>Security-audit.sh</code> reports</h2><ul><li>The active SSH settings for <code>Port</code>, <code>PermitRootLogin</code> and <code>PasswordAuthentication</code>.</li><li>UFW status and rules.</li><li>Failed SSH login attempts from <code>auth.log</code>.</li><li>Packages with pending updates.</li></ul><h2 id=audit-output>Audit output</h2><div class=terminal><div class=terminal-bar>sudo ./Security-audit.sh</div><pre>Linux Security Audit
 
-<meta property="og:title" content="Linux Security Hardening">
-<meta property="og:description" content="HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://emmanueltekle.nl/projects/linux-security-hardening/">
-<meta name="twitter:card" content="summary">
+ SSH configuration:
+<span class=ok>✓ Port 2222</span>
+<span class=ok>✓ PermitRootLogin no</span>
+<span class=ok>✓ PasswordAuthentication no</span>
 
-<link rel="canonical" href="https://emmanueltekle.nl/projects/linux-security-hardening/">
-<link rel="alternate" type="application/rss+xml" href="https://emmanueltekle.nl/posts/index.xml" title="Emmanuel Tekle — Blog">
-<link rel="alternate" type="application/rss+xml" href="https://emmanueltekle.nl/index.xml" title="Emmanuel Tekle — All">
-<link rel="me" href="https://github.com/E-mma9">
-<link rel="me" href="https://linkedin.com/in/emmanuel-tekle-3485b334a">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+UFW firewall status:
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
 
-<link rel="stylesheet" href="/css/main.min.4505896a0967e1bc293b4a788cc24a762613deabc7aafc9f9ecd2d3b986bfd9b.css" integrity="sha256-RQWJagln4bwpO0p4jMJKdiYT3qvHqvyfns0tO5hr/Zs=">
+To                         Action      From
+--                         ------      ----
+2222/tcp                   ALLOW IN    Anywhere
+80/tcp                     ALLOW IN    Anywhere
+443/tcp                    ALLOW IN    Anywhere
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1015'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2345d68a'/%3E%3C/svg%3E">
+ Failed SSH login attempts (last 24h):
+sshd[2376]: Failed password for project from 192.168.159.1 port 30414 ssh2
+sshd[4581]: Failed password for project from 192.168.159.1 port 30543 ssh2
 
-<script data-goatcounter="https://emmanueltekle.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</head>
-<body>
-  <div class="wrap"><nav class="topnav">
-  <a class="nav-id" href="/"><span class="accent">●</span> emmanuel.tekle</a>
-  <div class="nav-links">
-    <a href="/posts/">writing</a>
-    <a href="/projects/" class="active">projects</a>
-    <a href="/about/">about</a>
-    <a href="/Emmanuel_Tekle_CV.pdf" target="_blank" rel="noopener noreferrer">cv</a>
-  </div>
-</nav>
-<main>
-<article class="article">
-  <div class="prompt">
-    <span class="a">$</span>cat ~/projects/linux-security-hardening
-  </div>
-
-  <h1 class="article-title">Linux Security Hardening</h1>
-
-  <div class="article-meta">
-    <span>20 Mar 2026</span>
-    <span class="dot-sep">·</span><span>1 min read</span>
-    <span class="dot-sep">·</span><span class="tag">linux</span><span class="tag">bash</span><span class="tag">ssh</span><span class="tag">ufw</span><span class="tag">auditd</span><span class="tag">security</span><span class="tag">ubuntu</span><span class="tag">debian</span>
-  </div>
-
-  <p class="article-lede">Two Bash scripts that harden a fresh Ubuntu/Debian box and audit it afterwards.</p>
-
-  <div class="prose">
-    <p>Two Bash scripts that take a freshly-installed Ubuntu or Debian server and harden it to a sensible baseline, then audit the result.</p>
-<h2 id="what-it-does">What it does</h2>
-<p><strong><code>harden.sh</code></strong></p>
-<ul>
-<li>SSH hardening — no root login, no password auth, non-default port</li>
-<li>UFW firewall — default-deny, only SSH/HTTP/HTTPS open</li>
-<li><code>auditd</code> installed and configured for security logging</li>
-<li><code>unattended-upgrades</code> enabled for security patches</li>
-<li>Fail2ban for brute-force protection</li>
-</ul>
-<p><strong><code>security-audit.sh</code></strong></p>
-<ul>
-<li>Verifies SSH config matches hardened baseline</li>
-<li>Checks firewall rules</li>
-<li>Reports failed login attempts from <code>journalctl</code></li>
-<li>Lists pending updates</li>
-<li>Exit code reflects pass/fail for CI integration</li>
-</ul>
-<h2 id="why">Why</h2>
-<p>Wrote this to practice basic Linux admin and server-side security hands-on. The scripts are short and readable on purpose — every line is something I&rsquo;d be able to defend in an interview.</p>
-<h2 id="repo">Repo</h2>
-<p><a href="https://github.com/E-mma9/Linux-Security-Hardening">github.com/E-mma9/Linux-Security-Hardening</a></p>
-
-  </div>
-
-  
-  <div class="external-out">
-    <a href="https://github.com/E-mma9/Linux-Security-Hardening">view on github →</a>
-  </div>
-  
-
-  <div class="article-foot">
-    <a href="/projects/">← back to projects</a>
-  </div>
-</article>
-
-    </main><footer class="sitefoot">
-  <div>© 2026 — Enschede, NL <span class="cursor">█</span></div>
-  <div class="foot-links">
-    <a href="mailto:emmanueltekle@gmail.com">email</a>
-    <a href="https://github.com/E-mma9">github</a>
-    <a href="https://linkedin.com/in/emmanuel-tekle-3485b334a">linkedin</a>
-    <a href="/Emmanuel_Tekle_CV.pdf" target="_blank" rel="noopener noreferrer">cv</a>
-    <a href="/posts/index.xml">rss</a>
-  </div>
-</footer>
-</div>
-</body>
-</html>
+ Audit Complete</pre></div><h2 id=why>Why</h2><p>I wrote these to practise Linux administration and server-side security hands-on. The scripts are short and readable on purpose: every line is something I can explain and defend.</p><h2 id=what-id-do-next>What I&rsquo;d do next</h2><p>For one server, Bash is fine. For ten, this becomes an Ansible playbook with an inventory, and the audit becomes a set of <code>[OK]</code>/<code>[FAIL]</code> checks with an exit code so it can run from cron or CI.</p></div><div class=article-foot><a href=/projects/>← All projects</a></div></article></main><div class=wrap-wide><footer class=sitefoot><div>© 2026 Emmanuel Tekle · Enschede, NL</div><div class=foot-links><a href=mailto:emmanueltekle@gmail.com>Email</a>
+<a href=https://github.com/E-mma9 target=_blank rel="noopener noreferrer">GitHub</a>
+<a href=https://linkedin.com/in/emmanuel-tekle-3485b334a target=_blank rel="noopener noreferrer">LinkedIn</a>
+<a href=/Emmanuel_Tekle_CV.pdf target=_blank rel="noopener noreferrer">CV</a>
+<a href=/posts/index.xml>RSS</a></div></footer></div></div></body></html>
