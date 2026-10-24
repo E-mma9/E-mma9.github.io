@@ -1,0 +1,30 @@
+<section class="section" id="certifications">
+  <div class="section-head">
+    <h2>Certifications</h2>
+  </div>
+  <div class="certs">
+    {{ range hugo.Data.profile.certifications }}
+    {{ $c := . }}
+    {{ if eq .status "earned" }}
+    <article class="cert cert-hero">
+      {{ with .image }}
+      <img class="cert-image" src="{{ . | relURL }}" alt="{{ $c.name }} certificate" width="{{ $c.image_width }}" height="{{ $c.image_height }}" loading="lazy">
+      {{ end }}
+      <div>
+        <div class="cert-name">{{ .name }}</div>
+        <div class="cert-meta">
+          <span>Earned {{ .date }}{{ with .expires }} · Expires {{ . }}{{ end }}</span>
+          {{ with .credential_id }}<span>Credential ID {{ . }}</span>{{ end }}
+          {{ with .verify_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Verify on Microsoft Learn →</a>{{ end }}
+        </div>
+      </div>
+    </article>
+    {{ else }}
+    <article class="cert cert-planned">
+      <span class="cert-name">{{ .name }}</span>
+      <span class="cert-meta">{{ .date }}</span>
+    </article>
+    {{ end }}
+    {{ end }}
+  </div>
+</section>

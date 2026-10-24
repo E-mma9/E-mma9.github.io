@@ -1,0 +1,21 @@
+<section class="section" id="work">
+  <div class="section-head">
+    <h2>Experience</h2>
+  </div>
+  <div class="timeline">
+    {{ range hugo.Data.profile.experience }}
+    <article class="job">
+      <div class="job-head">
+        <div>
+          <span class="job-role">{{ .role }}</span>
+          <span class="job-org"> · {{ .company }}{{ with .note }} ({{ . }}){{ end }}</span>
+        </div>
+        <span class="job-meta">{{ .location }} · {{ .period }}</span>
+      </div>
+      <ul>
+        {{ range .bullets }}<li>{{ . }}</li>{{ end }}
+      </ul>
+    </article>
+    {{ end }}
+  </div>
+</section>

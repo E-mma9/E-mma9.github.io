@@ -1,0 +1,14 @@
+{{ $p := hugo.Data.profile }}
+<section class="hero">
+  <span class="badge">{{ $p.availability }}</span>
+  <h1>{{ $p.headline }}</h1>
+  <p class="lead">{{ $p.lead }}</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ site.Params.cv | relURL }}" target="_blank" rel="noopener noreferrer">Download CV</a>
+    <a class="btn btn-secondary" href="#contact">Get in touch</a>
+  </div>
+  <div class="hero-links">
+    <a href="{{ site.Params.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+</section>
