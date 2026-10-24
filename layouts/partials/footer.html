@@ -1,10 +1,12 @@
-<footer class="sitefoot">
-  <div>© {{ now.Year }} — {{ site.Params.location }} <span class="cursor">█</span></div>
-  <div class="foot-links">
-    <a href="mailto:{{ site.Params.email }}">email</a>
-    <a href="{{ site.Params.github }}">github</a>
-    <a href="{{ site.Params.linkedin }}">linkedin</a>
-    <a href="{{ site.Params.cv | relURL }}" target="_blank" rel="noopener noreferrer">cv</a>
-    <a href="{{ "/posts/index.xml" | relURL }}">rss</a>
-  </div>
-</footer>
+<div class="wrap-wide">
+  <footer class="sitefoot">
+    <div>© {{ now.Year }} {{ site.Params.author }} · {{ site.Params.location }}</div>
+    <div class="foot-links">
+      <a href="mailto:{{ site.Params.email }}">Email</a>
+      <a href="{{ site.Params.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="{{ site.Params.cv | relURL }}" target="_blank" rel="noopener noreferrer">CV</a>
+      <a href="{{ "/posts/index.xml" | relURL }}">RSS</a>
+    </div>
+  </footer>
+</div>

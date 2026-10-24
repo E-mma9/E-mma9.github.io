@@ -1,9 +1,11 @@
-<nav class="topnav">
-  <a class="nav-id" href="{{ "/" | relURL }}"><span class="accent">●</span> emmanuel.tekle</a>
-  <div class="nav-links">
-    <a href="{{ "/posts/" | relURL }}"{{ if hasPrefix .RelPermalink "/posts" }} class="active"{{ end }}>writing</a>
-    <a href="{{ "/projects/" | relURL }}"{{ if hasPrefix .RelPermalink "/projects" }} class="active"{{ end }}>projects</a>
-    <a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>about</a>
-    <a href="{{ site.Params.cv | relURL }}" target="_blank" rel="noopener noreferrer">cv</a>
-  </div>
-</nav>
+<div class="wrap-wide">
+  <nav class="topnav">
+    <a class="nav-id" href="{{ "/" | relURL }}">{{ site.Params.author }}</a>
+    <div class="nav-links">
+      <a href="{{ "/#work" | relURL }}">Work</a>
+      <a href="{{ "/projects/" | relURL }}"{{ if hasPrefix .RelPermalink "/projects" }} class="active"{{ end }}>Projects</a>
+      <a href="{{ "/posts/" | relURL }}"{{ if hasPrefix .RelPermalink "/posts" }} class="active"{{ end }}>Writing</a>
+      <a class="btn-cv" href="{{ site.Params.cv | relURL }}" target="_blank" rel="noopener noreferrer">CV ↓</a>
+    </div>
+  </nav>
+</div>
