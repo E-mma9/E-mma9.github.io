@@ -5,7 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-hugo --minify --destination public --quiet
+hugo --minify --cleanDestinationDir --destination public --quiet
 
 fail=0
 
