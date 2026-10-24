@@ -1,9 +1,4 @@
 ---
-title: "Blog"
-description: "Notes from the homelab, school, and what I'm currently learning."
-cascade:
-  showReadingTime: true
-  showWordCount: false
-  showDate: true
-  showAuthor: true
+title: "Writing"
+description: "Notes from the homelab and from work."
 ---
