@@ -10,7 +10,7 @@ summary: "Solo-built agent that researches every new support ticket for 200+ cli
 tech: ["Azure Container Apps", "Service Bus", "PostgreSQL", "Key Vault", "Bicep", "Azure DevOps", "Claude"]
 ---
 
-Built end-to-end during my internship at JUICT, a managed service provider. The agent sits in the support flow: every new ticket is picked up, researched across the company's tooling, and returned to the engineer with a diagnosis note before they open it.
+Built end-to-end at JUICT, a managed service provider. The agent sits in the support flow: every new ticket is picked up, researched across the company's tooling, and returned to the engineer with a diagnosis note before they open it.
 
 ## What it does
 
