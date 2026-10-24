@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" font-family="Inter, system-ui, sans-serif" font-size="14">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arrow-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"/>
+    </marker>
+  </defs>
+  <style>
+    .band { fill: none; stroke-width: 1.5; rx: 14; }
+    .band-label { font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+    .box { rx: 10; stroke-width: 1.5; }
+    .title { font-weight: 700; font-size: 15px; fill: #f8fafc; }
+    .sub { font-size: 12px; fill: #94a3b8; }
+    .flow { fill: none; stroke: #cbd5e1; stroke-width: 1.8; marker-end: url(#arrow); }
+    .flow-b { fill: none; stroke: #60a5fa; stroke-width: 1.8; marker-end: url(#arrow-b); }
+    .flow-dash { stroke-dasharray: 6 5; }
+    .lbl { font-size: 11.5px; fill: #cbd5e1; }
+    .lbl-b { font-size: 11.5px; fill: #93c5fd; }
+  </style>
+
+  <rect width="1200" height="760" fill="#0f172a"/>
+  <text x="32" y="38" class="title" font-size="18">AI support agent · production architecture (simplified)</text>
+  <text x="32" y="58" class="sub">Boundaries are enforced in code: the agent never holds credentials for client systems.</text>
+
+  <!-- Outside Azure -->
+  <rect x="32" y="84" width="1136" height="118" class="band" stroke="#7c3aed" fill="#1e1b4b" fill-opacity=".35"/>
+  <text x="48" y="106" class="band-label" fill="#a78bfa">Outside Azure</text>
+
+  <rect x="56" y="122" width="200" height="60" class="box" fill="#1e1b4b" stroke="#7c3aed"/>
+  <text x="156" y="148" text-anchor="middle" class="title">Autotask PSA</text>
+  <text x="156" y="167" text-anchor="middle" class="sub">tickets · internal notes</text>
+
+  <rect x="296" y="122" width="200" height="60" class="box" fill="#1e1b4b" stroke="#7c3aed"/>
+  <text x="396" y="148" text-anchor="middle" class="title">IT Glue · Datto RMM</text>
+  <text x="396" y="167" text-anchor="middle" class="sub">documentation · endpoints</text>
+
+  <rect x="536" y="122" width="180" height="60" class="box" fill="#1e1b4b" stroke="#7c3aed"/>
+  <text x="626" y="148" text-anchor="middle" class="title">Engineer</text>
+  <text x="626" y="167" text-anchor="middle" class="sub">reads the diagnosis note</text>
+
+  <rect x="756" y="122" width="180" height="60" class="box" fill="#1e1b4b" stroke="#7c3aed"/>
+  <text x="846" y="148" text-anchor="middle" class="title">Claude API</text>
+  <text x="846" y="167" text-anchor="middle" class="sub">model calls, egress via NAT</text>
+
+  <rect x="976" y="122" width="170" height="60" class="box" fill="#1e1b4b" stroke="#7c3aed"/>
+  <text x="1061" y="148" text-anchor="middle" class="title">Azure DevOps</text>
+  <text x="1061" y="167" text-anchor="middle" class="sub">PR · tests · scans · deploy</text>
+
+  <!-- Azure VNet -->
+  <rect x="32" y="232" width="1136" height="490" class="band" stroke="#475569" fill="#111c31"/>
+  <text x="48" y="714" class="band-label" fill="#94a3b8">Azure · private virtual network · NAT gateway for all outbound traffic</text>
+
+  <!-- Container Apps environment -->
+  <rect x="56" y="280" width="1088" height="196" class="band" stroke="#0d9488" fill="#042f2e" fill-opacity=".55"/>
+  <text x="72" y="302" class="band-label" fill="#2dd4bf">Container Apps environment · one managed identity per app · images pulled by digest</text>
+
+  <rect x="80" y="330" width="220" height="110" class="box" fill="#134e4a" stroke="#2dd4bf"/>
+  <text x="190" y="358" text-anchor="middle" class="title">Trigger job</text>
+  <text x="190" y="378" text-anchor="middle" class="sub">new ticket → Service Bus queue</text>
+  <text x="190" y="396" text-anchor="middle" class="sub">signs the request (HMAC)</text>
+  <text x="190" y="414" text-anchor="middle" class="sub">scale-to-zero</text>
+
+  <rect x="400" y="330" width="220" height="110" class="box" fill="#134e4a" stroke="#2dd4bf"/>
+  <text x="510" y="358" text-anchor="middle" class="title">Hermes agent</text>
+  <text x="510" y="378" text-anchor="middle" class="sub">one ticket per run</text>
+  <text x="510" y="396" text-anchor="middle" class="sub">stateless · no client credentials</text>
+  <text x="510" y="414" text-anchor="middle" class="sub">prompt-injection checks</text>
+
+  <rect x="720" y="330" width="220" height="110" class="box" fill="#134e4a" stroke="#2dd4bf"/>
+  <text x="830" y="358" text-anchor="middle" class="title">MCP server · read-only</text>
+  <text x="830" y="378" text-anchor="middle" class="sub">17 tools · scope fixed per run</text>
+  <text x="830" y="396" text-anchor="middle" class="sub">secret fields filtered</text>
+  <text x="830" y="414" text-anchor="middle" class="sub">writes only the internal note</text>
+
+  <rect x="980" y="330" width="144" height="110" class="box flow-dash" fill="none" stroke="#2dd4bf"/>
+  <text x="1052" y="372" text-anchor="middle" class="title" fill="#5eead4">MCP · execute</text>
+  <text x="1052" y="392" text-anchor="middle" class="sub">later, approved</text>
+  <text x="1052" y="410" text-anchor="middle" class="sub">proposals only</text>
+
+  <!-- Data & secrets -->
+  <rect x="56" y="500" width="1088" height="200" class="band" stroke="#d97706" fill="#451a03" fill-opacity=".45"/>
+  <text x="72" y="522" class="band-label" fill="#fbbf24">Data and secrets · private endpoints only, public access off</text>
+
+  <rect x="80" y="552" width="230" height="110" class="box" fill="#451a03" stroke="#f59e0b"/>
+  <text x="195" y="580" text-anchor="middle" class="title">Key Vault</text>
+  <text x="195" y="600" text-anchor="middle" class="sub">API tokens and signing keys</text>
+  <text x="195" y="618" text-anchor="middle" class="sub">read at runtime via managed identity</text>
+  <text x="195" y="636" text-anchor="middle" class="sub">per-secret access, no shared vault</text>
+
+  <rect x="350" y="552" width="230" height="110" class="box" fill="#451a03" stroke="#f59e0b"/>
+  <text x="465" y="580" text-anchor="middle" class="title">PostgreSQL</text>
+  <text x="465" y="600" text-anchor="middle" class="sub">runs, proposals, audit log</text>
+  <text x="465" y="618" text-anchor="middle" class="sub">Entra authentication only</text>
+  <text x="465" y="636" text-anchor="middle" class="sub">no passwords</text>
+
+  <rect x="620" y="552" width="230" height="110" class="box" fill="#451a03" stroke="#f59e0b"/>
+  <text x="735" y="580" text-anchor="middle" class="title">Container Registry</text>
+  <text x="735" y="600" text-anchor="middle" class="sub">pull by digest</text>
+  <text x="735" y="618" text-anchor="middle" class="sub">admin user disabled</text>
+  <text x="735" y="636" text-anchor="middle" class="sub">push from pipeline via federation</text>
+
+  <rect x="890" y="552" width="234" height="110" class="box" fill="#451a03" stroke="#f59e0b"/>
+  <text x="1007" y="580" text-anchor="middle" class="title">Log Analytics</text>
+  <text x="1007" y="600" text-anchor="middle" class="sub">app logs, Key Vault audit events</text>
+  <text x="1007" y="618" text-anchor="middle" class="sub">database and alert rules</text>
+  <text x="1007" y="636" text-anchor="middle" class="sub">health-checked rollouts</text>
+
+  <!-- Flows -->
+  <!-- Autotask -> trigger -->
+  <path d="M156,182 L156,330" class="flow"/>
+  <text x="66" y="262" class="lbl">1 · new ticket</text>
+  <!-- trigger -> hermes -->
+  <path d="M300,385 L400,385" class="flow"/>
+  <text x="350" y="376" text-anchor="middle" class="lbl">2 · signed run</text>
+  <!-- hermes -> mcp -->
+  <path d="M620,385 L720,385" class="flow"/>
+  <text x="670" y="376" text-anchor="middle" class="lbl">3 · MCP tools</text>
+  <!-- mcp -> Autotask / IT Glue / Datto (read) -->
+  <path d="M830,330 L830,268 L396,268 L396,182" class="flow"/>
+  <text x="600" y="262" text-anchor="middle" class="lbl">4 · read-only REST, via NAT</text>
+  <!-- mcp -> Autotask note -->
+  <path d="M900,330 L900,214 L256,214 L256,182" class="flow-b"/>
+  <text x="600" y="228" text-anchor="middle" class="lbl-b">5 · diagnosis as internal note (the only write)</text>
+  <!-- hermes -> Claude -->
+  <path d="M600,330 L600,246 L846,246 L846,182" class="flow flow-dash"/>
+  <text x="723" y="240" text-anchor="middle" class="lbl">model calls</text>
+  <!-- mcp -> postgres -->
+  <path d="M780,440 L780,480 L465,480 L465,552" class="flow"/>
+  <text x="640" y="494" text-anchor="middle" class="lbl">private endpoint</text>
+  <!-- Key Vault -> apps -->
+  <path d="M195,552 L195,440" class="flow flow-dash"/>
+  <text x="205" y="500" class="lbl">secrets at runtime</text>
+  <!-- DevOps -> ACR -->
+  <path d="M1061,182 L1061,206 L1150,206 L1150,607 L850,607" class="flow flow-dash"/>
+  <text x="1140" y="465" text-anchor="end" class="lbl">push image</text>
+</svg>
