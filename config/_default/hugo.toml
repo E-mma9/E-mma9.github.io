@@ -2,6 +2,7 @@ baseURL = "https://emmanueltekle.nl/"
 defaultContentLanguage = "en"
 title = "Emmanuel Tekle"
 enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
 summaryLength = 30
 buildDrafts = false
 buildFuture = false
@@ -14,7 +15,7 @@ buildFuture = false
   label = "English"
 
 [params]
-  description = "HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure."
+  description = "DevOps & Platform Engineer in the making. Azure-certified (AZ-104) Cloud & Cybersecurity student in Enschede, available Feb – Jul 2027."
   author = "Emmanuel Tekle"
   email = "emmanueltekle@gmail.com"
   github = "https://github.com/E-mma9"
@@ -32,7 +33,7 @@ buildFuture = false
     unsafe = true
   [markup.highlight]
     noClasses = false
-    style = "github-light"
+    style = "github"
     tabWidth = 2
   [markup.tableOfContents]
     startLevel = 2

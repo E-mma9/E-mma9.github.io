@@ -1,0 +1,58 @@
+name: Emmanuel Tekle
+headline: "DevOps & Platform Engineer in the making."
+availability: "Available Feb – Jul 2027 · full-time"
+lead: >-
+  Azure-certified (AZ-104) student at Saxion who ships production systems
+  while studying. Designed and built, solo, an AI support agent that now
+  handles every new ticket for ~50 client organisations of a managed
+  service provider.
+stats:
+  - value: "AZ-104"
+    label: "Microsoft Certified, Oct 2026"
+  - value: "2 yrs"
+    label: "hands-on production experience"
+  - value: "7 weeks"
+    label: "AI agent from idea to production"
+experience:
+  - role: "Automation & Infrastructure Intern"
+    company: "JUICT B.V."
+    note: "managed service provider"
+    location: "Haaksbergen, NL"
+    period: "Sep 2026 – Jan 2027"
+    bullets:
+      - "Automated standard IT changes end-to-end in production: self-service portal → Rewst RPA workflow → Autotask REST API, for ~200 client organisations."
+      - "Sole owner of the Azure platform behind the company CRM: hosting, PostgreSQL, secrets management and the release pipeline."
+  - role: "Systems Administrator"
+    company: "Livio"
+    note: "healthcare organisation"
+    location: "Enschede, NL"
+    period: "Apr 2025 – Aug 2026"
+    bullets:
+      - "Co-designed and ran the production Entra ID / hybrid identity platform: Conditional Access, RBAC, group design, Entra Connect sync and Group Policy."
+      - "Operated within ISO 27001 / NEN 7510 for patient-related data: least privilege, access control, logging and audit."
+certifications:
+  - name: "Microsoft Certified: Azure Administrator Associate (AZ-104)"
+    issuer: "Microsoft"
+    status: earned
+    date: "22 Oct 2026"
+    expires: "23 Oct 2027"
+    credential_id: "4C620F71E4B4DAAC"
+    verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelTekle/4C620F71E4B4DAAC"
+    image: "/img/az-104-certificate.png"
+    image_width: 1200
+    image_height: 813
+  - name: "HashiCorp Certified: Terraform Associate"
+    issuer: "HashiCorp"
+    status: planned
+    date: "Exam planned Nov 2026"
+  - name: "Certified Kubernetes Administrator (CKA)"
+    issuer: "The Linux Foundation"
+    status: planned
+    date: "Exam planned Jan 2027"
+education:
+  degree: "Bachelor Cybersecurity & Cloud Engineering (HBO)"
+  school: "Saxion University of Applied Sciences"
+  location: "Enschede, NL"
+  period: "Sep 2024 – Jul 2028 (expected)"
+  detail: "Year 3 · Virtualisation (10), Public & Hybrid Cloud (9), Automated Infrastructures (9)"
+beyond_work: "Outside work: competitive kickboxing (B-class, 9–1) and speedcubing (Dutch top 20, 2019)."
