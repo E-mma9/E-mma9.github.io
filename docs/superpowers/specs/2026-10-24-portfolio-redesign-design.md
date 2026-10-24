@@ -121,7 +121,7 @@ Footer: © year, Enschede NL, links email · GitHub · LinkedIn · CV · RSS.
    - Lead (2 sentences, from CV profile): "Azure-certified (AZ-104) student
      at Saxion who ships production systems while studying. Designed and
      built, solo, an AI support agent that now handles every new ticket for
-     ~50 client organisations of a managed service provider."
+     200+ client organisations of a managed service provider."
    - Buttons: primary **Download CV**, secondary **Get in touch** (anchor to
      contact form). Small inline links: GitHub · LinkedIn.
 2. **Three stats** (equal cards):

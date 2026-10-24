@@ -6,7 +6,7 @@ period: "Live since Oct 2026"
 status: live
 weight: 10
 icon: bot
-summary: "Solo-built agent that researches every new support ticket for ~50 client organisations and delivers a diagnosis note in 1–2 minutes."
+summary: "Solo-built agent that researches every new support ticket for 200+ client organisations and delivers a diagnosis note in 1–2 minutes."
 tech: ["Azure Container Apps", "Service Bus", "PostgreSQL", "Key Vault", "Bicep", "Azure DevOps", "Claude"]
 ---
 
@@ -14,7 +14,7 @@ Built end-to-end during my internship at JUICT, a managed service provider. The 
 
 ## What it does
 
-From idea to production in seven weeks. The agent researches every new support ticket for ~50 client organisations and delivers a diagnosis note in 1–2 minutes. It runs about 45 times per workday; the first week saw 200+ runs and zero data incidents.
+From idea to production in seven weeks. The agent researches every new support ticket for 200+ client organisations and delivers a diagnosis note in 1–2 minutes. It runs about 45 times per workday; the first week saw 200+ runs and zero data incidents.
 
 Research happens through 17 read-only tools over Autotask (tickets), IT Glue (documentation) and Datto RMM (endpoints). The agent can look, not touch.
 
