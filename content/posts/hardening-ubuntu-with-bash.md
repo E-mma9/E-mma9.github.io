@@ -10,65 +10,44 @@ I wrote two Bash scripts to harden a fresh Ubuntu/Debian server and audit it aft
 
 ## What gets configured
 
-`harden.sh`:
+`harden-server.sh`:
 
-- SSH — disable root login, disable password auth, change to a non-default port
-- UFW — default-deny, allow SSH/HTTP/HTTPS
-- `auditd` for security logging
-- `unattended-upgrades` for security patches
-- `fail2ban` for brute-force protection
+- System updates, with `unattended-upgrades` enabled for security patches
+- SSH — disable root login, disable password auth, move to port 2222
+- UFW — default-deny incoming, allow 2222/80/443
+- `auditd` installed and enabled for security logging
 
-`security-audit.sh`:
+`Security-audit.sh`:
 
-- Verifies SSH config against the hardened baseline
-- Checks UFW status and rules
-- Reports failed logins from `journalctl`
-- Lists pending updates
-- Exits non-zero on drift (useful for CI / cron)
+- Prints the active SSH settings for `Port`, `PermitRootLogin` and `PasswordAuthentication`
+- Shows UFW status and rules
+- Lists failed SSH logins from `auth.log`
+- Lists packages with pending updates
 
-## Idempotency
+## Keeping it simple
 
-Bash idempotency takes a bit of care. Each change is wrapped in a check so the script can be re-run safely:
+The SSH changes are three `sed` one-liners:
 
 ```bash
-ssh_set() {
-  local key="$1" val="$2"
-  if grep -qE "^${key}[[:space:]]" /etc/ssh/sshd_config; then
-    sed -i "s|^${key}.*|${key} ${val}|" /etc/ssh/sshd_config
-  else
-    echo "${key} ${val}" >> /etc/ssh/sshd_config
-  fi
-}
-
-ssh_set "PermitRootLogin" "no"
-ssh_set "PasswordAuthentication" "no"
-ssh_set "Port" "2222"
+sed -i 's/^#\?PermitRootLogin .*/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sed -i 's/^#\?Port .*/Port 2222/' /etc/ssh/sshd_config
 ```
 
-Matching `^${key}[[:space:]]` avoids picking up commented-out lines. The function handles both update and insert in one place.
+The `^#\?` matches both the commented default and an existing value, so the line gets replaced either way. `ufw` skips rules that already exist. Together that makes the script safe to re-run.
 
 ## The audit script
 
-```bash
-check() {
-  local desc="$1" cmd="$2"
-  if eval "$cmd" >/dev/null 2>&1; then
-    echo "  [OK]   $desc"
-  else
-    echo "  [FAIL] $desc"
-    EXIT=1
-  fi
-}
+The audit is deliberately plain: show the state, let a human read it.
 
-check "SSH root login disabled" \
-  "grep -qE '^PermitRootLogin no' /etc/ssh/sshd_config"
-check "SSH password auth disabled" \
-  "grep -qE '^PasswordAuthentication no' /etc/ssh/sshd_config"
-check "UFW active" "ufw status | grep -q 'Status: active'"
-check "auditd running" "systemctl is-active --quiet auditd"
+```bash
+grep -E '^(Port|PermitRootLogin|PasswordAuthentication)' /etc/ssh/sshd_config
+ufw status verbose
+grep "Failed password" /var/log/auth.log | tail -20
+apt list --upgradable
 ```
 
-`[OK]/[FAIL]` columnar output is easy to pipe into a Slack notification or store in a log.
+The next step is turning each line into an `[OK]`/`[FAIL]` check with an exit code, so it can run from cron or CI and fail loudly on drift.
 
 ## When this stops being the right tool
 

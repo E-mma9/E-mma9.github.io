@@ -1,36 +1,63 @@
 ---
 title: "Linux Security Hardening"
-date: 2026-03-20
-summary: "Two Bash scripts that harden a fresh Ubuntu/Debian box and audit it afterwards."
-tags: ["linux", "bash", "ssh", "ufw", "auditd", "security", "ubuntu", "debian"]
-externalUrl: "https://github.com/E-mma9/Linux-Security-Hardening"
-showHero: false
+date: 2026-04-20
+period: "Nov 2025 – Apr 2026"
+status: done
+weight: 40
+icon: shield
+summary: "Two Bash scripts that bring a fresh Ubuntu/Debian server to a sensible baseline and audit the result."
+tech: ["Bash", "Ubuntu", "SSH", "UFW", "auditd"]
+repo: "https://github.com/E-mma9/Linux-Security-Hardening"
 ---
 
-Two Bash scripts that take a freshly-installed Ubuntu or Debian server and harden it to a sensible baseline, then audit the result.
+Two short Bash scripts: one hardens a freshly installed Ubuntu or Debian server, the other reports on the result. Tested on Ubuntu LTS.
 
-## What it does
+## What `harden-server.sh` does
 
-**`harden.sh`**
+1. Updates the system and enables `unattended-upgrades` for automatic security patches.
+2. Hardens SSH: no root login, no password authentication, port moved to 2222.
+3. Configures UFW: default deny incoming, allow outgoing, open only 2222, 80 and 443.
+4. Installs and enables `auditd` for security event logging.
 
-- SSH hardening — no root login, no password auth, non-default port
-- UFW firewall — default-deny, only SSH/HTTP/HTTPS open
-- `auditd` installed and configured for security logging
-- `unattended-upgrades` enabled for security patches
-- Fail2ban for brute-force protection
+## What `Security-audit.sh` reports
 
-**`security-audit.sh`**
+- The active SSH settings for `Port`, `PermitRootLogin` and `PasswordAuthentication`.
+- UFW status and rules.
+- Failed SSH login attempts from `auth.log`.
+- Packages with pending updates.
 
-- Verifies SSH config matches hardened baseline
-- Checks firewall rules
-- Reports failed login attempts from `journalctl`
-- Lists pending updates
-- Exit code reflects pass/fail for CI integration
+## Audit output
+
+{{< terminal title="sudo ./Security-audit.sh" >}}
+Linux Security Audit
+
+ SSH configuration:
+✓ Port 2222
+✓ PermitRootLogin no
+✓ PasswordAuthentication no
+
+UFW firewall status:
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+
+To                         Action      From
+--                         ------      ----
+2222/tcp                   ALLOW IN    Anywhere
+80/tcp                     ALLOW IN    Anywhere
+443/tcp                    ALLOW IN    Anywhere
+
+ Failed SSH login attempts (last 24h):
+sshd[2376]: Failed password for project from 192.168.159.1 port 30414 ssh2
+sshd[4581]: Failed password for project from 192.168.159.1 port 30543 ssh2
+
+ Audit Complete
+{{< /terminal >}}
 
 ## Why
 
-Wrote this to practice basic Linux admin and server-side security hands-on. The scripts are short and readable on purpose — every line is something I'd be able to defend in an interview.
+I wrote these to practise Linux administration and server-side security hands-on. The scripts are short and readable on purpose: every line is something I can explain and defend.
 
-## Repo
+## What I'd do next
 
-[github.com/E-mma9/Linux-Security-Hardening](https://github.com/E-mma9/Linux-Security-Hardening)
+For one server, Bash is fine. For ten, this becomes an Ansible playbook with an inventory, and the audit becomes a set of `[OK]`/`[FAIL]` checks with an exit code so it can run from cron or CI.

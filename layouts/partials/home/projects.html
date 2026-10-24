@@ -1,0 +1,11 @@
+<section class="section" id="projects">
+  <div class="section-head">
+    <h2>Selected projects</h2>
+    <a class="section-link" href="{{ "/projects/" | relURL }}">All projects →</a>
+  </div>
+  <div class="project-grid">
+    {{ range first 4 (where site.RegularPages "Section" "projects").ByWeight }}
+    {{ partial "project-card.html" . }}
+    {{ end }}
+  </div>
+</section>

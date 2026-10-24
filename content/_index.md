@@ -1,6 +1,5 @@
 ---
 title: "Emmanuel Tekle"
-description: "HBO ICT student in Enschede focused on cybersecurity and cloud infrastructure."
+description: "DevOps & Platform Engineer in the making. Azure-certified (AZ-104) Cloud & Cybersecurity student in Enschede, available Feb – Jul 2027."
+aliases: ["/about/"]
 ---
-
-HBO ICT student in Enschede, focused on **cybersecurity** and **cloud infrastructure**. I run a <span class="mark">3-node Proxmox cluster</span>, write my own Prometheus rules, and learn out loud.

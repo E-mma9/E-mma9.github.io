@@ -1,12 +1,6 @@
 ---
 title: "Projects"
-description: "Hands-on infrastructure and security projects from my homelab."
-cascade:
-  showReadingTime: false
-  showWordCount: false
-  showDate: true
-  showAuthor: false
-  showTableOfContents: false
+description: "Production work and homelab projects, with the code where it is public."
 ---
 
-Hands-on projects where I turn theory into working infrastructure. Everything below was built and configured by hand — no managed wizards.
+Production work from my internship and projects from the homelab. Where the code is public, the repository is linked.

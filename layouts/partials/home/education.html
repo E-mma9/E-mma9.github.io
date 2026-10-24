@@ -1,0 +1,17 @@
+{{ $e := hugo.Data.profile.education }}
+<section class="section" id="education">
+  <div class="section-head">
+    <h2>Education</h2>
+  </div>
+  <article class="edu">
+    <div class="edu-head">
+      <div>
+        <span class="edu-degree">{{ $e.degree }}</span>
+        <span class="edu-school"> · {{ $e.school }}</span>
+      </div>
+      <span class="job-meta">{{ $e.location }} · {{ $e.period }}</span>
+    </div>
+    <p class="edu-detail">{{ $e.detail }}</p>
+  </article>
+  <p class="beyond">{{ hugo.Data.profile.beyond_work }}</p>
+</section>

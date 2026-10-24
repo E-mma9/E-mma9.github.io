@@ -1,0 +1,17 @@
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ if $posts }}
+<section class="section" id="writing">
+  <div class="section-head">
+    <h2>Latest writing</h2>
+    <a class="section-link" href="{{ "/posts/" | relURL }}">All posts →</a>
+  </div>
+  <div class="list">
+    {{ range first 3 $posts.ByDate.Reverse }}
+    <a class="list-item" href="{{ .RelPermalink }}">
+      <span class="item-date">{{ .Date.Format "02 Jan 2006" }}</span>
+      <span class="item-title">{{ .Title }}</span>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

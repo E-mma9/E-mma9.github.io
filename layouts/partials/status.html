@@ -1,0 +1,2 @@
+{{- $s := . -}}
+<span class="status status-{{ $s }}">{{ if eq $s "live" }}Live{{ else if eq $s "wip" }}In progress{{ else }}Complete{{ end }}</span>

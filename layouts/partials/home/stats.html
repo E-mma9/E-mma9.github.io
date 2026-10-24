@@ -1,0 +1,8 @@
+<section class="stats" aria-label="Highlights">
+  {{ range hugo.Data.profile.stats }}
+  <div class="stat">
+    <span class="stat-value">{{ .value }}</span>
+    <span class="stat-label">{{ .label }}</span>
+  </div>
+  {{ end }}
+</section>

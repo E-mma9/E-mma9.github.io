@@ -1,115 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Emmanuel Tekle — Projects</title>
-    <link>https://emmanueltekle.nl/projects/</link>
-    <description>Hands-on infrastructure and security projects from my homelab.</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <managingEditor>emmanueltekle@gmail.com (Emmanuel Tekle)</managingEditor>
-    <webMaster>emmanueltekle@gmail.com (Emmanuel Tekle)</webMaster>
-    <copyright>© 2026 Emmanuel Tekle</copyright>
-    <lastBuildDate>Fri, 17 Jul 2026 14:14:36 +0000</lastBuildDate>
-    <atom:link href="https://emmanueltekle.nl/projects/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Linux Security Hardening</title>
-      <link>https://emmanueltekle.nl/projects/linux-security-hardening/</link>
-      <pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate>
-      <author>emmanueltekle@gmail.com (Emmanuel Tekle)</author>
-      <guid>https://emmanueltekle.nl/projects/linux-security-hardening/</guid>
-      <description>Two Bash scripts that harden a fresh Ubuntu/Debian box and audit it afterwards.</description>
-      <content:encoded>&lt;![CDATA[<p>Two Bash scripts that take a freshly-installed Ubuntu or Debian server and harden it to a sensible baseline, then audit the result.</p>
-<h2 id="what-it-does">What it does</h2>
-<p><strong><code>harden.sh</code></strong></p>
-<ul>
-<li>SSH hardening — no root login, no password auth, non-default port</li>
-<li>UFW firewall — default-deny, only SSH/HTTP/HTTPS open</li>
-<li><code>auditd</code> installed and configured for security logging</li>
-<li><code>unattended-upgrades</code> enabled for security patches</li>
-<li>Fail2ban for brute-force protection</li>
-</ul>
-<p><strong><code>security-audit.sh</code></strong></p>
-<ul>
-<li>Verifies SSH config matches hardened baseline</li>
-<li>Checks firewall rules</li>
-<li>Reports failed login attempts from <code>journalctl</code></li>
-<li>Lists pending updates</li>
-<li>Exit code reflects pass/fail for CI integration</li>
-</ul>
-<h2 id="why">Why</h2>
-<p>Wrote this to practice basic Linux admin and server-side security hands-on. The scripts are short and readable on purpose — every line is something I&rsquo;d be able to defend in an interview.</p>
-<h2 id="repo">Repo</h2>
-<p><a href="https://github.com/E-mma9/Linux-Security-Hardening">github.com/E-mma9/Linux-Security-Hardening</a></p>
-]]></content:encoded>
-      
-      <category>linux</category>
-      
-      <category>bash</category>
-      
-      <category>ssh</category>
-      
-      <category>ufw</category>
-      
-      <category>auditd</category>
-      
-      <category>security</category>
-      
-      <category>ubuntu</category>
-      
-      <category>debian</category>
-      
-    </item>
-    
-    <item>
-      <title>Monitoring Homelab</title>
-      <link>https://emmanueltekle.nl/projects/monitoring-homelab/</link>
-      <pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate>
-      <author>emmanueltekle@gmail.com (Emmanuel Tekle)</author>
-      <guid>https://emmanueltekle.nl/projects/monitoring-homelab/</guid>
-      <description>Production-style Prometheus &#43; Grafana &#43; Alertmanager stack on a 3-node Proxmox cluster. PagerDuty for paging.</description>
-      <content:encoded>&lt;![CDATA[<p>A full monitoring stack on a 3-node Proxmox VE cluster running on consumer hardware. Every config file written by hand so I actually understand what each setting does.</p>
-<h2 id="whats-running">What&rsquo;s running</h2>
-<ul>
-<li><strong>Prometheus</strong> scraping 15s metrics from all nodes and services</li>
-<li><strong>Grafana</strong> dashboards (node health, networking, container)</li>
-<li><strong>Alertmanager</strong> routing to PagerDuty</li>
-<li><strong>node_exporter</strong> on every host</li>
-<li><strong>blackbox_exporter</strong> for HTTP/TCP endpoint checks</li>
-<li><strong>Tailscale</strong> mesh for remote access</li>
-</ul>
-<h2 id="alert-rules">Alert rules</h2>
-<p>Seven alert rules in production:</p>
-<ul>
-<li><code>NodeDown</code> — any host unreachable for &gt; 2 min</li>
-<li><code>DiskSpaceLow</code> — &lt; 15% free</li>
-<li><code>HighCPU</code> — &gt; 90% sustained 10 min</li>
-<li><code>HighRAM</code> — &gt; 90% sustained 5 min</li>
-<li><code>EndpointDown</code> — any blackbox target failing</li>
-<li><code>ServiceCrashed</code> — systemd unit in failed state</li>
-<li><code>ProxmoxStorageWarn</code> — storage pool &gt; 85%</li>
-</ul>
-<h2 id="paging">Paging</h2>
-<p>Alertmanager → PagerDuty. SMS on alert, voice escalation if not acknowledged within 5 minutes. Tested by triggering each rule deliberately.</p>
-<h2 id="repo">Repo</h2>
-<p><a href="https://github.com/E-mma9/Monitoring-Homelab">github.com/E-mma9/Monitoring-Homelab</a></p>
-]]></content:encoded>
-      
-      <category>proxmox</category>
-      
-      <category>prometheus</category>
-      
-      <category>grafana</category>
-      
-      <category>alertmanager</category>
-      
-      <category>pagerduty</category>
-      
-      <category>linux</category>
-      
-      <category>homelab</category>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Emmanuel Tekle — Projects</title><link>https://emmanueltekle.nl/projects/</link><description>Production work and homelab projects, with the code where it is public.</description><generator>Hugo</generator><language>en</language><managingEditor>emmanueltekle@gmail.com (Emmanuel Tekle)</managingEditor><webMaster>emmanueltekle@gmail.com (Emmanuel Tekle)</webMaster><copyright>© 2026 Emmanuel Tekle</copyright><lastBuildDate>Sat, 24 Oct 2026 16:24:17 +0200</lastBuildDate><atom:link href="https://emmanueltekle.nl/projects/index.xml" rel="self" type="application/rss+xml"/><item><title>AI support agent in production</title><link>https://emmanueltekle.nl/projects/ai-support-agent/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><author>emmanueltekle@gmail.com (Emmanuel Tekle)</author><guid>https://emmanueltekle.nl/projects/ai-support-agent/</guid><description>Solo-built agent that researches every new support ticket for ~50 client organisations and delivers a diagnosis note in 1–2 minutes.</description><content:encoded>&lt;![CDATA[<p>Built end-to-end during my internship at JUICT, a managed service provider. The agent sits in the support flow: every new ticket is picked up, researched across the company&rsquo;s tooling, and returned to the engineer with a diagnosis note before they open it.</p><h2 id="what-it-does">What it does</h2><p>From idea to production in seven weeks. The agent researches every new support ticket for ~50 client organisations and delivers a diagnosis note in 1–2 minutes. It runs about 45 times per workday; the first week saw 200+ runs and zero data incidents.</p><p>Research happens through 17 read-only tools over Autotask (tickets), IT Glue (documentation) and Datto RMM (endpoints). The agent can look, not touch.</p><h2 id="platform-as-code">Platform as code</h2><p>The whole platform is defined in Bicep: Azure Container Apps, a Service Bus queue feeding a job, PostgreSQL, Key Vault accessed through managed identities, a container registry, and a scale-to-zero schedule so nothing runs idle.</p><p>The pipeline in Azure DevOps runs unit tests,<code>pip-audit</code> and<code>gitleaks</code>, deploys with health-checked rollouts, and validates every pull request with a build. Nothing reaches production untested or unscanned.</p><h2 id="security-by-design">Security by design</h2><p>The limits are enforced in code rather than in prompts: one ticket per run, zero credentials inside the agent, secret fields filtered before anything reaches the model, and prompt-injection attempts detected and refused.</p><p>A second agent for sales is in design. It gets an MCP server as its only write path, with human approval before any message is sent.</p>
+]]></content:encoded></item><item><title>Mini Payments API</title><link>https://emmanueltekle.nl/projects/mini-payments-api/</link><pubDate>Sat, 24 Oct 2026 00:00:00 +0000</pubDate><author>emmanueltekle@gmail.com (Emmanuel Tekle)</author><guid>https://emmanueltekle.nl/projects/mini-payments-api/</guid><description>Spring Boot payments service with PostgreSQL and Flyway, on its way to Kubernetes with a scanned CI/CD pipeline.</description><content:encoded>&lt;![CDATA[<p>A small payments service built to practise platform work at a payments-grade standard: strict business rules, migrations, tests, and a delivery pipeline that scans before it ships.</p><h2 id="what-exists-today">What exists today</h2><ul><li>Spring Boot service with an accounts and transfers API, including balance checks and business-rule exceptions.</li><li>PostgreSQL schema managed by Flyway migrations.</li><li>A unit test for the transfer rules and an integration test for the full transfer flow, run through the Maven wrapper.</li></ul><h2 id="next">Next</h2><ul><li>Docker multi-stage build.</li><li>Kubernetes manifests, first on the homelab cluster.</li><li>GitHub Actions pipeline with Trivy image scanning.</li><li>AKS via Terraform.</li><li>Prometheus metrics and a Grafana dashboard.</li></ul>
+]]></content:encoded></item><item><title>Monitoring Homelab</title><link>https://emmanueltekle.nl/projects/monitoring-homelab/</link><pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate><author>emmanueltekle@gmail.com (Emmanuel Tekle)</author><guid>https://emmanueltekle.nl/projects/monitoring-homelab/</guid><description>Production-style Prometheus, Grafana and Alertmanager stack on a 3-node Proxmox cluster, paging through PagerDuty.</description><content:encoded>&lt;![CDATA[<p>A full monitoring and alerting pipeline on my 3-node Proxmox VE cluster. Every config file was written by hand, no helper scripts or one-click installers, so that I understand what each line does.</p><figure class="figure figure-dark"><img src="/img/projects/monitoring/pipeline.jpg" alt="Monitoring data flow: node_exporter and blackbox_exporter feed Prometheus, which feeds Grafana and Alertmanager; Alertmanager pages through PagerDuty" width="1376" height="768" loading="lazy"><figcaption>Data flow from exporters to my phone.</figcaption></figure><h2 id="whats-running">What&rsquo;s running</h2><ul><li><strong>node_exporter</strong> on each Proxmox host, exposing CPU, memory, disk and network metrics.</li><li><strong>Prometheus</strong> scraping every target every 15 seconds and evaluating the alert rules.</li><li><strong>Grafana</strong> with a custom cluster-overview dashboard.</li><li><strong>Alertmanager</strong> grouping alerts and routing them to PagerDuty.</li><li><strong>blackbox_exporter</strong> probing the HTTP endpoints of the services I run.</li></ul><p>Everything except node_exporter runs together in one LXC container; node_exporter runs directly on each host because it needs the host&rsquo;s kernel data.</p><h2 id="alert-rules">Alert rules</h2><p>Seven rules, each with a<code>for</code> duration chosen so a short spike does not page me.</p><table><thead><tr><th>Alert</th><th>Fires when</th><th>For</th><th>Severity</th></tr></thead><tbody><tr><td><code>NodeDown</code></td><td>node_exporter unreachable</td><td>1 min</td><td>critical</td></tr><tr><td><code>DiskSpaceWarning</code></td><td>root partition above 85%</td><td>5 min</td><td>warning</td></tr><tr><td><code>DiskSpaceCritical</code></td><td>root partition above 95%</td><td>2 min</td><td>critical</td></tr><tr><td><code>HighMemoryUsage</code></td><td>RAM above 90%</td><td>5 min</td><td>warning</td></tr><tr><td><code>HighCPUUsage</code></td><td>CPU above 95%</td><td>10 min</td><td>warning</td></tr><tr><td><code>EndpointDown</code></td><td>HTTP probe fails</td><td>2 min</td><td>critical</td></tr><tr><td><code>SlowResponse</code></td><td>response slower than 5 s</td><td>5 min</td><td>warning</td></tr></tbody></table><figure class="figure"><img src="/img/projects/monitoring/prometheus-alert-rules.png" alt="Prometheus rules page showing the blackbox_alerts and node_alerts groups, all inactive" width="943" height="907" loading="lazy"><figcaption>All seven rules loaded and quiet.</figcaption></figure><h2 id="dashboards">Dashboards</h2><figure class="figure"><img src="/img/projects/monitoring/grafana-cluster-overview.png" alt="Grafana cluster overview dashboard with CPU, memory, disk and uptime panels for node2" width="1400" height="663" loading="lazy"><figcaption>Custom cluster-overview dashboard in Grafana.</figcaption></figure><h2 id="paging">Paging</h2><p>Alertmanager sends firing alerts to PagerDuty through the Events API. PagerDuty opens an incident and sends a text message; if I do not acknowledge it, it calls. From crash to phone buzz is about three minutes for most alerts: the<code>for</code> duration plus Alertmanager&rsquo;s grouping window.</p><p>I chose PagerDuty over Telegram or Discord because it is what companies use, and I wanted to set up real incident management: escalation policies, acknowledgements, on-call.</p><figure class="figure"><img src="/img/projects/monitoring/pagerduty-incident.png" alt="PagerDuty service page for Homelab-Alerts showing a resolved incident for an unreachable endpoint" width="1300" height="936" loading="lazy"><figcaption>A resolved test incident in PagerDuty.</figcaption></figure><h2 id="the-cluster-underneath">The cluster underneath</h2><p>Three second-hand small-form-factor PCs (Dell OptiPlex, HP ProDesk) running Proxmox VE 9 as a cluster with high availability enabled. Storage is local on each node, with a 931 GB ZFS pool on<code>pve</code> for backups. Without shared storage an HA failover copies the container disk to another node, which takes minutes rather than seconds; fine for a homelab. All nodes are connected over Tailscale, with no ports exposed to the internet.</p><figure class="figure figure-dark"><img src="/img/projects/monitoring/proxmox-cluster.jpg" alt="Diagram of the three Proxmox nodes pve, node2 and node3 with the services running on each, connected through Tailscale" width="1376" height="768" loading="lazy"><figcaption>The three nodes and what runs where.</figcaption></figure><h2 id="what-i-learned">What I learned</h2><ul><li>How Prometheus works under the hood: the pull model, scrape jobs, relabelling and PromQL.</li><li>Why Alertmanager is a separate component: grouping, routing and silencing are their own problem.</li><li>How companies handle incidents with PagerDuty: on-call, escalation and acknowledgement.</li></ul><p>The install was the easy part. Understanding what each metric means, choosing thresholds that do not cry wolf, and building dashboards that actually help took most of the time.</p>
+]]></content:encoded></item><item><title>Linux Security Hardening</title><link>https://emmanueltekle.nl/projects/linux-security-hardening/</link><pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate><author>emmanueltekle@gmail.com (Emmanuel Tekle)</author><guid>https://emmanueltekle.nl/projects/linux-security-hardening/</guid><description>Two Bash scripts that bring a fresh Ubuntu/Debian server to a sensible baseline and audit the result.</description><content:encoded>&lt;![CDATA[<p>Two short Bash scripts: one hardens a freshly installed Ubuntu or Debian server, the other reports on the result. Tested on Ubuntu LTS.</p><h2 id="what-harden-serversh-does">What<code>harden-server.sh</code> does</h2><ol><li>Updates the system and enables<code>unattended-upgrades</code> for automatic security patches.</li><li>Hardens SSH: no root login, no password authentication, port moved to 2222.</li><li>Configures UFW: default deny incoming, allow outgoing, open only 2222, 80 and 443.</li><li>Installs and enables<code>auditd</code> for security event logging.</li></ol><h2 id="what-security-auditsh-reports">What<code>Security-audit.sh</code> reports</h2><ul><li>The active SSH settings for<code>Port</code>,<code>PermitRootLogin</code> and<code>PasswordAuthentication</code>.</li><li>UFW status and rules.</li><li>Failed SSH login attempts from<code>auth.log</code>.</li><li>Packages with pending updates.</li></ul><h2 id="audit-output">Audit output</h2><div class="terminal"><div class="terminal-bar">sudo ./Security-audit.sh</div><pre>Linux Security Audit
+SSH configuration:<span class="ok">✓ Port 2222</span><span class="ok">✓ PermitRootLogin no</span><span class="ok">✓ PasswordAuthentication no</span>
+UFW firewall status:
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+To Action From
+-- ------ ----
+2222/tcp ALLOW IN Anywhere
+80/tcp ALLOW IN Anywhere
+443/tcp ALLOW IN Anywhere
+Failed SSH login attempts (last 24h):
+sshd[2376]: Failed password for project from 192.168.159.1 port 30414 ssh2
+sshd[4581]: Failed password for project from 192.168.159.1 port 30543 ssh2
+Audit Complete</pre></div><h2 id="why">Why</h2><p>I wrote these to practise Linux administration and server-side security hands-on. The scripts are short and readable on purpose: every line is something I can explain and defend.</p><h2 id="what-id-do-next">What I&rsquo;d do next</h2><p>For one server, Bash is fine. For ten, this becomes an Ansible playbook with an inventory, and the audit becomes a set of<code>[OK]</code>/<code>[FAIL]</code> checks with an exit code so it can run from cron or CI.</p>
+]]></content:encoded></item></channel></rss>
