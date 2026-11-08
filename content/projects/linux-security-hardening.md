@@ -48,8 +48,8 @@ To                         Action      From
 443/tcp                    ALLOW IN    Anywhere
 
  Failed SSH login attempts (last 24h):
-sshd[2376]: Failed password for project from 192.168.159.1 port 30414 ssh2
-sshd[4581]: Failed password for project from 192.168.159.1 port 30543 ssh2
+sshd[2376]: Failed password for project from 10.0.0.50 port 30414 ssh2
+sshd[4581]: Failed password for project from 10.0.0.50 port 30543 ssh2
 
  Audit Complete
 {{< /terminal >}}

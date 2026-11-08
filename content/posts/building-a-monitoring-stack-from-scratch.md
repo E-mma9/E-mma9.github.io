@@ -19,9 +19,9 @@ scrape_configs:
   - job_name: 'proxmox-nodes'
     static_configs:
       - targets:
-          - '192.168.1.249:9100'   # pve
-          - '192.168.1.211:9100'   # node2
-          - '192.168.1.74:9100'    # node3
+          - '10.0.0.11:9100'   # host-1
+          - '10.0.0.12:9100'   # host-2
+          - '10.0.0.13:9100'   # host-3
 
   - job_name: 'blackbox-http'
     metrics_path: /probe
@@ -29,8 +29,8 @@ scrape_configs:
       module: [http_2xx]
     static_configs:
       - targets:
-          - 'http://192.168.1.30:81'       # Nginx Proxy Manager
-          - 'http://192.168.1.223/admin'   # Pi-hole
+          - 'http://10.0.0.20:81'       # reverse proxy
+          - 'http://10.0.0.21/admin'    # DNS admin
           - 'http://localhost:3000'        # Grafana
     relabel_configs:
       - source_labels: [__address__]

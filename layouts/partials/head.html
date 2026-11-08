@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ if .IsHome }}{{ site.Title }} — DevOps & Platform Engineer{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ site.Title }} — Platform / DevOps engineer{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
 <meta name="author" content="{{ site.Params.author }}">
 <meta name="theme-color" content="#ffffff">
@@ -9,7 +9,11 @@
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{{ "/img/og.png" | absURL }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ "/img/og.png" | absURL }}">
 
 <link rel="canonical" href="{{ .Permalink }}">
 <link rel="alternate" type="application/rss+xml" href="{{ "/posts/index.xml" | absURL }}" title="{{ site.Title }} — Blog">
@@ -30,6 +34,14 @@
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='0.5' y='0.5' width='31' height='31' rx='7' fill='%23ffffff' stroke='%23e2e8f0'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%231d4ed8'/%3E%3C/svg%3E">
 
+{{ if .IsHome }}
+{{ $creds := slice
+  (dict "@type" "EducationalOccupationalCredential" "name" "Microsoft Certified: Azure Administrator Associate (AZ-104)" "credentialCategory" "certification" "dateCreated" "2026-10-22" "expires" "2027-10-23" "identifier" "4C620F71E4B4DAAC" "url" "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/4C620F71E4B4DAAC")
+  (dict "@type" "EducationalOccupationalCredential" "name" "Microsoft Certified: Azure Solutions Architect Expert (AZ-305)" "credentialCategory" "certification" "dateCreated" "2026-11-08" "expires" "2027-11-09" "identifier" "84E42349E29D8743" "url" "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/84E42349E29D8743?sharingId=F7449C286C1C5718")
+}}
+{{ $person := dict "@context" "https://schema.org" "@type" "Person" "name" site.Params.author "jobTitle" "Platform / DevOps engineer" "url" site.Home.Permalink "email" (printf "mailto:%s" site.Params.email) "address" (dict "@type" "PostalAddress" "addressLocality" "Enschede" "addressCountry" "NL") "sameAs" (slice site.Params.github site.Params.linkedin) "hasCredential" $creds }}
+<script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
+{{ end }}
 {{ with site.Params.goatcounter -}}
 {{ if hugo.IsProduction -}}
 <script data-goatcounter="https://{{ . }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

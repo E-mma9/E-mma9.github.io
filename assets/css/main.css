@@ -101,17 +101,32 @@ main { padding-bottom: 4rem; }
 }
 .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
 .hero h1 {
-  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-size: clamp(1.65rem, 3.4vw, 2.15rem);
   font-weight: 800;
-  line-height: 1.08;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
+  max-width: 18em;
 }
 .lead { font-size: 1.15rem; color: var(--text-2); max-width: 38em; margin-bottom: 1.5rem; }
 .hero-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .hero-links { display: flex; gap: 1.1rem; font-size: 0.9rem; }
 .hero-links a { color: var(--text-2); font-weight: 500; }
 .hero-links a:hover { color: var(--accent); }
+
+/* ==== Skills ==== */
+
+.skill-list { display: grid; }
+.skill-row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) 1fr;
+  gap: 0.35rem 1.25rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.skill-domain { font-weight: 700; }
+.skill-line { font-size: 0.92rem; color: var(--text-2); }
+.skill-k { font-weight: 600; color: var(--text); }
 
 /* ==== Sections ==== */
 
@@ -381,6 +396,7 @@ main { padding-bottom: 4rem; }
   .topnav { padding: 0.9rem 0; }
   .nav-links { gap: 0.9rem; }
   .stats { grid-template-columns: 1fr; }
+  .skill-row { grid-template-columns: 1fr; }
   .project-grid { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; }
   .cert-hero { grid-template-columns: 1fr; }

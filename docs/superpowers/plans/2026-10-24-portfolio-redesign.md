@@ -173,7 +173,7 @@ experience:
     location: "Haaksbergen, NL"
     period: "Sep 2026 – Jan 2027"
     bullets:
-      - "Automated standard IT changes end-to-end in production: self-service portal → Rewst RPA workflow → Autotask REST API, for ~200 client organisations."
+      - "Automated standard IT changes end-to-end in production: self-service portal → RPA workflow → PSA API, for ~200 client organisations."
       - "Sole owner of the Azure platform behind the company CRM: hosting, PostgreSQL, secrets management and the release pipeline."
   - role: "Systems Administrator"
     company: "Livio"
@@ -446,7 +446,7 @@ git commit -m "home: hero, stats, experience, projects, certifications, educatio
 
 Front matter: title "AI support agent in production", date 2026-10-01, period "Live since Oct 2026", status live, weight 10, summary "Solo-built agent that researches every new support ticket for ~50 client organisations and delivers a diagnosis note in 1–2 minutes.", tech `[Azure Container Apps, Service Bus, PostgreSQL, Key Vault, Bicep, Azure DevOps, Claude]`, no repo, no thumb.
 Body, three h2 sections from the CV bullets, each 2–4 sentences, no extra facts:
-- "What it does": idea to production in seven weeks; ~45 runs per workday; 200+ runs and zero data incidents in the first week; 17 read-only tools over Autotask, IT Glue and Datto RMM.
+- "What it does": solo-built AI support agent, Azure-hosted, used for ~200 client organisations, with a person reviewing every note.
 - "Platform as code": Container Apps, Service Bus queue + job, PostgreSQL, Key Vault via managed identities, ACR, Bicep, scale-to-zero; pipeline with unit tests, pip-audit, gitleaks, health-checked rollouts, PR build validation.
 - "Security by design": one ticket per run, zero credentials inside the agent, secret fields filtered, prompt-injection attempts detected and refused. Closing line: a second agent for sales is in design, with an MCP server as the only write path and human approval before any send.
 Optional inline SVG flow (ticket → queue → agent job → read-only tools → diagnosis note) inside a `.figure-dark`; skip if it would take more than 30 minutes.
@@ -532,7 +532,7 @@ Keep title, date, tags, tone. Rewrite "Hardware" to: three second-hand small-for
 
 - [ ] **Step 2: `building-a-monitoring-stack-from-scratch.md`**
 
-Change job name `nodes` → `proxmox-nodes` and targets to `192.168.1.249:9100`, `192.168.1.211:9100`, `192.168.1.74:9100` (from the README). Replace the probe targets with two generic local services (`http://192.168.1.211:3000` style; take real ones from the repo's `prometheus.yml` if present, else use the two from the README's screenshots). Replace "Three Proxmox nodes… One VM runs… Another runs…" with: node_exporter on each host; Prometheus, Alertmanager, Grafana and blackbox_exporter together in one LXC container. Add one paragraph listing the seven rules by name with their `for` durations. Keep the Alertmanager, test-alert and "tripped me up" sections (they do not contradict the repo), but change "SMS" wording to "text message, then a phone call if I don't acknowledge".
+Change job name `nodes` → `proxmox-nodes` and targets to placeholders such as `10.0.0.11:9100` (`host-1`). Replace the probe targets with generic local services (`http://10.0.0.20` style). Replace "Three Proxmox nodes… One VM runs… Another runs…" with: node_exporter on each host; Prometheus, Alertmanager, Grafana and blackbox_exporter together in one LXC container. Add one paragraph listing the seven rules by name with their `for` durations. Keep the Alertmanager, test-alert and "tripped me up" sections (they do not contradict the repo), but change "SMS" wording to "text message, then a phone call if I don't acknowledge".
 
 - [ ] **Step 3: `hardening-ubuntu-with-bash.md`**
 

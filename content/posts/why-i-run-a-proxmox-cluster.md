@@ -12,9 +12,9 @@ A short write-up on my home Proxmox cluster — why three nodes, how it's wired,
 
 Three second-hand small-form-factor PCs, a Dell OptiPlex and two HP ProDesks, all on Intel i5 CPUs:
 
-- **pve** — 16 GB RAM, 238 GB NVMe for the OS, plus a 931 GB HDD as a ZFS pool for backups
-- **node2** — 8 GB RAM, 119 GB NVMe
-- **node3** — 8 GB RAM, 119 GB SSD
+- **host-1** — 16 GB RAM, 238 GB NVMe for the OS, plus a 931 GB HDD as a ZFS pool for backups
+- **host-2** — 8 GB RAM, 119 GB NVMe
+- **host-3** — 8 GB RAM, 119 GB SSD
 
 All three run Proxmox VE 9, headless, joined in one cluster with high availability enabled.
 
@@ -33,7 +33,7 @@ Everything sits on one bridged LAN via `vmbr0`, not segmented yet. Remote access
 
 ## Storage
 
-Storage is local on each node. There is no shared storage: a distributed storage layer would need an extra disk per node, and I did not want to spend on that yet. The ZFS pool on `pve` holds the backups for the whole cluster.
+Storage is local on each node. There is no shared storage: a distributed storage layer would need an extra disk per node, and I did not want to spend on that yet. The ZFS pool on `host-1` holds the backups for the whole cluster.
 
 The trade-off shows up on failover. Without shared storage, HA has to copy the container disk to the target node before it can start there, so a failover takes minutes rather than seconds. For a homelab that's fine.
 
