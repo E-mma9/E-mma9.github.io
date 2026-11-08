@@ -1,0 +1,16 @@
+<section class="section" id="skills">
+  <div class="section-head">
+    <h2>Skills</h2>
+  </div>
+  <div class="skill-list">
+    {{ range hugo.Data.profile.skills }}
+    <div class="skill-row">
+      <div class="skill-domain">{{ .domain }}</div>
+      <div>
+        <p class="skill-line"><span class="skill-k">Hands-on.</span> {{ .hands_on }}</p>
+        {{ with .learning }}<p class="skill-line"><span class="skill-k">Learning.</span> {{ . }}</p>{{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>

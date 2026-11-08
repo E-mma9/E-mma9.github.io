@@ -44,7 +44,7 @@ Seven rules, each with a `for` duration chosen so a short spike does not page me
 
 ## Dashboards
 
-{{< figure src="/img/projects/monitoring/grafana-cluster-overview.png" alt="Grafana cluster overview dashboard with CPU, memory, disk and uptime panels for node2" caption="Custom cluster-overview dashboard in Grafana." width=1400 height=663 >}}
+{{< figure src="/img/projects/monitoring/grafana-cluster-overview.png" alt="Grafana cluster overview dashboard with CPU, memory, disk and uptime panels for one node" caption="Custom cluster-overview dashboard in Grafana." width=1400 height=663 >}}
 
 ## Paging
 
@@ -56,9 +56,9 @@ I chose PagerDuty over Telegram or Discord because it is what companies use, and
 
 ## The cluster underneath
 
-Three second-hand small-form-factor PCs (Dell OptiPlex, HP ProDesk) running Proxmox VE 9 as a cluster with high availability enabled. Storage is local on each node, with a 931 GB ZFS pool on `pve` for backups. Without shared storage an HA failover copies the container disk to another node, which takes minutes rather than seconds; fine for a homelab. All nodes are connected over Tailscale, with no ports exposed to the internet.
+Three second-hand small-form-factor PCs running Proxmox VE 9 as a cluster with high availability enabled. Storage is local on each node, with a ZFS pool on `host-1` for backups. Without shared storage an HA failover copies the container disk to another node, which takes minutes rather than seconds; fine for a homelab. All nodes are connected over a private overlay, with no ports exposed to the internet.
 
-{{< figure src="/img/projects/monitoring/proxmox-cluster.jpg" alt="Diagram of the three Proxmox nodes pve, node2 and node3 with the services running on each, connected through Tailscale" caption="The three nodes and what runs where." width=1376 height=768 dark=true >}}
+{{< figure src="/img/projects/monitoring/proxmox-cluster.jpg" alt="Diagram of three Proxmox nodes and the services running on each" caption="The three nodes and what runs where. Hostnames in the source diagram are lab names." width=1376 height=768 dark=true >}}
 
 ## What I learned
 

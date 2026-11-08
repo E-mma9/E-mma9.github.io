@@ -1,0 +1,78 @@
+# Downloadable CV. Layout-only facts (phone, links, project detail) live here.
+# Biographical lines that also appear on the site use the site's wording.
+name: Emmanuel Tekle
+subtitle: "Platform / DevOps engineer (student, HBO Cybersecurity & Cloud Engineering) · Azure AZ-104 + AZ-305 · AI platform live in production"
+contact:
+  - "Enschede, NL · emmanueltekle@gmail.com · emmanueltekle.nl"
+  - "linkedin.com/in/emmanuel-tekle-3485b334a · github.com/E-mma9 · Dutch nationality · Available Feb – Jul 2027, full-time"
+profile: "Azure-certified (AZ-104, AZ-305) engineer who ships production systems while still studying. Designed and built, solo, an AI support agent that is live for ~200 client organisations of a managed service provider. It is hosted on Azure and stops at a diagnosis note for an engineer. 2 years of hands-on production experience across cloud, identity and containers. Preparing for the CKA."
+
+experience:
+  - title: "Automation & Infrastructure Engineer"
+    when: "Sep 2026 – Jan 2027"
+    meta: "JUICT B.V. (internship, managed service provider, ~200 client organisations) · Haaksbergen, NL"
+    bullets:
+      - "Automated standard IT changes end-to-end in production: self-service portal > RPA workflow > PSA API, for ~200 client organisations."
+      - "Azure platform for an internal CRM: hosting, PostgreSQL and the release pipeline."
+      - "Daily Azure DevOps: branching, pull requests, code review, CI/CD."
+  - title: "Systems Administrator"
+    when: "Apr 2025 – Aug 2026"
+    meta: "Livio (healthcare organisation) · Enschede, NL"
+    bullets:
+      - "Co-designed and ran the production Entra ID / hybrid identity platform of a healthcare organisation: Conditional Access, RBAC, group design, Entra Connect sync and Group Policy."
+      - "Operated within ISO 27001 / NEN 7510 for patient-related data: least privilege, access control, logging and audit."
+
+projects:
+  - title: "AI support agent in production (built solo)"
+    when: "Live since 16 Oct 2026"
+    meta: "Azure-hosted · ~200 client organisations"
+    bullets:
+      - "Reads a new ticket from the PSA, a documentation platform and RMM, then writes a diagnosis note for an engineer to review."
+  - title: "Mini Payments API – containerised, local Kubernetes manifests"
+    when: "Oct 2026 – present"
+    meta: "github.com/E-mma9"
+    bullets:
+      - "Spring Boot + PostgreSQL/Flyway service with tests, a Docker multi-stage image, docker-compose and local Kubernetes manifests. Not deployed to a cluster."
+  - title: "Homelab – 3-node Proxmox VE cluster"
+    when: "In progress"
+    bullets:
+      - "Proxmox VE cluster in progress. kubeadm for CKA practice is in progress. Terraform, Ansible and Wazuh are learning, not a finished platform."
+  - title: "Monitoring Homelab – production-style observability"
+    when: "Ongoing"
+    meta: "github.com/E-mma9/Monitoring-Homelab"
+    bullets:
+      - "Prometheus, Grafana and Alertmanager with custom alert rules, blackbox checks and PagerDuty paging, tested end-to-end."
+
+# Earned certificates first, in the same title / date / credential-line shape as AZ-104.
+certifications:
+  - title: "Microsoft Certified: Azure Administrator Associate (AZ-104)"
+    when: "Oct 2026"
+    credential_id: "4C620F71E4B4DAAC"
+    verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/4C620F71E4B4DAAC"
+  - title: "Microsoft Certified: Azure Solutions Architect Expert (AZ-305)"
+    when: "Nov 2026"
+    credential_id: "84E42349E29D8743"
+    verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/84E42349E29D8743?sharingId=F7449C286C1C5718"
+  - title: "Certified Kubernetes Administrator (CKA)"
+    when: "Exam planned spring 2027"
+
+education:
+  title: "Bachelor Cybersecurity & Cloud Engineering (HBO), Saxion"
+  when: "Sep 2024 – Jul 2028 (expected)"
+  meta: "Year 3 · Average 7.1 · Virtualisation (10), Public & Hybrid Cloud (9), Automated Infrastructures (9)"
+
+skills:
+  - label: "Cloud & IaC"
+    value: "Hands-on: Azure (AZ-104, AZ-305), Bicep, Linux, PostgreSQL. Learning: Terraform, Ansible."
+  - label: "Containers & orchestration"
+    value: "Hands-on: Docker, docker-compose. Learning: Kubernetes (local manifests, CKA prep)."
+  - label: "CI/CD"
+    value: "Hands-on: Git, Azure DevOps. Learning: GitHub Actions."
+  - label: "Observability"
+    value: "Hands-on: Prometheus, Grafana, Alertmanager. Learning: Wazuh."
+  - label: "Identity & security"
+    value: "Hands-on: Entra ID, Conditional Access. Learning: Trivy."
+  - label: "Scripting"
+    value: "Hands-on: Bash, PowerShell, Python (basic), Java/Spring Boot (basic)."
+
+languages: "Dutch (native), English (professional), German (elementary) · Former competitive kickboxer (B-class, 9–1) · Former Dutch top-20 speedcuber (2019)"

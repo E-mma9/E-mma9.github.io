@@ -1,18 +1,19 @@
 name: Emmanuel Tekle
-headline: "DevOps & Platform Engineer in the making."
+headline: "Platform / DevOps engineer · Azure AZ-104 + AZ-305 · AI platform live in production"
 availability: "Available Feb – Jul 2027 · full-time"
 lead: >-
-  Azure-certified (AZ-104) student at Saxion who ships production systems
-  while studying. Designed and built, solo, an AI support agent that now
-  handles every new ticket for 200+ client organisations of a managed
-  service provider.
+  Azure-certified (AZ-104, Azure Administrator Associate, Oct 2026, and
+  AZ-305, Azure Solutions Architect Expert, Nov 2026) student at Saxion
+  who ships production systems while studying. Designed and built, solo,
+  an AI support agent that now handles every new ticket for ~200 client
+  organisations of a managed service provider.
 stats:
-  - value: "AZ-104"
-    label: "Microsoft Certified, Oct 2026"
+  - value: "AZ-104 · AZ-305"
+    label: "Azure Administrator, Oct 2026 · Solutions Architect Expert, Nov 2026"
   - value: "2 yrs"
     label: "hands-on production experience"
-  - value: "7 weeks"
-    label: "AI agent from idea to production"
+  - value: "Live"
+    label: "AI support agent in production"
 experience:
   - role: "Automation & Infrastructure Engineer"
     company: "JUICT B.V."
@@ -20,8 +21,8 @@ experience:
     location: "Haaksbergen, NL"
     period: "Sep 2026 – Jan 2027"
     bullets:
-      - "Automated standard IT changes end-to-end in production: self-service portal → Rewst RPA workflow → Autotask REST API, for ~200 client organisations."
-      - "Sole owner of the Azure platform behind the company CRM: hosting, PostgreSQL, secrets management and the release pipeline."
+      - "Automated standard IT changes end-to-end in production: self-service portal → RPA workflow → PSA API, for ~200 client organisations."
+      - "Azure platform for an internal CRM: hosting, PostgreSQL and the release pipeline."
   - role: "Systems Administrator"
     company: "Livio"
     note: "healthcare organisation"
@@ -37,7 +38,7 @@ certifications:
     date: "22 Oct 2026"
     expires: "23 Oct 2027"
     credential_id: "4C620F71E4B4DAAC"
-    verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelTekle/4C620F71E4B4DAAC"
+    verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/4C620F71E4B4DAAC"
     image: "/img/az-104-certificate.png"
     image_width: 1200
     image_height: 813
@@ -45,21 +46,38 @@ certifications:
     issuer: "Microsoft"
     status: earned
     date: "8 Nov 2026"
-    expires: "8 Nov 2027"
+    expires: "9 Nov 2027"
     credential_id: "84E42349E29D8743"
     verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/84E42349E29D8743?sharingId=F7449C286C1C5718"
-  - name: "HashiCorp Certified: Terraform Associate"
-    issuer: "HashiCorp"
-    status: planned
-    date: "Exam planned Nov 2026"
+    image: "/img/az-305-certificate.png"
+    image_width: 1200
+    image_height: 813
   - name: "Certified Kubernetes Administrator (CKA)"
     issuer: "The Linux Foundation"
     status: planned
-    date: "Exam planned Jan 2027"
+    date: "Exam planned spring 2027"
 education:
   degree: "Bachelor Cybersecurity & Cloud Engineering (HBO)"
   school: "Saxion University of Applied Sciences"
   location: "Enschede, NL"
   period: "Sep 2024 – Jul 2028 (expected)"
   detail: "Year 3 · Virtualisation (10), Public & Hybrid Cloud (9), Automated Infrastructures (9)"
-beyond_work: "Outside work: competitive kickboxing (B-class, 9–1) and speedcubing (Dutch top 20, 2019)."
+beyond_work: "Outside work: former competitive kickboxer (B-class, 9–1) and former Dutch top-20 speedcuber (2019)."
+skills:
+  - domain: "Cloud & IaC"
+    hands_on: "Azure (AZ-104, AZ-305), Bicep, Linux, PostgreSQL"
+    learning: "Terraform, Ansible"
+  - domain: "Containers & orchestration"
+    hands_on: "Docker, docker-compose"
+    learning: "Kubernetes (local manifests, CKA prep)"
+  - domain: "CI/CD"
+    hands_on: "Git, Azure DevOps"
+    learning: "GitHub Actions"
+  - domain: "Observability"
+    hands_on: "Prometheus, Grafana, Alertmanager"
+    learning: "Wazuh"
+  - domain: "Identity & security"
+    hands_on: "Entra ID, Conditional Access"
+    learning: "Trivy"
+  - domain: "Scripting"
+    hands_on: "Bash, PowerShell, Python (basic), Java/Spring Boot (basic)"
