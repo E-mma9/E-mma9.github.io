@@ -2,8 +2,24 @@
 # Build the site and check the output.
 #   bash scripts/verify-site.sh            build + checks
 #   bash scripts/verify-site.sh --deploy   build + checks, then copy public/ to the repo root
+#   bash scripts/verify-site.sh --with-cv  regenerate the CV, then build + checks
+#   --with-cv and --deploy can be combined, in either order.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+
+deploy=0
+with_cv=0
+for arg in "$@"; do
+  case "$arg" in
+    --deploy) deploy=1 ;;
+    --with-cv) with_cv=1 ;;
+    *) echo "unknown argument: $arg" >&2; exit 2 ;;
+  esac
+done
+
+if [ "$with_cv" -eq 1 ]; then
+  bash scripts/cv/generate.sh
+fi
 
 hugo --minify --cleanDestinationDir --destination public --quiet
 
@@ -59,9 +75,15 @@ for p, t in bad:
 sys.exit(1 if bad else 0)
 EOF
 
-# 3. CV present and not a stub.
-if [ ! -f public/Emmanuel_Tekle_CV.pdf ] || [ "$(stat -f%z public/Emmanuel_Tekle_CV.pdf)" -lt 4000 ]; then
-  echo "CV missing or too small at public/Emmanuel_Tekle_CV.pdf"; fail=1
+# 3. CV present and not a stub. wc -c is the portable size check
+# (BSD stat -f and GNU stat -c do not accept each other's flags).
+if [ ! -f public/Emmanuel_Tekle_CV.pdf ]; then
+  echo "CV missing at public/Emmanuel_Tekle_CV.pdf"; fail=1
+else
+  cv_size=$(wc -c < public/Emmanuel_Tekle_CV.pdf | tr -d ' ')
+  if [ "$cv_size" -lt 4000 ]; then
+    echo "CV too small at public/Emmanuel_Tekle_CV.pdf ($cv_size bytes)"; fail=1
+  fi
 fi
 
 if [ "$fail" -ne 0 ]; then
@@ -72,7 +94,7 @@ echo "OK"
 # --deploy: GitHub Pages serves the repo root of main, so copy the build there.
 # Only generated paths are removed; source dirs (content, layouts, assets, static,
 # config, data, docs, scripts) and .nojekyll/.gitignore are never touched.
-if [ "${1:-}" = "--deploy" ]; then
+if [ "$deploy" -eq 1 ]; then
   rm -rf about css tags categories posts projects img index.html index.xml sitemap.xml robots.txt
   cp -R public/. .
   echo "DEPLOYED to repo root"

@@ -1,5 +1,10 @@
 # Hugo build artifacts
 public/
+
+# Local venv for scripts/cv/generate.sh
+scripts/cv/.venv/
+__pycache__/
+*.pyc
 resources/_gen/
 hugo_stats.json
 .hugo_build.lock

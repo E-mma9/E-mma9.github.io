@@ -1,0 +1,81 @@
+# Wording of the downloadable CV, frozen to the October 2026 PDF.
+# This file is intentionally NOT generated from data/profile.yaml: the PDF
+# keeps older phrasing (job title "Intern", "~50 client organisations", and so
+# on). The only later edit is the earned AZ-305 entry.
+name: Emmanuel Tekle
+subtitle: "DevOps / Platform Engineer (student, HBO Cybersecurity & Cloud Engineering) · Microsoft Certified: Azure Administrator Associate"
+contact:
+  - "Enschede, NL · 06 87 43 35 37 · emmanueltekle@gmail.com · emmanueltekle.nl"
+  - "linkedin.com/in/emmanuel-tekle-3485b334a · github.com/E-mma9 · Dutch nationality · Available Feb – Jul 2027, full-time"
+profile: "Azure-certified (AZ-104) engineer who ships production systems while still studying. Designed and built, solo, an AI support agent that now handles every new ticket for ~50 client organisations of a managed service provider, on a private, identity-first Azure platform with a fully automated, security-scanned delivery pipeline. 2 years of hands-on production experience across cloud, identity, CI/CD, infrastructure as code and containers. Preparing for the CKA; heading for platform engineering and DevSecOps."
+
+experience:
+  - title: "Automation & Infrastructure Intern"
+    when: "Sep 2026 – Jan 2027"
+    meta: "JUICT B.V. (managed service provider, ~200 client organisations) · Haaksbergen, NL"
+    bullets:
+      - "Eliminated manual engineer work for standard IT changes by automating them end-to-end in production: self-service portal → Rewst RPA workflow → Autotask REST API, for ~200 client organisations."
+      - "Sole owner of the Azure platform behind the company CRM: hosting, PostgreSQL, secrets management and the release pipeline."
+      - "Daily Azure DevOps: branching, pull requests, code review, CI/CD."
+  - title: "Systems Administrator"
+    when: "Apr 2025 – Aug 2026"
+    meta: "Livio (healthcare organisation) · Enschede, NL"
+    bullets:
+      - "Co-designed and ran the production Entra ID / hybrid identity platform of a healthcare organisation: Conditional Access, RBAC, group design, Entra Connect sync and Group Policy."
+      - "Operated within ISO 27001 / NEN 7510 for patient-related data: least privilege, access control, logging and audit."
+
+projects:
+  - title: "AI support agent in production – JUICT (built end-to-end, solo)"
+    when: "Live since Oct 2026"
+    meta: "Hermes agent + Claude · Azure Container Apps · Azure DevOps"
+    bullets:
+      - "From idea to production in seven weeks: the agent researches every new support ticket for ~50 client organisations and delivers a diagnosis note in 1–2 minutes, ~45 runs per workday, 200+ runs and zero data incidents in the first week; 17 read-only tools over Autotask, IT Glue and Datto RMM."
+      - "Platform as code: Azure Container Apps, Service Bus queue + job, PostgreSQL, Key Vault via managed identities, ACR, Bicep, scale-to-zero. CI/CD with unit tests, pip-audit, gitleaks, health-checked rollouts and PR build validation; nothing reaches production untested or unscanned."
+      - "Security by design, enforced in code rather than prompts: one ticket per run, zero credentials inside the agent, secret fields filtered, prompt-injection attempts detected and refused. Now designing a second agent for sales: MCP server as the only write path, human approval before any send."
+  - title: "Mini Payments API – Spring Boot on Kubernetes"
+    when: "Oct 2026 – present"
+    meta: "github.com/E-mma9"
+    bullets:
+      - "Spring Boot + PostgreSQL/Flyway service with tests and a Docker multi-stage build; next: Kubernetes, GitHub Actions with Trivy, AKS via Terraform."
+  - title: "Homelab – 3-node Proxmox VE cluster"
+    when: "Ongoing"
+    bullets:
+      - "Self-built platform as code: Terraform + Ansible provisioning, CI in GitHub Actions/GitLab CI, Wazuh SIEM; kubeadm cluster in progress for CKA."
+  - title: "Monitoring Homelab – production-style observability"
+    when: "Ongoing"
+    meta: "github.com/E-mma9/Monitoring-Homelab"
+    bullets:
+      - "Prometheus, Grafana and Alertmanager with custom alert rules, blackbox checks and PagerDuty paging, tested end-to-end."
+
+# Earned certificates first, in the same title / date / credential-line shape
+# as AZ-104. The CKA row is followed immediately by the Terraform sentence
+# (that is how the October 2026 PDF stacked them).
+certifications:
+  - title: "Microsoft Certified: Azure Administrator Associate (AZ-104)"
+    when: "Oct 2026"
+    credential_id: "4C620F71E4B4DAAC"
+    verify_url: "https://learn.microsoft.com/api/credentials/share/nl-nl/EmmanuelAronTekle-4331/4C620F71E4B4DAAC?sharingId=F7449C286C1C5718"
+  - title: "Microsoft Certified: Azure Solutions Architect Expert (AZ-305)"
+    when: "Nov 2026"
+    credential_id: "84E42349E29D8743"
+    verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/84E42349E29D8743?sharingId=F7449C286C1C5718"
+  - title: "Certified Kubernetes Administrator (CKA)"
+    when: "Exam planned Jan 2027"
+    meta: "HashiCorp Terraform Associate – exam planned Nov 2026"
+
+education:
+  title: "Bachelor Cybersecurity & Cloud Engineering (HBO), Saxion"
+  when: "Sep 2024 – Jul 2028 (expected)"
+  meta: "Year 3 · Average 7.1 · Virtualisation (10), Public & Hybrid Cloud (9), Automated Infrastructures (9)"
+
+skills:
+  - label: "Platform"
+    value: "Azure (AZ-104), Azure Container Apps, Docker, Kubernetes (CKA prep), Linux, PostgreSQL"
+  - label: "Automation"
+    value: "Azure DevOps Pipelines, GitHub Actions, Terraform, Ansible, Bicep, Git"
+  - label: "Security & observability"
+    value: "Entra ID, Key Vault, managed identities, Prometheus, Grafana, Wazuh, Trivy, gitleaks"
+  - label: "Scripting"
+    value: "Bash, PowerShell, Python (basic), Java/Spring Boot (basic)"
+
+languages: "Dutch (native), English (professional), German (elementary) · Competitive kickboxing (B-class, 9–1) · Speedcubing (Dutch top 20, 2019)"
