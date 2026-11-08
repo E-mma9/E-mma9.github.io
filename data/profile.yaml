@@ -41,6 +41,13 @@ certifications:
     image: "/img/az-104-certificate.png"
     image_width: 1200
     image_height: 813
+  - name: "Microsoft Certified: Azure Solutions Architect Expert (AZ-305)"
+    issuer: "Microsoft"
+    status: earned
+    date: "8 Nov 2026"
+    expires: "8 Nov 2027"
+    credential_id: "84E42349E29D8743"
+    verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/84E42349E29D8743?sharingId=F7449C286C1C5718"
   - name: "HashiCorp Certified: Terraform Associate"
     issuer: "HashiCorp"
     status: planned

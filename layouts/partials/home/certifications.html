@@ -6,7 +6,7 @@
     {{ range hugo.Data.profile.certifications }}
     {{ $c := . }}
     {{ if eq .status "earned" }}
-    <article class="cert cert-hero">
+    <article class="cert cert-hero{{ if not .image }} cert-text{{ end }}">
       {{ with .image }}
       <img class="cert-image" src="{{ . | relURL }}" alt="{{ $c.name }} certificate" width="{{ $c.image_width }}" height="{{ $c.image_height }}" loading="lazy">
       {{ end }}
