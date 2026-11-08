@@ -12,7 +12,7 @@ experience:
     when: "Sep 2026 – Jan 2027"
     meta: "JUICT B.V. (internship, managed service provider, ~200 client organisations) · Haaksbergen, NL"
     bullets:
-      - "Automated standard IT changes end-to-end in production: self-service portal → RPA workflow → PSA API, for ~200 client organisations."
+      - "Automated standard IT changes end-to-end in production: self-service portal > RPA workflow > PSA API, for ~200 client organisations."
       - "Azure platform for an internal CRM: hosting, PostgreSQL and the release pipeline."
       - "Daily Azure DevOps: branching, pull requests, code review, CI/CD."
   - title: "Systems Administrator"
