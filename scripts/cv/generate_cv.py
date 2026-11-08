@@ -2,10 +2,10 @@
 """Rebuild Emmanuel_Tekle_CV.pdf from scripts/cv/content.yaml.
 
 The October 2026 PDF was ReportLab platypus output (Helvetica, A4, no
-embedded fonts). Margins below were measured from that file: 18 mm page
-margins plus SimpleDocTemplate's default 6 pt frame padding on the sides
-and top. The bottom margin is tighter so the added AZ-305 block stays on
-the same single page; it does not move anything that still fits.
+embedded fonts). Side margins match that file: 18 mm plus SimpleDocTemplate's
+default 6 pt frame padding. AZ-305 adds 26.5 pt. The same 26.5 pt is taken
+back by shortening each inter-block gap by 1 pt and the top margin by 4.5 pt,
+so the last line still sits about 41 pt above the page edge on a single page.
 
 Run via scripts/cv/generate.sh. Output is byte-stable (invariant=1).
 """
@@ -47,12 +47,19 @@ GRAY = HexColor("#666666")
 INK = HexColor("#222222")
 RULE = HexColor("#B8C4D3")
 
-# Measured from the original content stream. See the module docstring.
+# Side margins match the October 2026 PDF (18 mm + the old 6 pt frame padding).
 SIDE = 18 * mm + 6
-TOP = 9 * mm + 6
-# Original content ended ~42 pt above the page edge, so the real bottom
-# margin was never exercised. 12 pt keeps AZ-305 on one page.
-BOTTOM = 12
+# Original top margin was 9 mm + 6 pt (31.51 pt). 4.5 pt of that, plus 1 pt
+# off every inter-block gap below, pays for the 26.5 pt AZ-305 block.
+TOP = 9 * mm + 6 - 4.5
+# Frame floor. The last line is placed well above this; it only stops a spill
+# onto a second page.
+BOTTOM = 28
+# Gaps in the October 2026 PDF were 3 pt before a section, 2 pt under its
+# rule, and 3 pt after an entry. Each is 1 pt tighter.
+GAP_BEFORE_SECTION = 2
+GAP_AFTER_RULE = 1
+GAP_AFTER_ENTRY = 2
 # Fixed timestamp so repeated runs write the same bytes. 8 Nov 2026 UTC,
 # the day AZ-305 was earned. Not drawn on the page.
 SOURCE_DATE_EPOCH = "1794096000"
@@ -200,13 +207,13 @@ def add_entry(story, item: dict, width: float, style) -> None:
         story.append(Paragraph(xml_text(item["meta"]), style["meta"]))
     for bullet in item.get("bullets") or []:
         story.append(Paragraph(xml_text(bullet), style["bullet"], bulletText=BULLET))
-    story.append(Spacer(1, 3))
+    story.append(Spacer(1, GAP_AFTER_ENTRY))
 
 
 def add_section(story, title: str, width: float, style) -> None:
-    story.append(Spacer(1, 3))
+    story.append(Spacer(1, GAP_BEFORE_SECTION))
     story.append(section_header(title, width, style["section"]))
-    story.append(Spacer(1, 2))
+    story.append(Spacer(1, GAP_AFTER_RULE))
 
 
 def build_story(data: dict, width: float, style) -> list:
