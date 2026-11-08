@@ -1,6 +1,6 @@
 # CV generator
 
-`Emmanuel_Tekle_CV.pdf` (repo root and `static/`) is built by ReportLab from `content.yaml`. The wording matches the October 2026 PDF, plus the earned AZ-305 line. It is not rendered from `data/profile.yaml`, because that file uses newer site copy.
+`Emmanuel_Tekle_CV.pdf` (repo root and `static/`) is built by ReportLab from `content.yaml`. Lines that also appear on the site (role, certifications, client count, hobbies) use the site's wording. The rest of the CV is the October 2026 text.
 
 From the repo root:
 

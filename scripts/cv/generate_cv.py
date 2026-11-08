@@ -107,7 +107,13 @@ def styles():
             "section", fontName="Helvetica-Bold", fontSize=11, leading=14, textColor=NAVY
         ),
         "body": ParagraphStyle(
-            "body", fontName="Helvetica", fontSize=8.3, leading=10.2, textColor=INK
+            "body",
+            fontName="Helvetica",
+            fontSize=8.3,
+            leading=10.2,
+            textColor=INK,
+            # Pulls a slightly tight line up so the profile stays four lines.
+            spaceShrinkage=0.08,
         ),
         "job": ParagraphStyle(
             "job", fontName="Helvetica-Bold", fontSize=9.5, leading=12, textColor=INK
@@ -248,7 +254,9 @@ def build_story(data: dict, width: float, style) -> list:
         ]
         for row in data["skills"]
     ]
-    skills = Table(rows, colWidths=[width * 0.24, width * 0.76])
+    # 24/76 wrapped "PostgreSQL" once AZ-305 joined the platform line.
+    # 109 pt still fits the longest label ("Security & observability").
+    skills = Table(rows, colWidths=[109, width - 109])
     skills.setStyle(
         TableStyle(
             [

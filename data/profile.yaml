@@ -2,13 +2,14 @@ name: Emmanuel Tekle
 headline: "DevOps & Platform Engineer in the making."
 availability: "Available Feb – Jul 2027 · full-time"
 lead: >-
-  Azure-certified (AZ-104) student at Saxion who ships production systems
-  while studying. Designed and built, solo, an AI support agent that now
-  handles every new ticket for 200+ client organisations of a managed
-  service provider.
+  Azure-certified (AZ-104, Azure Administrator Associate, Oct 2026, and
+  AZ-305, Azure Solutions Architect Expert, Nov 2026) student at Saxion
+  who ships production systems while studying. Designed and built, solo,
+  an AI support agent that now handles every new ticket for 200+ client
+  organisations of a managed service provider.
 stats:
-  - value: "AZ-104"
-    label: "Microsoft Certified, Oct 2026"
+  - value: "AZ-104 · AZ-305"
+    label: "Azure Administrator, Oct 2026 · Solutions Architect Expert, Nov 2026"
   - value: "2 yrs"
     label: "hands-on production experience"
   - value: "7 weeks"
@@ -45,21 +46,20 @@ certifications:
     issuer: "Microsoft"
     status: earned
     date: "8 Nov 2026"
-    expires: "8 Nov 2027"
+    expires: "9 Nov 2027"
     credential_id: "84E42349E29D8743"
     verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/84E42349E29D8743?sharingId=F7449C286C1C5718"
-  - name: "HashiCorp Certified: Terraform Associate"
-    issuer: "HashiCorp"
-    status: planned
-    date: "Exam planned Nov 2026"
+    image: "/img/az-305-certificate.png"
+    image_width: 1200
+    image_height: 813
   - name: "Certified Kubernetes Administrator (CKA)"
     issuer: "The Linux Foundation"
     status: planned
-    date: "Exam planned Jan 2027"
+    date: "Exam planned spring 2027"
 education:
   degree: "Bachelor Cybersecurity & Cloud Engineering (HBO)"
   school: "Saxion University of Applied Sciences"
   location: "Enschede, NL"
   period: "Sep 2024 – Jul 2028 (expected)"
   detail: "Year 3 · Virtualisation (10), Public & Hybrid Cloud (9), Automated Infrastructures (9)"
-beyond_work: "Outside work: competitive kickboxing (B-class, 9–1) and speedcubing (Dutch top 20, 2019)."
+beyond_work: "Outside work: former competitive kickboxer (B-class, 9–1) and former Dutch top-20 speedcuber (2019)."
