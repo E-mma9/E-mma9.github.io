@@ -206,6 +206,7 @@ main { padding-bottom: 4rem; }
 .certs { display: grid; gap: 0.8rem; }
 .cert { border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; }
 .cert-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: center; }
+.cert-hero.cert-text { grid-template-columns: 1fr; }
 .cert-image { border-radius: 8px; width: 100%; }
 .cert-name { font-weight: 700; font-size: 1.05rem; }
 .cert-meta { font-size: 0.9rem; color: var(--text-2); margin-top: 0.35rem; display: grid; gap: 0.15rem; }
