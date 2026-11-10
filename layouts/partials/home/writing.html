@@ -2,15 +2,22 @@
 {{ if $posts }}
 <section class="section" id="writing">
   <div class="section-head">
-    <h2>Latest writing</h2>
-    <a class="section-link" href="{{ "/posts/" | relURL }}">All posts →</a>
+    <div>
+      <h2>Latest writing</h2>
+      <p class="section-lead">Build log and notes from the homelab.</p>
+    </div>
+    <a class="section-link" href="{{ "/posts/" | relURL }}">All posts</a>
   </div>
   <div class="list">
-    {{ range first 3 $posts.ByDate.Reverse }}
-    <a class="list-item" href="{{ .RelPermalink }}">
-      <span class="item-date">{{ .Date.Format "02 Jan 2006" }}</span>
-      <span class="item-title">{{ .Title }}</span>
-    </a>
+    {{ range first 5 $posts.ByDate.Reverse }}
+    <article class="list-item">
+      <time class="item-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+      <div>
+        <a class="item-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Params.summary }}<p class="item-summary">{{ . }}</p>{{ end }}
+        {{ with .Params.tags }}{{ partial "tags.html" . }}{{ end }}
+      </div>
+    </article>
     {{ end }}
   </div>
 </section>
