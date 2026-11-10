@@ -10,7 +10,7 @@
   <rect x="490" y="160" width="220" height="128" rx="12" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
   <text x="600" y="206" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Agent</text>
   <text x="600" y="230" text-anchor="middle" fill="#bfdbfe" font-size="13">hosted on Azure</text>
-  <text x="600" y="252" text-anchor="middle" fill="#bfdbfe" font-size="13">read-only context</text>
+  <text x="600" y="252" text-anchor="middle" fill="#bfdbfe" font-size="13">note for review</text>
 
   <rect x="900" y="180" width="220" height="88" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
   <text x="1010" y="218" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Engineer</text>
@@ -19,11 +19,12 @@
   <path d="M300 224 H490" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
   <path d="M710 224 H900" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
 
-  <rect x="250" y="420" width="700" height="160" rx="14" fill="#111827" stroke="#334155" stroke-width="1.5"/>
-  <text x="600" y="462" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="600" letter-spacing="0.04em">READ-ONLY CONTEXT</text>
-  <text x="600" y="508" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">PSA · documentation platform · RMM</text>
-  <text x="600" y="542" text-anchor="middle" fill="#94a3b8" font-size="14">The agent writes one diagnosis note. A person decides what happens next.</text>
-  <path d="M600 288 V420" fill="none" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrb)"/>
+  <rect x="250" y="400" width="700" height="180" rx="14" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="600" y="442" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="600" letter-spacing="0.04em">READ-ONLY CONTEXT</text>
+  <text x="600" y="482" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">PSA · documentation platform · RMM</text>
+  <text x="600" y="512" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">EDR · M365 management tool</text>
+  <text x="600" y="550" text-anchor="middle" fill="#94a3b8" font-size="15">Internal note for a person. Changes in a customer environment require approval.</text>
+  <path d="M600 288 V400" fill="none" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrb)"/>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">

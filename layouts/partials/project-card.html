@@ -11,6 +11,7 @@
       <span>{{ .Title }}</span>
       {{ with .Params.status }}{{ partial "status.html" . }}{{ end }}
     </div>
+    {{ with .Params.period }}<p class="card-period">{{ . }}</p>{{ end }}
     {{ with .Params.summary }}<p class="card-summary">{{ . }}</p>{{ end }}
     {{ with .Params.tech }}
     <div class="tags">{{ range first 4 . }}<span class="tag">{{ . }}</span>{{ end }}</div>

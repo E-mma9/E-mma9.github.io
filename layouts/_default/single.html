@@ -7,6 +7,7 @@
     {{ with .Params.period }}<span>{{ . }}</span>{{ else }}{{ if not .Date.IsZero }}<span>{{ .Date.Format "02 Jan 2006" }}</span>{{ end }}{{ end }}
     {{ with .Params.status }}<span class="dot-sep">·</span>{{ partial "status.html" . }}{{ end }}
     {{ if and (not $isProject) (gt .ReadingTime 0) }}<span class="dot-sep">·</span><span>{{ .ReadingTime }} min read</span>{{ end }}
+    {{ with .GetTerms "series" }}{{ range . }}<span class="dot-sep">·</span><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
   </div>
 
   {{ with .Params.summary }}<p class="article-lede">{{ . }}</p>{{ end }}
@@ -15,13 +16,18 @@
   {{ if or .Params.repo $tags }}
   <div class="article-actions">
     {{ with .Params.repo }}<a class="btn btn-secondary" href="{{ . }}" target="_blank" rel="noopener noreferrer">View on GitHub →</a>{{ end }}
-    {{ with $tags }}<div class="tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}
+    {{ if $isProject }}
+      {{ with $tags }}<div class="tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}
+    {{ else }}
+      {{ with .Params.tags }}{{ partial "tags.html" . }}{{ end }}
+    {{ end }}
   </div>
   {{ end }}
 
   <div class="prose">
     {{ .Content }}
   </div>
+  {{ partial "series-nav.html" . }}
 
   <div class="article-foot">
     {{ if $isProject }}<a href="{{ "/projects/" | relURL }}">← All projects</a>{{ else }}<a href="{{ "/posts/" | relURL }}">← All writing</a>{{ end }}

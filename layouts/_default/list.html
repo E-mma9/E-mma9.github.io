@@ -2,22 +2,36 @@
 <h1 class="article-title">{{ .Title }}</h1>
 {{ with .Content }}<div class="article-lede">{{ . }}</div>{{ end }}
 
-{{ if eq .Section "projects" }}
+{{ if eq .Kind "taxonomy" }}
+<div class="list">
+  {{ range .Pages.ByTitle }}
+  <a class="list-item" href="{{ .RelPermalink }}">
+    <span class="item-date">{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</span>
+    <span class="item-title">{{ .Title }}</span>
+  </a>
+  {{ end }}
+</div>
+{{ else if eq .Section "projects" }}
 <div class="project-grid">
   {{ range .Pages.ByWeight }}
   {{ partial "project-card.html" . }}
   {{ end }}
 </div>
 {{ else }}
+{{ $pages := .Pages.ByDate.Reverse }}
+{{ if and (eq .Kind "term") (eq .Data.Plural "series") }}
+  {{ $pages = .Pages.ByParam "series_order" }}
+{{ end }}
 <div class="list">
-  {{ range .Pages.ByDate.Reverse }}
-  <a class="list-item" href="{{ .RelPermalink }}">
-    <span class="item-date">{{ .Date.Format "02 Jan 2006" }}</span>
-    <span>
-      <span class="item-title">{{ .Title }}</span>
+  {{ range $pages }}
+  <article class="list-item">
+    <time class="item-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+    <div>
+      <a class="item-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
       {{ with .Params.summary }}<p class="item-summary">{{ . }}</p>{{ end }}
-    </span>
-  </a>
+      {{ with .Params.tags }}{{ partial "tags.html" . }}{{ end }}
+    </div>
+  </article>
   {{ end }}
 </div>
 {{ end }}
