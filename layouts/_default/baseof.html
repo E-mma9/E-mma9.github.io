@@ -4,9 +4,14 @@
   {{- partial "head.html" . -}}
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
   <div class="page">
-    {{- partial "nav.html" . -}}
-    <main class="wrap{{ if .IsHome }} wrap-wide{{ end }}">
+    <header class="site-header">
+      <div class="wrap-wide">
+        {{- partial "nav.html" . -}}
+      </div>
+    </header>
+    <main id="content" class="wrap{{ if .IsHome }} wrap-wide{{ end }}">
       {{- block "main" . }}{{- end }}
     </main>
     {{- partial "footer.html" . -}}

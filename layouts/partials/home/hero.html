@@ -1,12 +1,16 @@
 {{ $p := hugo.Data.profile }}
 <section class="hero">
-  <h1>{{ $p.headline }}</h1>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <p class="badge">{{ $p.availability }}</p>
+  <h1>{{ $p.name }}</h1>
+  <p class="hero-role"><span>{{ $p.headline }}</span> <span class="hero-dot" aria-hidden="true">·</span> <span class="hero-pos">{{ $p.positioning }}</span></p>
   <p class="lead">{{ $p.lead }}</p>
   <div class="hero-actions">
     <a class="btn btn-primary" href="{{ site.Params.cv | relURL }}" target="_blank" rel="noopener noreferrer">Download CV</a>
     <a class="btn btn-secondary" href="#contact">Get in touch</a>
   </div>
   <div class="hero-links">
+    <span>{{ site.Params.location }}</span>
     <a href="{{ site.Params.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
     <a href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </div>

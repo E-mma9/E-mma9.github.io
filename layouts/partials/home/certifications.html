@@ -10,12 +10,12 @@
       {{ with .image }}
       <img class="cert-image" src="{{ . | relURL }}" alt="{{ $c.name }} certificate" width="{{ $c.image_width }}" height="{{ $c.image_height }}" loading="lazy">
       {{ end }}
-      <div>
+      <div class="cert-body">
         <div class="cert-name">{{ .name }}</div>
         <div class="cert-meta">
           <span>Earned {{ .date }}{{ with .expires }} · Expires {{ . }}{{ end }}</span>
           {{ with .credential_id }}<span>Credential ID {{ . }}</span>{{ end }}
-          {{ with .verify_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Verify on Microsoft Learn →</a>{{ end }}
+          {{ with .verify_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Verify on Microsoft Learn</a>{{ end }}
         </div>
       </div>
     </article>
