@@ -2,15 +2,17 @@
   <div class="section-head">
     <h2>Skills</h2>
   </div>
-  <div class="skill-list">
-    {{ range hugo.Data.profile.skills }}
-    <div class="skill-row">
-      <div class="skill-domain">{{ .domain }}</div>
-      <div>
-        <p class="skill-line"><span class="skill-k">Hands-on.</span> {{ .hands_on }}</p>
-        {{ with .learning }}<p class="skill-line"><span class="skill-k">Learning.</span> {{ . }}</p>{{ end }}
-      </div>
-    </div>
+  <ul class="skill-grid">
+    {{ range hugo.Data.profile.skills.primary }}
+    <li class="skill-tile">
+      {{ partial "tech-icon.html" . }}
+      <span>{{ . }}</span>
+    </li>
     {{ end }}
-  </div>
+  </ul>
+  <ul class="chip-row">
+    {{ range hugo.Data.profile.skills.more }}
+    <li class="chip">{{ .name }}{{ with .note }} <span class="chip-note">({{ . }})</span>{{ end }}{{ if .learning }} <span class="chip-note">(learning)</span>{{ end }}</li>
+    {{ end }}
+  </ul>
 </section>

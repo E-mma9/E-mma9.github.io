@@ -4,12 +4,37 @@
   {{- partial "head.html" . -}}
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
   <div class="page">
-    {{- partial "nav.html" . -}}
-    <main class="wrap{{ if .IsHome }} wrap-wide{{ end }}">
+    <header class="site-header">
+      <div class="wrap-wide">
+        {{- partial "nav.html" . -}}
+      </div>
+    </header>
+    <main id="content" class="wrap{{ if .IsHome }} wrap-wide{{ end }}">
       {{- block "main" . }}{{- end }}
     </main>
     {{- partial "footer.html" . -}}
   </div>
+  <script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('[data-theme-toggle]');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (!btn) return;
+    function paint(dark) {
+      if (dark) root.setAttribute('data-theme', 'dark');
+      else root.removeAttribute('data-theme');
+      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+      btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      if (meta) meta.setAttribute('content', dark ? '#090b10' : '#f4f6f8');
+    }
+    btn.addEventListener('click', function () {
+      paint(root.getAttribute('data-theme') !== 'dark');
+    });
+    paint(root.getAttribute('data-theme') === 'dark');
+  })();
+  </script>
 </body>
 </html>

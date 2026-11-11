@@ -1,12 +1,8 @@
 name: Emmanuel Tekle
-headline: "Platform / DevOps engineer · Azure AZ-104 + AZ-305 · AI platform live in production"
+headline: "Engineer"
+positioning: "Platform / DevOps"
 availability: "Available Feb – Jul 2027 · full-time"
-lead: >-
-  Azure-certified (AZ-104, Azure Administrator Associate, Oct 2026, and
-  AZ-305, Azure Solutions Architect Expert, Nov 2026) student at Saxion
-  who ships production systems while studying. Designed and built, solo,
-  an AI support agent that now handles every new ticket for ~200 client
-  organisations of a managed service provider.
+lead: "Azure-certified. I ship production systems while studying at Saxion."
 stats:
   - value: "AZ-104 · AZ-305"
     label: "Azure Administrator, Oct 2026 · Solutions Architect Expert, Nov 2026"
@@ -20,17 +16,14 @@ experience:
     note: "managed service provider"
     location: "Haaksbergen, NL"
     period: "Sep 2026 – Jan 2027"
-    bullets:
-      - "Built and operate a multi-service Azure platform (Container Apps, scheduled jobs, PostgreSQL, Key Vault, container registry and Service Bus) for an AI support agent that has been live since 16 October 2026, for ~200 client organisations."
-      - "Split the platform into a read service and a separate execute service, each with its own managed identity and database role. Write actions in a customer environment require approval. Infrastructure is Bicep, released through a four-stage Azure DevOps pipeline."
+    line: "Azure platform for an AI support agent, live since 16 Oct 2026 for ~200 client organisations. Write actions require approval."
+    href: "/projects/ai-support-agent/"
   - role: "Systems Administrator"
     company: "Livio"
     note: "healthcare organisation"
     location: "Enschede, NL"
     period: "Apr 2025 – Aug 2026"
-    bullets:
-      - "Co-designed and ran the production Entra ID / hybrid identity platform: Conditional Access, RBAC, group design, Entra Connect sync and Group Policy."
-      - "Operated within ISO 27001 / NEN 7510 for patient-related data: least privilege, access control, logging and audit."
+    line: "Production Entra ID and hybrid identity — Conditional Access, RBAC, Entra Connect and Group Policy — within ISO 27001 / NEN 7510."
 certifications:
   - name: "Microsoft Certified: Azure Administrator Associate (AZ-104)"
     issuer: "Microsoft"
@@ -64,20 +57,41 @@ education:
   detail: "Year 3 · Virtualisation (10), Public & Hybrid Cloud (9), Automated Infrastructures (9)"
 beyond_work: "Outside work: former competitive kickboxer (B-class, 9–1) and former Dutch top-20 speedcuber (2019)."
 skills:
-  - domain: "Cloud & IaC"
-    hands_on: "Azure (AZ-104, AZ-305), Container Apps, Container Apps Jobs, Logic Apps, Service Bus, Key Vault, Azure Database for PostgreSQL, Bicep, Linux, PostgreSQL"
-    learning: "Terraform, Ansible"
-  - domain: "Containers & orchestration"
-    hands_on: "Docker (non-root images), docker-compose, Azure Container Registry"
-    learning: "Kubernetes (local manifests, CKA prep)"
-  - domain: "CI/CD"
-    hands_on: "Git, Azure DevOps Pipelines"
-    learning: "GitHub Actions"
-  - domain: "Observability"
-    hands_on: "Prometheus, Grafana, Alertmanager"
-    learning: "Wazuh"
-  - domain: "Identity & security"
-    hands_on: "Entra ID, Conditional Access, managed identity, gitleaks, pip-audit"
-    learning: "Trivy"
-  - domain: "Scripting"
-    hands_on: "Bash, PowerShell, Python, Java/Spring Boot (basic), MCP"
+  primary:
+    - Azure
+    - Bicep
+    - Terraform
+    - Ansible
+    - Linux
+    - PostgreSQL
+    - Docker
+    - Kubernetes
+    - Git
+    - GitHub Actions
+    - Azure DevOps
+    - Prometheus
+    - Grafana
+    - Alertmanager
+    - Wazuh
+    - Entra ID
+    - Bash
+    - PowerShell
+    - Python
+  more:
+    - name: Container Apps
+    - name: Container Apps Jobs
+    - name: Logic Apps
+    - name: Service Bus
+    - name: Key Vault
+    - name: Azure Database for PostgreSQL
+    - name: Azure Container Registry
+    - name: docker-compose
+    - name: Conditional Access
+    - name: managed identity
+    - name: gitleaks
+    - name: pip-audit
+    - name: Java / Spring Boot
+      note: basic
+    - name: MCP
+    - name: Trivy
+      learning: true
