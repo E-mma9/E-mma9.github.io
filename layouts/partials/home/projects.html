@@ -1,11 +1,22 @@
+{{ $projects := where site.RegularPages "Section" "projects" }}
+{{ $lead := slice "mini-payments-api" "monitoring-homelab" }}
 <section class="section" id="projects">
   <div class="section-head">
     <h2>Selected projects</h2>
-    <a class="section-link" href="{{ "/projects/" | relURL }}">All projects →</a>
+    <a class="section-link" href="{{ "/projects/" | relURL }}">All projects</a>
   </div>
-  <div class="project-grid">
-    {{ range first 4 (where site.RegularPages "Section" "projects").ByWeight }}
-    {{ partial "project-card.html" . }}
+  <div class="home-projects">
+    {{ range $slug := $lead }}
+      {{ with index (where $projects "File.BaseFileName" $slug) 0 }}
+      <a class="home-project" href="{{ .RelPermalink }}">
+        <span class="home-project-title">{{ .Title }}</span>
+        {{ with .Params.period }}<span class="home-project-meta">{{ . }}</span>{{ end }}
+        {{ with .Params.summary }}<span class="home-project-summary">{{ . }}</span>{{ end }}
+      </a>
+      {{ end }}
     {{ end }}
   </div>
+  {{ with index (where $projects "File.BaseFileName" "ai-support-agent") 0 }}
+  <p class="also-link"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+  {{ end }}
 </section>

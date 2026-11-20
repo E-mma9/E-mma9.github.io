@@ -5,14 +5,13 @@
     <h2>Latest writing</h2>
     <a class="section-link" href="{{ "/posts/" | relURL }}">All posts</a>
   </div>
-  <div class="write-grid">
-    {{ range first 5 $posts.ByDate.Reverse }}
-    <a class="write-card" href="{{ .RelPermalink }}">
+  <ul class="link-list">
+    {{ range first 3 $posts.ByDate.Reverse }}
+    <li>
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
-      <span class="write-title">{{ .Title }}</span>
-      {{ with .Params.summary }}<span class="write-summary">{{ . }}</span>{{ end }}
-    </a>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
     {{ end }}
-  </div>
+  </ul>
 </section>
 {{ end }}
