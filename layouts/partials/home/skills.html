@@ -1,18 +1,12 @@
+{{ $have := hugo.Data.profile.skills.primary }}
+{{ $lead := slice "Kubernetes" "Azure" "Terraform" "Ansible" "GitHub Actions" "Azure DevOps" "Docker" "Linux" }}
 <section class="section" id="skills">
   <div class="section-head">
     <h2>Skills</h2>
   </div>
-  <ul class="skill-grid">
-    {{ range hugo.Data.profile.skills.primary }}
-    <li class="skill-tile">
-      {{ partial "tech-icon.html" . }}
-      <span>{{ . }}</span>
-    </li>
-    {{ end }}
-  </ul>
-  <ul class="chip-row">
-    {{ range hugo.Data.profile.skills.more }}
-    <li class="chip">{{ .name }}{{ with .note }} <span class="chip-note">({{ . }})</span>{{ end }}{{ if .learning }} <span class="chip-note">(learning)</span>{{ end }}</li>
+  <ul class="skill-pills">
+    {{ range $lead }}
+      {{ if in $have . }}<li>{{ . }}</li>{{ end }}
     {{ end }}
   </ul>
 </section>
