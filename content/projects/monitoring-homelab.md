@@ -4,6 +4,7 @@ date: 2026-04-18
 period: "Feb – Apr 2026"
 status: done
 weight: 30
+tagline: "Prometheus, Grafana and PagerDuty alerting on a 3-node Proxmox cluster."
 summary: "Production-style Prometheus, Grafana and Alertmanager stack on a 3-node Proxmox cluster, paging through PagerDuty."
 tech: ["Prometheus", "Grafana", "Alertmanager", "blackbox_exporter", "PagerDuty", "Proxmox VE"]
 repo: "https://github.com/E-mma9/Monitoring-Homelab"

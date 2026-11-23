@@ -5,6 +5,7 @@ period: "Oct 2026 – present"
 status: wip
 weight: 20
 icon: payments
+tagline: "Spring Boot payments API, containerised and running on local Kubernetes."
 summary: "Spring Boot payments API with PostgreSQL 17. Multistage image, Compose, then local Kubernetes with a ConfigMap, a Secret and a Postgres volume."
 tech: ["Java", "Spring Boot", "PostgreSQL", "Docker", "Kubernetes"]
 repo: "https://github.com/E-mma9/mini-payments-api/tree/feature/mini-payments-api-skeleton"

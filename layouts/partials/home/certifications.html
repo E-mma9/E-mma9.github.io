@@ -1,19 +1,43 @@
+{{ $p := hugo.Data.profile }}
 <section class="section" id="certifications">
-  <h2>Certifications</h2>
-  <div class="cert-minis">
-    {{ range hugo.Data.profile.certifications }}
-    {{ if eq .status "earned" }}
+  <div class="section-head">
+    <h2>Certifications & education</h2>
+  </div>
+  <div class="creds">
+    {{ range $p.certifications }}
     {{ $c := . }}
-    <article class="cert-mini">
-      {{ with .image }}
-      <img src="{{ . | relURL }}" alt="{{ $c.name }} certificate" width="{{ $c.image_width }}" height="{{ $c.image_height }}" loading="lazy">
-      {{ end }}
-      <div class="cert-mini-body">
-        <h3>{{ .name }}</h3>
-        {{ with .verify_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Verify</a>{{ end }}
+    {{ if and (eq .status "earned") .image }}
+    <a class="card cred cred-photo" href="{{ .verify_url }}" target="_blank" rel="noopener noreferrer">
+      <img class="cred-image" src="{{ .image | relURL }}" alt="{{ .name }} certificate" width="{{ .image_width }}" height="{{ .image_height }}">
+      <div class="cred-body">
+        <div class="card-top">
+          <span class="status status-live">Earned {{ .date }}</span>
+          <span class="cred-verify">Verify <span class="arrow" aria-hidden="true">↗</span></span>
+        </div>
+        <h3 class="card-title">{{ .short | default .name }}</h3>
+        <p class="card-tagline">{{ .issuer }} · {{ .code }}</p>
       </div>
-    </article>
+    </a>
+    {{ else }}
+    <div class="card cred">
+      <div class="card-top">
+        <span class="status status-wip">{{ .date }}</span>
+        <span class="cred-kind">Certification</span>
+      </div>
+      <h3 class="card-title">{{ .short | default .name }}</h3>
+      <p class="card-tagline">{{ .issuer }} · {{ .code }}</p>
+    </div>
     {{ end }}
+    {{ end }}
+    {{ with $p.education }}
+    <div class="card cred">
+      <div class="card-top">
+        <span class="status status-wip">{{ .period }}</span>
+        <span class="cred-kind">Education</span>
+      </div>
+      <h3 class="card-title">{{ .degree }}</h3>
+      <p class="card-tagline">{{ .school }}</p>
+    </div>
     {{ end }}
   </div>
 </section>

@@ -2,19 +2,25 @@
   <div class="section-head">
     <h2>Experience</h2>
   </div>
-  <div class="timeline">
+  <ol class="timeline">
     {{ range hugo.Data.profile.experience }}
-    <article class="job">
+    <li class="job{{ if .current }} job-current{{ end }}">
       <div class="job-head">
-        <div>
-          <span class="job-role">{{ .role }}</span>
-          <span class="job-org"> · {{ .company }}{{ with .note }} ({{ . }}){{ end }}</span>
-        </div>
-        <span class="job-meta">{{ .location }} · {{ .period }}</span>
+        <h3 class="job-role">{{ .role }}</h3>
+        <span class="job-period">{{ .period }}</span>
       </div>
-      <p class="job-line">{{ .line }}</p>
-      {{ with .href }}<a class="text-link" href="{{ . | relURL }}">View project</a>{{ end }}
-    </article>
+      <p class="job-org">{{ .company }}{{ if .current }} <span class="status status-live">Current</span>{{ end }}</p>
+      {{ with .highlights }}
+      <ul class="job-points">
+        {{ range . }}<li>{{ . }}</li>{{ end }}
+      </ul>
+      {{ end }}
+      {{ with .tech }}
+      <ul class="chips job-tags">
+        {{ range . }}<li class="chip">{{ . }}</li>{{ end }}
+      </ul>
+      {{ end }}
+    </li>
     {{ end }}
-  </div>
+  </ol>
 </section>

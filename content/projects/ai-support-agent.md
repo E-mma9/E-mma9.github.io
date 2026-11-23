@@ -6,14 +6,15 @@ period: "Live since 16 Oct 2026"
 status: live
 weight: 10
 icon: bot
-summary: "Solo-built Azure platform for an AI support agent, live since 16 Oct 2026, for ~200 client organisations. A person reviews every note. Write actions require approval."
+tagline: "Diagnoses every new support ticket, live for 200+ organisations."
+summary: "Solo-built Azure platform for an AI support agent, live since 16 Oct 2026, for 200+ client organisations. A person reviews every note. Write actions require approval."
 tech: ["Azure Container Apps", "Bicep", "PostgreSQL", "Azure DevOps", "Key Vault", "Python"]
 thumb: "/img/projects/ai-support-agent/architecture.svg"
 thumb_width: 1200
 thumb_height: 760
 ---
 
-This is a solo-built, Azure-hosted support agent that has been live since 16 October 2026 and is used across around 200 client organisations. When a new ticket arrives, the agent reads from the PSA, the documentation platform, the RMM, the EDR and the Microsoft 365 management tools, then writes an internal note with a diagnosis and a proposed next step; a person reviews that note, and anything that would change a customer environment runs only after approval. On the platform side the work is a read service and a separate execute service, each with its own identity and database role, secrets taken at runtime from Key Vault, PostgreSQL with Entra authentication, and a pipeline that tests every change, builds container images and deploys through Bicep.
+This is a solo-built, Azure-hosted support agent that has been live since 16 October 2026 and is used across more than 200 client organisations. When a new ticket arrives, the agent reads from the PSA, the documentation platform, the RMM, the EDR and the Microsoft 365 management tools, then writes an internal note with a diagnosis and a proposed next step; a person reviews that note, and anything that would change a customer environment runs only after approval. On the platform side the work is a read service and a separate execute service, each with its own identity and database role, secrets taken at runtime from Key Vault, PostgreSQL with Entra authentication, and a pipeline that tests every change, builds container images and deploys through Bicep.
 
 {{< figure src="/img/projects/ai-support-agent/architecture.svg" alt="High-level flow: a new PSA ticket reaches an Azure-hosted agent, which reads the PSA, a documentation platform, RMM, EDR and an M365 management tool, then writes an internal note. Changes in a customer environment require approval." caption="High-level flow of a new ticket. The agent reads those systems and writes an internal note for a person. Write actions require approval. Vendor names, network detail and client information are left out." width=1200 height=760 dark=true >}}
 

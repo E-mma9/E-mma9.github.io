@@ -1,22 +1,22 @@
 # Downloadable CV. Layout-only facts (phone, links, project detail) live here.
 # Biographical lines that also appear on the site use the site's wording.
 name: Emmanuel Tekle
-subtitle: "Platform / DevOps engineer (student, HBO Cybersecurity & Cloud Engineering) · Azure AZ-104 + AZ-305 · AI platform live in production"
+subtitle: "DevOps & Platform Engineer · Microsoft Certified: Azure Solutions Architect Expert"
 contact:
   - "Enschede, NL · emmanueltekle@gmail.com · emmanueltekle.nl"
   - "linkedin.com/in/emmanuel-tekle-3485b334a · github.com/E-mma9 · Dutch nationality · Available Feb – Jul 2027, full-time"
-profile: "Azure-certified (AZ-104, AZ-305) engineer who ships production systems while still studying. Designed and built, solo, an AI support agent that is live for ~200 client organisations of a managed service provider. It is hosted on Azure and stops at a diagnosis note for an engineer. CKA exam planned 5 Feb 2027."
+profile: "Azure-certified (AZ-104, AZ-305) engineer who builds and runs production platforms on Azure. Designed and built, solo, an AI support agent that is live for 200+ client organisations of a managed service provider. It is hosted on Azure and stops at a diagnosis note for an engineer. CKA exam planned 5 Feb 2027."
 
 experience:
-  - title: "Automation & Infrastructure Engineer (intern)"
+  - title: "Automation & Infrastructure Engineer"
     when: "Sep 2026 – Jan 2027"
-    meta: "JUICT B.V. (internship, managed service provider, ~200 client organisations) · Haaksbergen, NL"
+    meta: "JUICT B.V. (managed service provider, 200+ client organisations) · Haaksbergen, NL"
     bullets:
-      - "Automated standard IT changes end-to-end in production: self-service portal > RPA workflow > PSA API, for ~200 client organisations."
+      - "Automated standard IT changes end-to-end in production: self-service portal > RPA workflow > PSA API, for 200+ client organisations."
       - "Azure platform for an internal CRM: hosting, PostgreSQL and the release pipeline."
       - "Daily Azure DevOps: branching, pull requests, code review, CI/CD."
   - title: "Systems Administrator"
-    when: "Mar 2026 – Sep 2026"
+    when: "Apr 2025 – Aug 2026"
     meta: "Livio (healthcare organisation) · Enschede, NL"
     bullets:
       - "Co-designed and ran the production Entra ID / hybrid identity platform of a healthcare organisation: Conditional Access, RBAC, group design, Entra Connect sync and Group Policy."
@@ -25,7 +25,7 @@ experience:
 projects:
   - title: "AI support agent in production (built solo)"
     when: "Live since 16 Oct 2026"
-    meta: "Azure-hosted · ~200 client organisations"
+    meta: "Azure-hosted · 200+ client organisations"
     bullets:
       - "Reads a new ticket from the PSA, a documentation platform and RMM, then writes a diagnosis note for an engineer to review."
   - title: "Mini Payments API – containerised, local Kubernetes manifests"
@@ -59,7 +59,6 @@ certifications:
 education:
   title: "Bachelor Cybersecurity & Cloud Engineering (HBO), Saxion"
   when: "Sep 2024 – Jul 2028 (expected)"
-  meta: "Year 3 · Average 7.1 · Virtualisation (10), Public & Hybrid Cloud (9), Automated Infrastructures (9)"
 
 skills:
   - label: "Cloud & IaC"

@@ -1,22 +1,11 @@
-{{ $projects := where site.RegularPages "Section" "projects" }}
-{{ $cards := slice
-  (dict "slug" "mini-payments-api" "line" "Spring Boot payments API on Kubernetes")
-  (dict "slug" "monitoring-homelab" "line" "Prometheus, Grafana and Alertmanager on Proxmox")
-}}
-<section class="section" id="work">
+<section class="section" id="projects">
   <div class="section-head">
     <h2>Projects</h2>
-    <a class="section-link" href="{{ "/projects/" | relURL }}">All projects</a>
+    <a class="section-link" href="{{ "/projects/" | relURL }}">All projects →</a>
   </div>
-  <div class="home-projects">
-    {{ range $cards }}
-      {{ $line := .line }}
-      {{ with index (where $projects "File.BaseFileName" .slug) 0 }}
-      <a class="home-project" href="{{ .RelPermalink }}">
-        <span class="home-project-title">{{ .Title }}</span>
-        <span class="home-project-summary">{{ $line }}</span>
-      </a>
-      {{ end }}
+  <div class="cards">
+    {{ range first 4 (where site.RegularPages "Section" "projects").ByWeight }}
+    {{ partial "project-card.html" . }}
     {{ end }}
   </div>
 </section>
