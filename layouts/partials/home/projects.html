@@ -1,22 +1,22 @@
 {{ $projects := where site.RegularPages "Section" "projects" }}
-{{ $lead := slice "mini-payments-api" "monitoring-homelab" }}
-<section class="section" id="projects">
+{{ $cards := slice
+  (dict "slug" "mini-payments-api" "line" "Spring Boot payments API on Kubernetes")
+  (dict "slug" "monitoring-homelab" "line" "Prometheus, Grafana and Alertmanager on Proxmox")
+}}
+<section class="section" id="work">
   <div class="section-head">
-    <h2>Selected projects</h2>
+    <h2>Projects</h2>
     <a class="section-link" href="{{ "/projects/" | relURL }}">All projects</a>
   </div>
   <div class="home-projects">
-    {{ range $slug := $lead }}
-      {{ with index (where $projects "File.BaseFileName" $slug) 0 }}
+    {{ range $cards }}
+      {{ $line := .line }}
+      {{ with index (where $projects "File.BaseFileName" .slug) 0 }}
       <a class="home-project" href="{{ .RelPermalink }}">
         <span class="home-project-title">{{ .Title }}</span>
-        {{ with .Params.period }}<span class="home-project-meta">{{ . }}</span>{{ end }}
-        {{ with .Params.summary }}<span class="home-project-summary">{{ . }}</span>{{ end }}
+        <span class="home-project-summary">{{ $line }}</span>
       </a>
       {{ end }}
     {{ end }}
   </div>
-  {{ with index (where $projects "File.BaseFileName" "ai-support-agent") 0 }}
-  <p class="also-link"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-  {{ end }}
 </section>

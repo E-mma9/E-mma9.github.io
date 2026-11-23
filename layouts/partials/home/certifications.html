@@ -1,7 +1,5 @@
 <section class="section" id="certifications">
-  <div class="section-head">
-    <h2>Certifications</h2>
-  </div>
+  <h2>Certifications</h2>
   <div class="cert-minis">
     {{ range hugo.Data.profile.certifications }}
     {{ if eq .status "earned" }}
@@ -12,8 +10,7 @@
       {{ end }}
       <div class="cert-mini-body">
         <h3>{{ .name }}</h3>
-        <p>Earned {{ .date }}{{ with .expires }} · Expires {{ . }}{{ end }}</p>
-        {{ with .verify_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Verify on Microsoft Learn</a>{{ end }}
+        {{ with .verify_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">Verify</a>{{ end }}
       </div>
     </article>
     {{ end }}

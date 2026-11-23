@@ -1,9 +1,7 @@
 {{ $have := hugo.Data.profile.skills.primary }}
-{{ $lead := slice "Kubernetes" "Azure" "Terraform" "Ansible" "GitHub Actions" "Azure DevOps" "Docker" "Linux" }}
+{{ $lead := slice "Kubernetes" "Azure" "Terraform" "Ansible" "GitHub Actions" }}
 <section class="section" id="skills">
-  <div class="section-head">
-    <h2>Skills</h2>
-  </div>
+  <h2>Skills</h2>
   <ul class="skill-pills">
     {{ range $lead }}
       {{ if in $have . }}<li>{{ . }}</li>{{ end }}
