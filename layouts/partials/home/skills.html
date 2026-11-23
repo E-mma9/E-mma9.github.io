@@ -1,10 +1,30 @@
-{{ $have := hugo.Data.profile.skills.primary }}
-{{ $lead := slice "Kubernetes" "Azure" "Terraform" "Ansible" "GitHub Actions" }}
+{{ $names := slice }}
+{{ range hugo.Data.profile.skills.primary }}
+  {{ $names = $names | append . }}
+{{ end }}
+{{ range hugo.Data.profile.skills.more }}
+  {{ if not .learning }}{{ $names = $names | append .name }}{{ end }}
+{{ end }}
+{{ $names = $names | append "Proxmox" }}
+{{ $groups := slice
+  (dict "label" "Containers" "items" (slice "Kubernetes" "Docker" "docker-compose" "Proxmox"))
+  (dict "label" "Cloud & IaC" "items" (slice "Azure" "Bicep" "Terraform" "Ansible" "PostgreSQL"))
+  (dict "label" "CI/CD" "items" (slice "Git" "Azure DevOps" "GitHub Actions"))
+  (dict "label" "Observability & Security" "items" (slice "Prometheus" "Grafana" "Alertmanager" "Wazuh" "Entra ID" "Conditional Access"))
+  (dict "label" "OS & Scripting" "items" (slice "Linux" "Bash" "PowerShell" "Python"))
+}}
 <section class="section" id="skills">
   <h2>Skills</h2>
-  <ul class="skill-pills">
-    {{ range $lead }}
-      {{ if in $have . }}<li>{{ . }}</li>{{ end }}
+  <div class="skill-groups">
+    {{ range $groups }}
+    <div class="skill-group">
+      <h3>{{ .label }}</h3>
+      <ul class="skill-pills">
+        {{ range .items }}
+          {{ if in $names . }}<li>{{ . }}</li>{{ end }}
+        {{ end }}
+      </ul>
+    </div>
     {{ end }}
-  </ul>
+  </div>
 </section>
