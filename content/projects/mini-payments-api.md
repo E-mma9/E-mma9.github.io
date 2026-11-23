@@ -5,6 +5,7 @@ period: "Oct 2026 – present"
 status: wip
 weight: 20
 icon: payments
+tagline: "Spring Boot payments service, on its way to Kubernetes."
 summary: "Spring Boot payments service with PostgreSQL and Flyway, on its way to Kubernetes with a scanned CI/CD pipeline."
 tech: ["Java", "Spring Boot", "PostgreSQL", "Flyway", "Maven", "Kubernetes"]
 repo: "https://github.com/E-mma9/mini-payments-api"

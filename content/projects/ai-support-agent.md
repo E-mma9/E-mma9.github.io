@@ -6,6 +6,7 @@ period: "Live since Oct 2026"
 status: live
 weight: 10
 icon: bot
+tagline: "Diagnoses every new support ticket in 1–2 minutes, for 200+ organisations."
 summary: "Solo-built agent that researches every new support ticket for 200+ client organisations and delivers a diagnosis note in 1–2 minutes."
 tech: ["Azure Container Apps", "Service Bus", "PostgreSQL", "Key Vault", "Bicep", "Azure DevOps", "MCP", "Claude"]
 thumb: "/img/projects/ai-support-agent/architecture.svg"

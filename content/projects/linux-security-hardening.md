@@ -5,6 +5,7 @@ period: "Nov 2025 – Apr 2026"
 status: done
 weight: 40
 icon: shield
+tagline: "Bash scripts that harden and audit a fresh Ubuntu server."
 summary: "Two Bash scripts that bring a fresh Ubuntu/Debian server to a sensible baseline and audit the result."
 tech: ["Bash", "Ubuntu", "SSH", "UFW", "auditd"]
 repo: "https://github.com/E-mma9/Linux-Security-Hardening"

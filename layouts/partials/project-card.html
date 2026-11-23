@@ -1,19 +1,9 @@
-<a class="project-card" href="{{ .RelPermalink }}">
-  <div class="card-thumb">
-    {{ with .Params.thumb }}
-    <img src="{{ . | relURL }}" alt="{{ $.Title }}" width="{{ $.Params.thumb_width }}" height="{{ $.Params.thumb_height }}" loading="lazy">
-    {{ else }}
-    {{ partial "icon.html" (dict "name" (.Params.icon | default "box")) }}
-    {{ end }}
+<a class="card" href="{{ .RelPermalink }}">
+  <div class="card-top">
+    {{ with .Params.status }}{{ partial "status.html" . }}{{ else }}<span></span>{{ end }}
+    <span class="arrow" aria-hidden="true">↗</span>
   </div>
-  <div class="card-body">
-    <div class="card-title">
-      <span>{{ .Title }}</span>
-      {{ with .Params.status }}{{ partial "status.html" . }}{{ end }}
-    </div>
-    {{ with .Params.summary }}<p class="card-summary">{{ . }}</p>{{ end }}
-    {{ with .Params.tech }}
-    <div class="tags">{{ range first 4 . }}<span class="tag">{{ . }}</span>{{ end }}</div>
-    {{ end }}
-  </div>
+  <h3 class="card-title">{{ .Title }}</h3>
+  {{ with (.Params.tagline | default .Params.summary) }}<p class="card-tagline">{{ . }}</p>{{ end }}
+  {{ with .Params.tech }}<p class="card-tech">{{ delimit (first 4 .) " · " }}</p>{{ end }}
 </a>

@@ -1,5 +1,5 @@
 ---
 title: "Emmanuel Tekle"
-description: "DevOps & Platform Engineer in the making. Azure-certified (AZ-104) Cloud & Cybersecurity student in Enschede, available Feb – Jul 2027."
+description: "DevOps & Platform Engineer in Enschede. Microsoft Certified: Azure Solutions Architect Expert (AZ-305, AZ-104). Available Feb – Jul 2027."
 aliases: ["/about/"]
 ---
