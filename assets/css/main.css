@@ -200,7 +200,7 @@ html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
 /* ==== Hero ==== */
 
-.hero { position: relative; margin-bottom: clamp(2.5rem, 6vw, 4rem); max-width: 40rem; }
+.hero { position: relative; margin-bottom: clamp(3.5rem, 8vw, 5.5rem); max-width: 40rem; }
 .badge {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.32rem 0.75rem 0.32rem 0.6rem;
@@ -253,13 +253,14 @@ html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
 /* ==== Sections ==== */
 
-.section { margin: clamp(3.25rem, 7vw, 5rem) 0 0; }
+.section { margin: clamp(4.25rem, 9vw, 6.5rem) 0 0; }
 .section-head {
   display: flex; align-items: flex-end; justify-content: space-between;
   gap: 1rem;
   margin-bottom: 0.2rem;
 }
-.section-head h2 {
+.section-head h2,
+.section > h2 {
   font-family: var(--display);
   font-size: clamp(1.25rem, 1.6vw, 1.45rem);
   font-weight: 600;

@@ -5,10 +5,10 @@ subtitle: "Platform / DevOps engineer (student, HBO Cybersecurity & Cloud Engine
 contact:
   - "Enschede, NL · emmanueltekle@gmail.com · emmanueltekle.nl"
   - "linkedin.com/in/emmanuel-tekle-3485b334a · github.com/E-mma9 · Dutch nationality · Available Feb – Jul 2027, full-time"
-profile: "Azure-certified (AZ-104, AZ-305) engineer who ships production systems while still studying. Designed and built, solo, an AI support agent that is live for ~200 client organisations of a managed service provider. It is hosted on Azure and stops at a diagnosis note for an engineer. 2 years of hands-on production experience across cloud, identity and containers. Preparing for the CKA."
+profile: "Azure-certified (AZ-104, AZ-305) engineer who ships production systems while still studying. Designed and built, solo, an AI support agent that is live for ~200 client organisations of a managed service provider. It is hosted on Azure and stops at a diagnosis note for an engineer. CKA exam planned 5 Feb 2027."
 
 experience:
-  - title: "Automation & Infrastructure Engineer"
+  - title: "Automation & Infrastructure Engineer (intern)"
     when: "Sep 2026 – Jan 2027"
     meta: "JUICT B.V. (internship, managed service provider, ~200 client organisations) · Haaksbergen, NL"
     bullets:
@@ -16,7 +16,7 @@ experience:
       - "Azure platform for an internal CRM: hosting, PostgreSQL and the release pipeline."
       - "Daily Azure DevOps: branching, pull requests, code review, CI/CD."
   - title: "Systems Administrator"
-    when: "Apr 2025 – Aug 2026"
+    when: "Mar 2026 – Sep 2026"
     meta: "Livio (healthcare organisation) · Enschede, NL"
     bullets:
       - "Co-designed and ran the production Entra ID / hybrid identity platform of a healthcare organisation: Conditional Access, RBAC, group design, Entra Connect sync and Group Policy."
@@ -36,7 +36,7 @@ projects:
   - title: "Homelab – 3-node Proxmox VE cluster"
     when: "In progress"
     bullets:
-      - "Proxmox VE cluster in progress. kubeadm for CKA practice is in progress. Terraform, Ansible and Wazuh are learning, not a finished platform."
+      - "Proxmox VE cluster in progress. kubeadm for CKA practice is in progress."
   - title: "Monitoring Homelab – production-style observability"
     when: "Ongoing"
     meta: "github.com/E-mma9/Monitoring-Homelab"
@@ -54,7 +54,7 @@ certifications:
     credential_id: "84E42349E29D8743"
     verify_url: "https://learn.microsoft.com/api/credentials/share/en-us/EmmanuelAronTekle-4331/84E42349E29D8743?sharingId=F7449C286C1C5718"
   - title: "Certified Kubernetes Administrator (CKA)"
-    when: "Exam planned spring 2027"
+    when: "exam planned 5 Feb 2027"
 
 education:
   title: "Bachelor Cybersecurity & Cloud Engineering (HBO), Saxion"
@@ -63,13 +63,13 @@ education:
 
 skills:
   - label: "Cloud & IaC"
-    value: "Hands-on: Azure (AZ-104, AZ-305), Bicep, Linux, PostgreSQL. Learning: Terraform, Ansible."
+    value: "Azure (AZ-104, AZ-305), Bicep, Terraform, Ansible, Linux, PostgreSQL."
   - label: "Containers & orchestration"
-    value: "Hands-on: Docker, docker-compose. Learning: Kubernetes (local manifests, CKA prep)."
+    value: "Docker, docker-compose, Kubernetes, Proxmox (homelab)."
   - label: "CI/CD"
-    value: "Hands-on: Git, Azure DevOps. Learning: GitHub Actions."
+    value: "Git, Azure DevOps, GitHub Actions."
   - label: "Observability"
-    value: "Hands-on: Prometheus, Grafana, Alertmanager. Learning: Wazuh."
+    value: "Prometheus, Grafana, Alertmanager, Wazuh."
   - label: "Identity & security"
     value: "Hands-on: Entra ID, Conditional Access. Learning: Trivy."
   - label: "Scripting"

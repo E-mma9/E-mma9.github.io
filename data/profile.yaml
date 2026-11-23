@@ -6,12 +6,10 @@ lead: "Azure-certified. I ship production systems while studying at Saxion."
 stats:
   - value: "AZ-104 · AZ-305"
     label: "Azure Administrator, Oct 2026 · Solutions Architect Expert, Nov 2026"
-  - value: "2 yrs"
-    label: "hands-on production experience"
   - value: "Live"
     label: "AI support agent in production"
 experience:
-  - role: "Automation & Infrastructure Engineer"
+  - role: "Automation & Infrastructure Engineer (intern)"
     company: "JUICT B.V."
     note: "managed service provider"
     location: "Haaksbergen, NL"
@@ -22,7 +20,7 @@ experience:
     company: "Livio"
     note: "healthcare organisation"
     location: "Enschede, NL"
-    period: "Apr 2025 – Aug 2026"
+    period: "Mar 2026 – Sep 2026"
     line: "Production Entra ID and hybrid identity — Conditional Access, RBAC, Entra Connect and Group Policy — within ISO 27001 / NEN 7510."
 certifications:
   - name: "Microsoft Certified: Azure Administrator Associate (AZ-104)"
@@ -48,7 +46,7 @@ certifications:
   - name: "Certified Kubernetes Administrator (CKA)"
     issuer: "The Linux Foundation"
     status: planned
-    date: "Exam planned spring 2027"
+    date: "exam planned 5 Feb 2027"
 education:
   degree: "Bachelor Cybersecurity & Cloud Engineering (HBO)"
   school: "Saxion University of Applied Sciences"
