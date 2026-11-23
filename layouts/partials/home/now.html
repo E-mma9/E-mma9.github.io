@@ -1,0 +1,12 @@
+{{ $p := hugo.Data.profile }}
+{{ $job := index $p.experience 0 }}
+{{ $cka := "" }}
+{{ range $p.certifications }}
+  {{ if and (eq .status "planned") (in .name "CKA") }}{{ $cka = .date }}{{ end }}
+{{ end }}
+<section class="section" id="work">
+  <div class="section-head">
+    <h2>Now</h2>
+  </div>
+  <p class="now-line">{{ $job.role }} at {{ $job.company }} · studying at {{ $p.education.school }}{{ with $cka }} · CKA, {{ . | lower }}{{ end }}</p>
+</section>

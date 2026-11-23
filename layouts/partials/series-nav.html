@@ -1,0 +1,27 @@
+{{ $current := . }}
+{{ with $current.Params.series }}
+  {{ $name := index . 0 }}
+  {{ $sorted := sort (where site.RegularPages "Params.series" "intersect" (slice $name)) "Params.series_order" }}
+  {{ $order := $current.Params.series_order }}
+  {{ $prev := where $sorted "Params.series_order" (sub $order 1) }}
+  {{ $next := where $sorted "Params.series_order" (add $order 1) }}
+  <nav class="series-nav" aria-label="In this series">
+    {{ with $current.GetTerms "series" }}
+    <a class="series-kicker" href="{{ (index . 0).RelPermalink }}">{{ $name }}</a>
+    {{ end }}
+    <div class="series-links">
+      {{ with $prev }}
+      {{ with index . 0 }}
+      <a class="series-prev" href="{{ .RelPermalink }}"><span>Previous</span>{{ .Title }}</a>
+      {{ end }}
+      {{ else }}
+      <span></span>
+      {{ end }}
+      {{ with $next }}
+      {{ with index . 0 }}
+      <a class="series-next" href="{{ .RelPermalink }}"><span>Next</span>{{ .Title }}</a>
+      {{ end }}
+      {{ end }}
+    </div>
+  </nav>
+{{ end }}

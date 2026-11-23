@@ -1,15 +1,29 @@
 {{ define "main" }}
 <h1 class="article-title">{{ .Title }}</h1>
 
-{{ if eq .Section "projects" }}
+{{ if eq .Kind "taxonomy" }}
+<div class="lined page-list">
+  {{ range .Pages.ByTitle }}
+  <a class="line-item" href="{{ .RelPermalink }}">
+    <span class="line-title">{{ .Title }}</span>
+    <span class="line-meta">{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }} <span class="arrow" aria-hidden="true">→</span></span>
+  </a>
+  {{ end }}
+</div>
+{{ else if eq .Section "projects" }}
 <div class="cards page-list">
   {{ range .Pages.ByWeight }}
   {{ partial "project-card.html" . }}
   {{ end }}
 </div>
 {{ else }}
+{{ $pages := .Pages.ByDate.Reverse }}
+{{ if and (eq .Kind "term") (eq .Data.Plural "series") }}
+  {{ $pages = .Pages.ByParam "series_order" }}
+{{ end }}
+{{ if eq .Kind "term" }}{{ with .Content }}<div class="article-lede">{{ . }}</div>{{ end }}{{ end }}
 <div class="lined page-list">
-  {{ range .Pages.ByDate.Reverse }}
+  {{ range $pages }}
   <a class="line-item" href="{{ .RelPermalink }}">
     <span class="line-title">{{ .Title }}</span>
     <span class="line-meta">{{ .Date.Format "02 Jan 2006" }} <span class="arrow" aria-hidden="true">→</span></span>

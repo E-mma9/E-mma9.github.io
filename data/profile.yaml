@@ -40,7 +40,7 @@ skills:
       - { name: "Prometheus" }
       - { name: "Grafana" }
       - { name: "Wazuh" }
-      - { name: "Trivy" }
+      - { name: "Trivy", note: "learning" }
       - { name: "gitleaks" }
   - group: "Scripting"
     items:
