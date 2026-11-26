@@ -67,7 +67,7 @@ skills:
   - label: "Observability"
     value: "Prometheus, Grafana, Alertmanager, Wazuh."
   - label: "Identity & security"
-    value: "Hands-on: Entra ID, Conditional Access. Learning: Trivy."
+    value: "Hands-on: Entra ID, Conditional Access."
   - label: "Scripting"
     value: "Hands-on: Bash, PowerShell, Python (basic), Java/Spring Boot (basic)."
 
