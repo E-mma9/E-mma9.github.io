@@ -1,30 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" font-family="Inter, system-ui, sans-serif">
   <rect width="1200" height="760" fill="#0f172a"/>
   <text x="600" y="78" text-anchor="middle" fill="#f8fafc" font-size="22" font-weight="700">AI support agent · high level</text>
-  <text x="600" y="108" text-anchor="middle" fill="#94a3b8" font-size="15">Azure-hosted · a person reviews every note</text>
+  <text x="600" y="108" text-anchor="middle" fill="#94a3b8" font-size="15">Azure-hosted · tickets, phone and Teams</text>
 
-  <rect x="80" y="180" width="220" height="88" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-  <text x="190" y="218" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">New ticket</text>
-  <text x="190" y="242" text-anchor="middle" fill="#94a3b8" font-size="13">PSA</text>
+  <rect x="60" y="160" width="250" height="76" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="185" y="193" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">New ticket</text>
+  <text x="185" y="216" text-anchor="middle" fill="#94a3b8" font-size="13">PSA</text>
 
-  <rect x="490" y="160" width="220" height="128" rx="12" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
-  <text x="600" y="206" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Agent</text>
-  <text x="600" y="230" text-anchor="middle" fill="#bfdbfe" font-size="13">hosted on Azure</text>
-  <text x="600" y="252" text-anchor="middle" fill="#bfdbfe" font-size="13">note for review</text>
+  <rect x="60" y="262" width="250" height="76" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="185" y="295" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Inbound call</text>
+  <text x="185" y="318" text-anchor="middle" fill="#94a3b8" font-size="13">customer on the phone</text>
 
-  <rect x="900" y="180" width="220" height="88" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-  <text x="1010" y="218" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Engineer</text>
-  <text x="1010" y="242" text-anchor="middle" fill="#94a3b8" font-size="13">reads the note</text>
+  <rect x="60" y="364" width="250" height="76" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="185" y="397" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Question</text>
+  <text x="185" y="420" text-anchor="middle" fill="#94a3b8" font-size="13">Teams chat</text>
 
-  <path d="M300 224 H490" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
-  <path d="M710 224 H900" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="490" y="220" width="220" height="160" rx="12" fill="#1e3a8a" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="600" y="282" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Agent</text>
+  <text x="600" y="306" text-anchor="middle" fill="#bfdbfe" font-size="13">hosted on Azure</text>
+  <text x="600" y="328" text-anchor="middle" fill="#bfdbfe" font-size="13">diagnoses and resolves</text>
 
-  <rect x="250" y="400" width="700" height="180" rx="14" fill="#111827" stroke="#334155" stroke-width="1.5"/>
-  <text x="600" y="442" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="600" letter-spacing="0.04em">READ-ONLY CONTEXT</text>
-  <text x="600" y="482" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">PSA · documentation platform · RMM</text>
-  <text x="600" y="512" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">EDR · M365 management tool</text>
-  <text x="600" y="550" text-anchor="middle" fill="#94a3b8" font-size="15">Internal note for a person. Changes in a customer environment require approval.</text>
-  <path d="M600 288 V400" fill="none" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrb)"/>
+  <rect x="890" y="160" width="250" height="76" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="1015" y="193" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Standard change done</text>
+  <text x="1015" y="216" text-anchor="middle" fill="#94a3b8" font-size="13">no engineer approval</text>
+
+  <rect x="890" y="262" width="250" height="76" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="1015" y="295" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Call handled</text>
+  <text x="1015" y="318" text-anchor="middle" fill="#94a3b8" font-size="13">ticket created, some issues resolved</text>
+
+  <rect x="890" y="364" width="250" height="76" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="1015" y="397" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="700">Answer in Teams</text>
+  <text x="1015" y="420" text-anchor="middle" fill="#94a3b8" font-size="13">from the documentation</text>
+
+  <path d="M310 198 L490 262" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M310 300 H490" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M310 402 L490 338" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M710 262 L890 198" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M710 300 H890" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M710 338 L890 402" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="250" y="530" width="700" height="140" rx="14" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="600" y="572" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="600" letter-spacing="0.04em">SYSTEMS THE AGENT WORKS IN</text>
+  <text x="600" y="612" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">PSA · documentation platform · RMM</text>
+  <text x="600" y="642" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">EDR · M365 management tool</text>
+  <path d="M600 380 V530" fill="none" stroke="#60a5fa" stroke-width="2" marker-end="url(#arrb)"/>
 
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">

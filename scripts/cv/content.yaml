@@ -5,7 +5,7 @@ subtitle: "DevOps & Platform Engineer · Microsoft Certified: Azure Solutions Ar
 contact:
   - "Enschede, NL · emmanueltekle@gmail.com · emmanueltekle.nl"
   - "linkedin.com/in/emmanuel-tekle-3485b334a · github.com/E-mma9 · Dutch nationality · Available Feb – Jul 2027, full-time"
-profile: "Azure-certified (AZ-104, AZ-305) engineer who builds and runs production platforms on Azure. Designed and built, solo, an AI support agent that is live for 200+ client organisations of a managed service provider. It is hosted on Azure and stops at a diagnosis note for an engineer. CKA exam planned 5 Feb 2027."
+profile: "Azure-certified (AZ-104, AZ-305) engineer who builds and runs production platforms on Azure. Designed and built, solo, an AI support agent that is live for 200+ client organisations of a managed service provider. It is hosted on Azure, carries out standard changes without engineer approval, handles inbound support calls and answers documentation questions in Teams. CKA exam planned 5 Feb 2027."
 
 experience:
   - title: "Automation & Infrastructure Engineer"
@@ -27,12 +27,9 @@ projects:
     when: "Live since 16 Oct 2026"
     meta: "Azure-hosted · 200+ client organisations"
     bullets:
-      - "Reads a new ticket from the PSA, a documentation platform and RMM, then writes a diagnosis note for an engineer to review."
-  - title: "Mini Payments API – containerised, local Kubernetes manifests"
-    when: "Oct 2026 – present"
-    meta: "github.com/E-mma9"
-    bullets:
-      - "Spring Boot + PostgreSQL/Flyway service with tests, a Docker multi-stage image, docker-compose and local Kubernetes manifests. Not deployed to a cluster."
+      - "Reads each new ticket across the PSA, a documentation platform and RMM, diagnoses it and carries out standard changes itself, without engineer approval."
+      - "Answers inbound customer calls: creates the ticket and resolves some issues during the call."
+      - "Doubles as a documentation source that colleagues query from a Teams chat."
   - title: "Homelab – 3-node Proxmox VE cluster"
     when: "In progress"
     bullets:

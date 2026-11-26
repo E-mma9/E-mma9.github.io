@@ -109,11 +109,11 @@ main.wrap { padding-top: clamp(2.5rem, 7vw, 4.5rem); }
   max-width: 14em;
 }
 .hero h1 em { font-style: normal; color: var(--faint); }
-.hero-badge { display: inline-flex; margin-bottom: 1.5rem; padding: 0.35rem 0.8rem; border: 1px solid var(--line-strong, #34343c); border-radius: 999px; background: var(--surface, #111114); transition: border-color .15s ease; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.hero-badge { display: inline-flex; padding: 0.35rem 0.8rem; border: 1px solid var(--line-strong, #34343c); border-radius: 999px; background: var(--surface, #111114); transition: border-color .15s ease; }
 .hero-badge:hover { border-color: var(--accent); }
 .hero-badge .status { color: var(--text); gap: 0.5rem; }
 .badge-prefix { color: var(--muted); margin-right: -0.25rem; }
-@media (max-width: 560px) { .badge-prefix { display: none; } }
 .lead { margin-top: 1.4rem; font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: var(--muted); max-width: 32em; text-wrap: pretty; }
 .hero-actions { margin-top: 2rem; display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
 
@@ -192,6 +192,7 @@ a.line-item:hover .arrow { transform: translateX(3px); color: var(--text); }
 .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
 .status-live::before { background: var(--green); box-shadow: 0 0 0 3px rgba(62, 207, 142, 0.2); }
 .status-wip::before { background: var(--amber); }
+.status-done::before { background: var(--accent); }
 
 /* ==== Experience timeline ==== */
 

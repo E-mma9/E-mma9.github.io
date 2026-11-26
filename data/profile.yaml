@@ -1,11 +1,13 @@
 name: Emmanuel Tekle
 headline: "DevOps & Platform Engineer"
 availability: "Available Feb – Jul 2027 · full-time"
-badge: "Azure Solutions Architect Expert"
-badge_prefix: "Microsoft Certified:"
+badges:
+  - { name: "Azure Solutions Architect Expert", status: "live" }
+  - { name: "Azure Administrator Associate", status: "live" }
+  - { name: "Certified Kubernetes Administrator", prefix: "Soon:", status: "wip" }
 lead: >-
   I build and run production platforms on Azure. Solo-built an AI agent that
-  handles every new support ticket for 200+ organisations.
+  resolves support tickets and takes support calls for 200+ organisations.
 stats:
   - value: "2×"
     label: "Azure certified"
@@ -54,7 +56,7 @@ experience:
     period: "Sep 2026 – Jan 2027"
     current: true
     highlights:
-      - "Built and run an AI support agent on Azure, live for 200+ client organisations."
+      - "Built and run an AI support agent on Azure that resolves tickets and takes support calls for 200+ client organisations."
       - "Entire platform as code in Bicep, shipped through Azure DevOps CI/CD with security scans."
       - "Automated standard IT changes end-to-end; own the Azure platform behind the company CRM."
     tech: ["Azure", "Bicep", "Azure DevOps", "CI/CD", "Container Apps", "Docker", "Key Vault", "Managed identities", "Private networking", "PostgreSQL", "Service Bus", "Log Analytics", "AI agents", "MCP"]
