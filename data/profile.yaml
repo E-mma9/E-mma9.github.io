@@ -2,9 +2,9 @@ name: Emmanuel Tekle
 headline: "DevOps & Platform Engineer"
 availability: "Available Feb – Jul 2027 · full-time"
 badges:
-  - { name: "Azure Solutions Architect Expert", status: "live" }
-  - { name: "Azure Administrator Associate", status: "live" }
-  - { name: "Certified Kubernetes Administrator", prefix: "Soon:", status: "wip" }
+  - { name: "Azure Solutions Architect Expert (AZ-305)", status: "live" }
+  - { name: "Azure Administrator Associate (AZ-104)", status: "live" }
+  - { name: "Certified Kubernetes Administrator (CKA)", prefix: "Soon:", status: "wip" }
 lead: >-
   I build and run production platforms on Azure. Solo-built an AI agent that
   resolves support tickets and takes support calls for 200+ organisations.
@@ -42,7 +42,6 @@ skills:
       - { name: "Prometheus" }
       - { name: "Grafana" }
       - { name: "Wazuh" }
-      - { name: "Trivy", note: "learning" }
       - { name: "gitleaks" }
   - group: "Scripting"
     items:
